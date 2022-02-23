@@ -1,17 +1,16 @@
-module.exports={
-    color:{
+export default colors = {
         "white": "#ffffff",
-        "greenTint10": "#e7f3ed",
-        "greenTint20" : "#d0e8db",
-        "greenTint30": "#b8dcc8",
-        "greenTint40" : "#a0d0b6",
+        "greenTint90": "#e7f3ed",
+        "greenTint80" : "#d0e8db",
+        "greenTint70": "#b8dcc8",
+        "greenTint60" : "#a0d0b6",
         "greenTint50": "#89c5a4",
-        "greenTint60": "#71b992",
-        "greenTint70": "#59ad80",
-        "greenTint80" : "#41a16d",
-        "greenTint90": "#2a965b",
-        "greenTint100": "#128a49",
-        "greenShade0": "#128a49",
+        "greenTint40": "#71b992",
+        "greenTint30": "#59ad80",
+        "greenTint20" : "#41a16d",
+        "greenTint10": "#2a965b",
+        "greenTint": "#128a49",
+        "greenShade": "#128a49",
         "greenShade10": "#107c42",
         "greenShade20": "#0e6e3a",
         "greenShade30" : "#0d6133",
@@ -23,5 +22,4 @@ module.exports={
         "greenShade90": "#020e07",
         "black": "#000000",
         "luminateGreen": "#1ddf76"
-    }
 }
