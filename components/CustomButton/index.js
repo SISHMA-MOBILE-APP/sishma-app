@@ -13,7 +13,7 @@ export default function Button(props) {
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 0 }} >
                 <Text style={styles.inputText}>{props.text}</Text>
-                <AntDesign name="right" size={30} color="white"/>
+                {props.icon}
             </LinearGradient>
         </TouchableOpacity>
     </View>

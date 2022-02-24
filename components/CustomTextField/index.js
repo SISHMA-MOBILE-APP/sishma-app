@@ -1,37 +1,40 @@
-import React,{useState} from 'react';
-import {StyleSheet, TextInput,View} from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, TextInput, View } from "react-native";
 
 export default function InputText(props) {
-  const [text, onChangeText] = React.useState(null);
+  const [text, setText] = useState(null);
   return (
     <View style={styles.inputView}>
       <TextInput
         style={styles.inputText}
         placeholder={props.placeholderText}
-        placeholderTextColor="#003f5c"
+        placeholderTextColor="#a0d0b6"
         secureTextEntry={props.visibility}
-        onChangeText={onChangeText}
-        value={text}
+        onChangeText={(newText) => setText(newText)}
+        defaultValue={text}
       />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-    
-    inputView:{
-        alignItems: "center",
-        justifyContent: "center",
-        width:"100%",
-        backgroundColor:"#465881",
-        borderRadius:25,
-        height:50,
-        padding:20
-      },
-      inputText: {
-      alignItems: "center",
-      justifyContent: "center",
-      height:50,
-      color:"white"
-    },
-  });
+  inputView: {
+    width: "100%",
+    height: 70,
+    flexDirection: "row",
+    alignSelf: "center",
+    borderWidth: 5,
+    elevation: 1,
+    borderRadius: 35,
+    borderColor: "#a0d0b6",
+    justifyContent: "space-around",
+    backgroundColor: "#e7f3ed",
+    alignItems: "center",
+    marginBottom: 6,
+  },
+  inputText: {
+    fontSize: 18,
+    alignSelf: "center",
+    color: "#41a16d",
+  },
+});
