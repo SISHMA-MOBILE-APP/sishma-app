@@ -5,25 +5,20 @@ import { AntDesign } from '@expo/vector-icons';
 
 export default function Button(props) {
   return (
-    <View style={styles.container}>
       <TouchableOpacity onPress={props.onPress}>
-            <LinearGradient
-            style={styles.button}
-                    colors={['#41a16d', '#107c42']}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 0 }} >
-                <Text style={styles.inputText}>{props.text}</Text>
-                {props.icon}
-            </LinearGradient>
-        </TouchableOpacity>
-    </View>
+          <LinearGradient
+          style={styles.button}
+                  colors={['#41a16d', '#107c42']}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }} >
+              <Text style={styles.inputText}>{props.text}</Text>
+              {props.icon}
+          </LinearGradient>
+      </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   button: {
     width: "100%",
     height: 70,

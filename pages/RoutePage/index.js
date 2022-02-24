@@ -20,7 +20,7 @@ export default function Welcome() {
       <LinearGradient
         style={[
           styles.circle,
-          { transform: [{ rotate: "0deg" }], top: -120, left: -160 },
+          { transform: [{ rotate: "0deg" }], top: -140, left: -160 },
         ]}
         colors={["#094525", colors.greenTint80]}
         start={{ x: 0.25, y: 0.75 }}
@@ -29,14 +29,14 @@ export default function Welcome() {
       <LinearGradient
         style={[
           styles.circle,
-          { transform: [{ rotate: "103deg" }], top: -125, left: 30 },
+          { transform: [{ rotate: "103deg" }], top: -145, left: 30 },
         ]}
         colors={["#1ddf76", "#128a49"]}
       />
       <LinearGradient
         style={[
           styles.circle,
-          { transform: [{ rotate: "6.5deg" }], top: -40, left: -95 },
+          { transform: [{ rotate: "6.5deg" }], top: -60, left: -95 },
         ]}
         colors={["rgba(30,182,103,0.49)", "rgba(6,105,44, 0.8)"]}
         start={{ x: 0.25, y: 0.25 }}
@@ -45,7 +45,7 @@ export default function Welcome() {
       <LinearGradient
         style={[
           styles.circle,
-          { transform: [{ rotate: "123deg" }], top: -220, left: -40 },
+          { transform: [{ rotate: "123deg" }], top: -240, left: -40 },
         ]}
         colors={["#128a49", "#1ddf76"]}
         start={{ x: 0.75, y: 0.25 }}
@@ -63,7 +63,7 @@ export default function Welcome() {
         </View>
       </View>
       <Text style={styles.greet}>{"SISHMA"}</Text>
-      <View style={{ top: 410 }}>
+      <View style={styles.buttonContainer}>
         <RouteButton
           text="Farmer Registration"
           icon={<AntDesign name="right" size={30} color="white" />}
@@ -80,21 +80,6 @@ export default function Welcome() {
     </View>
   );
 }
-
-// function RouteButton(props){
-//     return (
-//         <TouchableOpacity>
-//             <LinearGradient
-//                     style={styles.button}
-//                     colors={['#41a16d', '#107c42']}
-//                     start={{ x: 0, y: 0 }}
-//                     end={{ x: 1, y: 0 }} >
-//                 <Text style={styles.routetext}>{props.text}</Text>
-//                 <AntDesign name="right" size={30} color="white"/>
-//             </LinearGradient>
-//         </TouchableOpacity>
-//     );
-// }
 
 const styles = StyleSheet.create({
   container: {
@@ -169,4 +154,15 @@ const styles = StyleSheet.create({
     color: "white",
     marginLeft: "10%",
   },
+  buttonContainer: {
+    top: 380,
+    paddingTop: 30,
+    height: "100%",
+    backgroundColor: "white",
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
+    padding: "8%",
+    alignItems: "center",
+    elevation: 20,
+  }
 });
