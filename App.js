@@ -1,11 +1,11 @@
-import { StatusBar } from 'react-native';
-import Routepage from './pages/RoutePage';
+import { StatusBar } from "react-native";
+import Routepage from "./pages/RoutePage";
 
 export default function App() {
   return (
     <>
-    <Routepage />
-    <StatusBar />
+      <Routepage />
+      <StatusBar />
     </>
   );
 }
