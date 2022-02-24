@@ -12,6 +12,7 @@ import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import colors from "../../utils/colors";
 import RouteButton from "../../components/CustomButton";
+import InputText from "../../components/CustomTextField";
 export default function Welcome() {
   const [signInOptions, setSignOptions] = React.useState(false);
 
@@ -76,6 +77,7 @@ export default function Welcome() {
           text="Officer Registration"
           icon={<AntDesign name="right" size={30} color="white" />}
         />
+        {/* <InputText placeholderText="Full name"/> */}
       </View>
     </View>
   );
