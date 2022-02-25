@@ -1,4 +1,3 @@
-
 import {
     StyleSheet,
     Text,
@@ -7,7 +6,6 @@ import {
     Modal,
     Dimensions,
     TouchableOpacity,
-    SafeAreaView,ScrollView, KeyboardAvoidingView 
   } from "react-native";
   import { LinearGradient } from "expo-linear-gradient";
   import React from "react";
@@ -16,16 +14,12 @@ import {
   import RouteButton from "../../components/CustomButton";
   import InputText from "../../components/CustomTextField";
   import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import { NavigationContainer } from "@react-navigation/native";
-  
-  
-   
-  
-  const Admin = ({navigation}) => {
+  export default function Option() {
     const [signInOptions, setSignOptions] = React.useState(false);
+  
     return (
-      <ScrollView  style={styles.container}>
-       <LinearGradient
+      <View style={styles.container}>
+        <LinearGradient
           style={[
             styles.circle,
             { transform: [{ rotate: "0deg" }], top: -140, left: -160 },
@@ -60,42 +54,32 @@ import { NavigationContainer } from "@react-navigation/native";
           end={{ x: 0.75, y: 0.8 }}
         />
   
-  <View>
-  {/*<View style={{ flexDirection: "row" }}>
+        <View style={styles.logo}>
+          <View style={{ flexDirection: "row" }}>
             <View style={[styles.dots, { marginRight: 5, marginBottom: 5 }]} />
             <View style={styles.dots} />
           </View>
           <View style={{ flexDirection: "row" }}>
             <View style={[styles.dots, { marginRight: 5 }]} />
             <View style={styles.dots} />
-        </View>*/}
+          </View>
         </View>
-        <Text style={styles.greet}>{"REGISTER"}</Text>
+        <Text style={styles.greet}>{"SISHMA"}</Text>
         <View style={styles.buttonContainer}>
-        <KeyboardAvoidingView behavior="padding" >
-           <InputText placeholderText="Full name"/> 
-           <InputText placeholderText="Employee Code"/> 
-           <InputText placeholderText="Designation " /> 
-           <InputText placeholderText="Officialc address"  multiline={true}/> 
-           <InputText placeholderText="Sub-district"/> 
-           <InputText placeholderText=" Village"/> 
-           <InputText placeholderText="Sub-District"/> 
-           <InputText placeholderText="District"/> 
-           <InputText placeholderText="Pin"/> 
-           <InputText placeholderText="AAdhar Number"/> 
-
-           </KeyboardAvoidingView>
-           <View style={styles.submit}>
-           <RouteButton text='Register Now'  onPress={() => navigation.navigate('Login')}/>
-           <Text> Or Go back</Text>
-          
-           </View>
-        </View>
-      </ScrollView>
-    )
+          <RouteButton
+            text="LOGIN"
+            icon={<AntDesign name="right" size={30} color="white" />}
+          />
+         
+          <RouteButton
+            text="Register"
+            icon={<AntDesign name="right" size={30} color="white" />}
+          />
+          {/* <InputText placeholderText="Full name"/> */}
+          </View>
+      </View>
+    );
   }
-  
-  export default Admin
   
   const styles = StyleSheet.create({
     container: {
@@ -109,11 +93,11 @@ import { NavigationContainer } from "@react-navigation/native";
       borderRadius: 469 / 2,
     },
     greet: {
-      top: hp('2.5%'),
+      top: 240,
       alignSelf: "center",
       letterSpacing: 10,
       color: "white",
-      fontSize: hp('5%'),
+      fontSize: 30,
     },
     dots: {
       width: 23.82,
@@ -138,56 +122,17 @@ import { NavigationContainer } from "@react-navigation/native";
       alignItems: "center",
       justifyContent: "center",
     },
-    modalView: {
-      width: "80%",
-      height: 200,
-      backgroundColor: "white",
-      borderRadius: 20,
-    },
-    textStyle: {
-      width: "100%",
-      textAlign: "center",
-      fontSize: hp('3%'),
-      marginTop: 10,
-    },
-    button: {
-      width: "94%",
-      height: 70,
-      flexDirection: "row",
-      alignSelf: "center",
-      borderWidth: 5,
-      elevation: 1,
-      borderRadius: 35,
-      borderColor: "#a0d0b6",
-      justifyContent: "center",
-      backgroundColor: "#e7f3ed",
-      alignItems: "center",
-      marginBottom: 6,
-    },
-    routetext: {
-      fontSize: hp('4%'),
-      alignSelf: "center",
-      color: "white",
-      marginLeft: "10%",
-    },
-    buttonContainer: {
-      top: hp('5%'),
-      paddingTop: 30,
-      height: "100%",
-      backgroundColor: "#d0e8db",
-      borderTopRightRadius: 30,
-      borderTopLeftRadius: 30,
-      padding: "5%",
-      alignItems: "center",
-      elevation: 20,
-    },
-    submit:{
-      width:wp('50%'),
-      justifyContent:'center',
-      alignItems:'center',
-      
+    buttonContainer:{
+     
+      flex:1,
     
-      
+     paddingTop:hp('55%')
+     
     }
-  });
+   
+    
   
+    
+  
+
+  });

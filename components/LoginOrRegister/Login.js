@@ -1,4 +1,3 @@
-
 import {
     StyleSheet,
     Text,
@@ -7,7 +6,6 @@ import {
     Modal,
     Dimensions,
     TouchableOpacity,
-    SafeAreaView,ScrollView, KeyboardAvoidingView 
   } from "react-native";
   import { LinearGradient } from "expo-linear-gradient";
   import React from "react";
@@ -16,16 +14,12 @@ import {
   import RouteButton from "../../components/CustomButton";
   import InputText from "../../components/CustomTextField";
   import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import { NavigationContainer } from "@react-navigation/native";
-  
-  
+  export default function Login() {
    
   
-  const Admin = ({navigation}) => {
-    const [signInOptions, setSignOptions] = React.useState(false);
     return (
-      <ScrollView  style={styles.container}>
-       <LinearGradient
+      <View style={styles.container}>
+        <LinearGradient
           style={[
             styles.circle,
             { transform: [{ rotate: "0deg" }], top: -140, left: -160 },
@@ -60,42 +54,32 @@ import { NavigationContainer } from "@react-navigation/native";
           end={{ x: 0.75, y: 0.8 }}
         />
   
-  <View>
-  {/*<View style={{ flexDirection: "row" }}>
+        <View style={styles.logo}>
+          <View style={{ flexDirection: "row" }}>
             <View style={[styles.dots, { marginRight: 5, marginBottom: 5 }]} />
             <View style={styles.dots} />
           </View>
           <View style={{ flexDirection: "row" }}>
             <View style={[styles.dots, { marginRight: 5 }]} />
             <View style={styles.dots} />
-        </View>*/}
+          </View>
         </View>
-        <Text style={styles.greet}>{"REGISTER"}</Text>
-        <View style={styles.buttonContainer}>
-        <KeyboardAvoidingView behavior="padding" >
-           <InputText placeholderText="Full name"/> 
-           <InputText placeholderText="Employee Code"/> 
-           <InputText placeholderText="Designation " /> 
-           <InputText placeholderText="Officialc address"  multiline={true}/> 
-           <InputText placeholderText="Sub-district"/> 
-           <InputText placeholderText=" Village"/> 
-           <InputText placeholderText="Sub-District"/> 
-           <InputText placeholderText="District"/> 
-           <InputText placeholderText="Pin"/> 
-           <InputText placeholderText="AAdhar Number"/> 
-
-           </KeyboardAvoidingView>
-           <View style={styles.submit}>
-           <RouteButton text='Register Now'  onPress={() => navigation.navigate('Login')}/>
-           <Text> Or Go back</Text>
-          
-           </View>
-        </View>
-      </ScrollView>
-    )
+        <Text style={styles.greet}>{"LOGIN"}</Text>
+<View style={styles.loginContainer}>
+    <View style={{width:wp('75%')}}>
+    
+    <InputText placeholderText='name'/>
+    <View style={{paddingBottom:wp('2%')}}/>  
+    <InputText placeholderText='password' visibility={true}/>
+    <View style={{padding:wp('5%')}}/>  
+    <RouteButton text='SUBMIT'/>
+    </View>
+    </View>    
+          {/* <InputText placeholderText="Full name"/> */}
+        
+      </View>
+    );
   }
-  
-  export default Admin
   
   const styles = StyleSheet.create({
     container: {
@@ -104,16 +88,16 @@ import { NavigationContainer } from "@react-navigation/native";
     },
     circle: {
       position: "absolute",
-      width: 469,
-      height: 469,
-      borderRadius: 469 / 2,
+      width: 469,   //469
+      height: 469,  //469
+      borderRadius: 469 / 2, //469/2
     },
     greet: {
-      top: hp('2.5%'),
+      top: hp('25%'),
       alignSelf: "center",
       letterSpacing: 10,
       color: "white",
-      fontSize: hp('5%'),
+      fontSize: 30,
     },
     dots: {
       width: 23.82,
@@ -123,7 +107,7 @@ import { NavigationContainer } from "@react-navigation/native";
     },
     logo: {
       position: "absolute",
-      top: 114,
+      top: hp('7.5%'),
       left: Dimensions.get("screen").width / 2 - 27,
       borderWidth: 1.17,
       borderColor: "white",
@@ -147,7 +131,7 @@ import { NavigationContainer } from "@react-navigation/native";
     textStyle: {
       width: "100%",
       textAlign: "center",
-      fontSize: hp('3%'),
+      fontSize: 24,
       marginTop: 10,
     },
     button: {
@@ -159,35 +143,34 @@ import { NavigationContainer } from "@react-navigation/native";
       elevation: 1,
       borderRadius: 35,
       borderColor: "#a0d0b6",
-      justifyContent: "center",
+      justifyContent: "space-around",
       backgroundColor: "#e7f3ed",
       alignItems: "center",
       marginBottom: 6,
     },
     routetext: {
-      fontSize: hp('4%'),
+      fontSize: 18,
       alignSelf: "center",
       color: "white",
       marginLeft: "10%",
     },
     buttonContainer: {
-      top: hp('5%'),
+      top: 380,
       paddingTop: 30,
       height: "100%",
-      backgroundColor: "#d0e8db",
+      backgroundColor: "white",
       borderTopRightRadius: 30,
       borderTopLeftRadius: 30,
-      padding: "5%",
+      padding: "8%",
       alignItems: "center",
       elevation: 20,
     },
-    submit:{
-      width:wp('50%'),
-      justifyContent:'center',
-      alignItems:'center',
-      
-    
-      
+    loginContainer:{
+     
+        height:hp('100%'),
+        width:wp('100%'),
+        alignItems:'center',
+        justifyContent:'center'
+       
     }
   });
-  

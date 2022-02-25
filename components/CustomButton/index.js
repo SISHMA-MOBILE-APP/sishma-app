@@ -35,8 +35,9 @@ const styles = StyleSheet.create({
   },
   inputText: {
     fontSize: 18,
-    alignSelf: "center",
+   alignSelf:'center',
     color: "white",
-    marginLeft: "10%",
+   
+ 
   },
 });
