@@ -15,7 +15,6 @@ import RouteButton from "../../components/CustomButton";
 import InputText from "../../components/CustomTextField";
 export default function Welcome() {
   const [signInOptions, setSignOptions] = React.useState(false);
-
   return (
     <View style={styles.container}>
       <LinearGradient
