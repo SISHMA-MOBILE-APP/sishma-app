@@ -13,7 +13,7 @@ import { AntDesign } from "@expo/vector-icons";
 import colors from "../../utils/colors";
 import RouteButton from "../../components/CustomButton";
 import InputText from "../../components/CustomTextField";
-export default function Welcome() {
+export default function Welcome({navigation}) {
   const [signInOptions, setSignOptions] = React.useState(false);
   return (
     <View style={styles.container}>
@@ -64,11 +64,11 @@ export default function Welcome() {
       </View>
       <Text style={styles.greet}>{"SISHMA"}</Text>
       <View style={styles.buttonContainer}>
-        <RouteButton
+        <RouteButton onPress={() => navigation.navigate('FarmerReg')}
           text="Farmer Registration"
           icon={<AntDesign name="right" size={30} color="white" />}
         />
-        <RouteButton
+        <RouteButton  onPress={() => navigation.navigate('AdminReg')}
           text="Admin Registration"
           icon={<AntDesign name="right" size={30} color="white" />}
         />
