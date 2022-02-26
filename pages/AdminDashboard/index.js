@@ -182,12 +182,9 @@ import { NavigationContainer } from "@react-navigation/native";
       elevation: 20,
     },
     submit:{
-      width:wp('50%'),
+      width:wp('80%'),
       justifyContent:'center',
-      alignItems:'center',
-      
-    
-      
+      marginTop: hp("3")  
     }
   });
   

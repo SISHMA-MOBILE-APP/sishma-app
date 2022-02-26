@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
    
     alignItems: "center",
     marginBottom: 6,
-    backgroundColor:'white',
+    backgroundColor:"transparent",
     padding:hp('1%')
   },
   inputText: {

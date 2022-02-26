@@ -21,10 +21,10 @@ export default function Button(props) {
 const styles = StyleSheet.create({
   button: {
     width: "100%",
-    height: 70,
+    height: 50,
     flexDirection: "row",
     alignSelf: "center",
-    borderWidth: 5,
+    // borderWidth: 5,
     elevation: 1,
     borderRadius: 35,
     borderColor: "#a0d0b6",
@@ -32,12 +32,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#e7f3ed",
     alignItems: "center",
     marginBottom: 6,
+    elevation: 1.5
   },
   inputText: {
     fontSize: 18,
    alignSelf:'center',
     color: "white",
-   
- 
   },
 });

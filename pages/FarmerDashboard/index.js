@@ -83,10 +83,9 @@ const Farmer = ({navigation}) => {
          <InputText placeholderText="Kit number"/> 
          </KeyboardAvoidingView>
          <View style={styles.submit}>
-          <View style={{padding:wp('3%')}} />
           <RouteButton  onPress={() => navigation.navigate('Login')} text='Register Now'/>
     
-          <Text>Go back</Text>
+          <Text style={{alignSelf: "center"}}>Go back</Text>
          </View>
         
       </View>
@@ -172,20 +171,19 @@ const styles = StyleSheet.create({
   buttonContainer: {
     top: hp('5%'),
     paddingTop: 30,
-    height: "100%",
     backgroundColor: "#d0e8db",
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
     padding: "5%",
+    paddingBottom: "20%",
     alignItems: "center",
     elevation: 20,
+    opacity: 0.85,
   },
   submit:{
-    width:wp('50%'),
+    marginTop: hp("4"),
+    width:wp('80%'),
     justifyContent:'center',
-    alignItems:'center',
-    
-  
-    
+    // alignItems:'center',
   }
 });
