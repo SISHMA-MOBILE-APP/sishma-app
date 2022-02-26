@@ -7,7 +7,7 @@ export default function Button(props) {
   return (
       <TouchableOpacity onPress={props.onPress}>
           <LinearGradient
-          style={styles.button}
+          style={[styles.button, props.style]}
                   colors={['#41a16d', '#107c42']}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 0 }} >
@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     height: 50,
     flexDirection: "row",
     alignSelf: "center",
-    // borderWidth: 5,
     elevation: 1,
     borderRadius: 35,
     borderColor: "#a0d0b6",

@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     paddingBottom: "20%",
     alignItems: "center",
     elevation: 20,
-    opacity: 0.85,
+    opacity: 0.9,
   },
   submit:{
     marginTop: hp("4"),
