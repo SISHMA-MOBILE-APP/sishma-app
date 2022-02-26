@@ -1,4 +1,4 @@
-module.exports={
+const transcription ={
     english:{
         /* Admin Dashboard */
         signIn: "Sign In",
@@ -83,4 +83,6 @@ module.exports={
         designation: "பதவி",
         OffAddress: "அதிகாரப்பூர்வ முகவரி",
     }
-}
+};
+
+module.exports = {transcription};

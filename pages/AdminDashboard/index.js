@@ -10,19 +10,21 @@ import {
     SafeAreaView,ScrollView, KeyboardAvoidingView 
   } from "react-native";
   import { LinearGradient } from "expo-linear-gradient";
-  import React from "react";
+  import React, { useContext } from "react";
   import { AntDesign } from "@expo/vector-icons";
   import colors from "../../utils/colors";
   import RouteButton from "../../components/CustomButton";
   import InputText from "../../components/CustomTextField";
   import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { NavigationContainer } from "@react-navigation/native";
-  
-  
-   
+
+// Language Provider
+import { Language } from "../../providers/languageProvider";
+import { transcription } from "../../utils/lang";   
   
   const Admin = ({navigation}) => {
     const [signInOptions, setSignOptions] = React.useState(false);
+    const lang = useContext(Language);
     return (
       <ScrollView  style={styles.container}>
        <LinearGradient
@@ -59,21 +61,10 @@ import { NavigationContainer } from "@react-navigation/native";
           start={{ x: 0.75, y: 0.25 }}
           end={{ x: 0.75, y: 0.8 }}
         />
-  
-  <View>
-  {/*<View style={{ flexDirection: "row" }}>
-            <View style={[styles.dots, { marginRight: 5, marginBottom: 5 }]} />
-            <View style={styles.dots} />
-          </View>
-          <View style={{ flexDirection: "row" }}>
-            <View style={[styles.dots, { marginRight: 5 }]} />
-            <View style={styles.dots} />
-        </View>*/}
-        </View>
         <Text style={styles.greet}>{"REGISTER"}</Text>
         <View style={styles.buttonContainer}>
         <KeyboardAvoidingView behavior="padding" >
-           <InputText placeholderText="Full name"/> 
+           <InputText placeholderText={transcription[lang.language]["name"]}/> 
            <InputText placeholderText="Employee Code"/> 
            <InputText placeholderText="Designation " /> 
            <InputText placeholderText="Officialc address"  multiline={true}/> 
