@@ -1,20 +1,21 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { LinearGradient } from 'expo-linear-gradient';
-import { AntDesign } from '@expo/vector-icons';
+import { LinearGradient } from "expo-linear-gradient";
+import { AntDesign } from "@expo/vector-icons";
 
 export default function Button(props) {
   return (
-      <TouchableOpacity onPress={props.onPress}>
-          <LinearGradient
-          style={[styles.button, props.style]}
-                  colors={['#41a16d', '#107c42']}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 0 }} >
-              <Text style={styles.inputText}>{props.text}</Text>
-              {props.icon}
-          </LinearGradient>
-      </TouchableOpacity>
+    <TouchableOpacity onPress={props.onPress}>
+      <LinearGradient
+        style={[styles.button, props.style]}
+        colors={["#41a16d", "#107c42"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+      >
+        <Text style={styles.inputText}>{props.text}</Text>
+        {props.icon}
+      </LinearGradient>
+    </TouchableOpacity>
   );
 }
 
@@ -31,11 +32,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#e7f3ed",
     alignItems: "center",
     marginBottom: 6,
-    elevation: 1.5
+    elevation: 1.5,
   },
   inputText: {
     fontSize: 18,
-   alignSelf:'center',
+    alignSelf: "center",
     color: "white",
   },
 });
