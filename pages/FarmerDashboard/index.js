@@ -1,4 +1,3 @@
-
 import {
   StyleSheet,
   Text,
@@ -7,24 +6,127 @@ import {
   Modal,
   Dimensions,
   TouchableOpacity,
-  SafeAreaView,ScrollView, KeyboardAvoidingView 
+  SafeAreaView,
+  ScrollView,
+  KeyboardAvoidingView,
+  Alert,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
+import React, { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import colors from "../../utils/colors";
 import RouteButton from "../../components/CustomButton";
 import InputText from "../../components/CustomTextField";
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+import Validation from "../../components/CustomTextField/Validation";
+import * as Animatable from "react-native-animatable";
+import Feather from "react-native-vector-icons/Feather";
 
-
- 
-
-const Farmer = ({navigation}) => {
-  const [signInOptions, setSignOptions] = React.useState(false);
+const Farmer = ({ navigation }) => {
+  const [data, setData] = useState([
+    {
+      Aadhar: "",
+      Mobile: "",
+      Pin: "",
+      isValidPin: false,
+      isValidMobile: false,
+      isValidAadhar: false,
+      check_textInputAadhar: false,
+      check_textInputMobile: false,
+      check_textInputPin: false,
+      isValidUser: false,
+    },
+  ]);
+  const textInputAadhar = (val) => {
+    if (val.trim().length == 10) {
+      setData({
+        ...data,
+        Aadhar: val,
+        check_textInputAadhar: true,
+      });
+    } else {
+      setData({
+        ...data,
+        Aadhar: val,
+        check_textInputAadhar: false,
+      });
+    }
+  };
+  const textInputPin = (val) => {
+    if (val.trim().length == 6) {
+      setData({
+        ...data,
+        Pin: val,
+        check_textInputPin: true,
+      });
+    } else {
+      setData({
+        ...data,
+        Pin: val,
+        check_textInputPin: false,
+      });
+    }
+  };
+  const textInputMobile = (val) => {
+    if (val.trim().length == 10) {
+      setData({
+        ...data,
+        Mobile: val,
+        check_textInputMobile: true,
+      });
+    } else {
+      setData({
+        ...data,
+        Mobile: val,
+        check_textInputPin: false,
+      });
+    }
+  };
+  const handleValidAadhar = (val) => {
+    if (val.trim().length == 10) {
+      setData({
+        ...data,
+        isValidAadhar: true,
+      });
+    } else {
+      setData({
+        ...data,
+        isValidAadhar: false,
+      });
+    }
+  };
+  const handleValidMobile = (val) => {
+    if (val.trim().length == 10) {
+      setData({
+        ...data,
+        isValidMobile: true,
+      });
+    } else {
+      setData({
+        ...data,
+        isValidMobile: false,
+      });
+    }
+  };
+  const handleValidPin = (val) => {
+    if (val.trim().length == 6) {
+      setData({
+        ...data,
+        isValidPin: true,
+      });
+    } else {
+      setData({
+        ...data,
+        isValidPin: false,
+      });
+    }
+  };
   return (
-    <ScrollView  style={styles.container}>
-     <LinearGradient
+    <ScrollView style={styles.container}>
+      <LinearGradient
         style={[
           styles.circle,
           { transform: [{ rotate: "0deg" }], top: -140, left: -160 },
@@ -59,8 +161,8 @@ const Farmer = ({navigation}) => {
         end={{ x: 0.75, y: 0.8 }}
       />
 
-<View>
-{/*<View style={{ flexDirection: "row" }}>
+      <View>
+        {/*<View style={{ flexDirection: "row" }}>
           <View style={[styles.dots, { marginRight: 5, marginBottom: 5 }]} />
           <View style={styles.dots} />
         </View>
@@ -71,29 +173,138 @@ const Farmer = ({navigation}) => {
       </View>
       <Text style={styles.greet}>{"REGISTER"}</Text>
       <View style={styles.buttonContainer}>
-      <KeyboardAvoidingView behavior="padding" >
-         <InputText placeholderText="Full name"/> 
-         <InputText placeholderText="Residential Adress" multiline={true}/> 
-         <InputText placeholderText="Village " /> 
-         <InputText placeholderText="District"/> 
-         <InputText placeholderText="Sub-district"/> 
-         <InputText placeholderText="Pin"/> 
-         <InputText placeholderText="AAdhar Number"/> 
-         <InputText placeholderText="Mobile Number"/> 
-         <InputText placeholderText="Kit number"/> 
-         </KeyboardAvoidingView>
-         <View style={styles.submit}>
-          <RouteButton  onPress={() => navigation.navigate('Login')} text='Register Now'/>
-    
-          <Text style={{alignSelf: "center"}}>Go back</Text>
-         </View>
-        
+        <KeyboardAvoidingView behavior="padding">
+          <InputText placeholderText="Full name" />
+          <InputText placeholderText="Residential Adress" multiline={true} />
+          <InputText placeholderText="Village " />
+          <InputText placeholderText="District" />
+          <InputText placeholderText="Sub-district" />
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <Validation
+              placeholderText="Pin"
+              onChangeText={(val) => textInputPin(val)}
+              onEndEditing={(e) => handleValidPin(e.nativeEvent.text)}
+              maxLength={6}
+            />
+            {data.check_textInputPin ? (
+              <Animatable.View animation="bounceIn">
+                <Feather
+                  style={{ right: wp("10%") }}
+                  name="check-circle"
+                  color="green"
+                  size={20}
+                />
+              </Animatable.View>
+            ) : null}
+          </View>
+          {data.isValidPin ? null : (
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <Text style={{ color: "red" }}>
+                Pincode must be 6 characters long.
+              </Text>
+            </Animatable.View>
+          )}
+
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <Validation
+              placeholderText="AAdhar Number"
+              onChangeText={(val) => textInputAadhar(val)}
+              onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
+              maxLength={10}
+            />
+            {data.check_textInputAadhar ? (
+              <Animatable.View animation="bounceIn">
+                <Feather
+                  style={{ right: wp("10%") }}
+                  name="check-circle"
+                  color="green"
+                  size={20}
+                />
+              </Animatable.View>
+            ) : null}
+          </View>
+          {data.isValidAadhar ? (
+            null
+          ) : (
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <Text style={{ color: "red" }}>
+                Aadhar must be 10 characters long.
+              </Text>
+            </Animatable.View>
+          )}
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <Validation
+              placeholderText="Mobile Number"
+              onChangeText={(val) => textInputMobile(val)}
+              onEndEditing={(e) => handleValidMobile(e.nativeEvent.text)}
+              maxLength={10}
+            />
+            {data.check_textInputMobile ? (
+              <Animatable.View animation="bounceIn">
+                <Feather
+                  style={{ right: wp("10%") }}
+                  name="check-circle"
+                  color="green"
+                  size={20}
+                />
+              </Animatable.View>
+            ) : null}
+          </View>
+          {data.isValidMobile ? (
+            null
+          ) : (
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <Text style={{ color: "red" }}>
+                Mobile must be 10 characters long.
+              </Text>
+            </Animatable.View>
+          )}
+
+          <InputText placeholderText="Kit number" />
+        </KeyboardAvoidingView>
+
+        <View style={styles.submit}>
+          <RouteButton
+            onPress={() => {
+              {
+                data.isValidAadhar && data.isValidMobile && data.isValidPin
+                  ? navigation.navigate("Login")
+                  : Alert.alert(
+                      "Registrstion Error!",
+                      "Please recheck the from and fill correctly!",
+                      [{ text: "Okay" }]
+                    );
+              }
+            }}
+            text="Register Now"
+          />
+
+          <Text style={{ alignSelf: "center" }}>Go back</Text>
+        </View>
       </View>
     </ScrollView>
-  )
-}
+  );
+};
 
-export default Farmer
+export default Farmer;
 
 const styles = StyleSheet.create({
   container: {
@@ -107,11 +318,11 @@ const styles = StyleSheet.create({
     borderRadius: 469 / 2,
   },
   greet: {
-    top: hp('2.5%'),
+    top: hp("2.5%"),
     alignSelf: "center",
     letterSpacing: 10,
     color: "white",
-    fontSize: hp('5%'),
+    fontSize: hp("5%"),
   },
   dots: {
     width: 23.82,
@@ -145,7 +356,7 @@ const styles = StyleSheet.create({
   textStyle: {
     width: "100%",
     textAlign: "center",
-    fontSize: hp('3%'),
+    fontSize: hp("3%"),
     marginTop: 10,
   },
   button: {
@@ -163,13 +374,13 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   routetext: {
-    fontSize: hp('4%'),
+    fontSize: hp("4%"),
     alignSelf: "center",
     color: "white",
     marginLeft: "10%",
   },
   buttonContainer: {
-    top: hp('5%'),
+    top: hp("5%"),
     paddingTop: 30,
     backgroundColor: "#d0e8db",
     borderTopRightRadius: 30,
@@ -180,10 +391,10 @@ const styles = StyleSheet.create({
     elevation: 20,
     opacity: 0.9,
   },
-  submit:{
+  submit: {
     marginTop: hp("4"),
-    width:wp('80%'),
-    justifyContent:'center',
+    width: wp("80%"),
+    justifyContent: "center",
     // alignItems:'center',
-  }
+  },
 });
