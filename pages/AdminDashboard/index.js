@@ -24,7 +24,10 @@ import { transcription } from "../../utils/lang";
   
   const Admin = ({navigation}) => {
     const [signInOptions, setSignOptions] = React.useState(false);
+
+    // Language provider
     const lang = useContext(Language);
+    
     return (
       <ScrollView  style={styles.container}>
        <LinearGradient
@@ -86,7 +89,7 @@ import { transcription } from "../../utils/lang";
     )
   }
   
-  export default Admin
+  export default Admin;
   
   const styles = StyleSheet.create({
     container: {

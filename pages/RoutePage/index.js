@@ -66,17 +66,17 @@ export default function Welcome({navigation}) {
       <View style={styles.buttonContainer}>
         <RouteButton onPress={() => navigation.navigate('FarmerReg')}
           text="Farmer Registration"
-          style={{borderWidth: 5, height: 70}}
+          style={{borderWidth: 5, height: 70, marginBottom: 10}}
           icon={<AntDesign name="right" size={30} color="white" />}
         />
         <RouteButton  onPress={() => navigation.navigate('AdminReg')}
           text="Admin Registration"
-          style={{borderWidth: 5, height: 70}}
+          style={{borderWidth: 5, height: 70, marginBottom: 10}}
           icon={<AntDesign name="right" size={30} color="white" />}
         />
         <RouteButton
           text="Officer Registration"
-          style={{borderWidth: 5, height: 70}}
+          style={{borderWidth: 5, height: 70, marginBottom: 10}}
           icon={<AntDesign name="right" size={30} color="white" />}
         />
         {/* <InputText placeholderText="Full name"/> */}
