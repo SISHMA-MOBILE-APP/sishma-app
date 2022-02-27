@@ -65,19 +65,18 @@ import { transcription } from "../../utils/lang";
         <View style={styles.buttonContainer}>
         <KeyboardAvoidingView behavior="padding" >
            <InputText placeholderText={transcription[lang.language]["name"]}/> 
-           <InputText placeholderText="Employee Code"/> 
-           <InputText placeholderText="Designation " /> 
-           <InputText placeholderText="Officialc address"  multiline={true}/> 
-           <InputText placeholderText="Sub-district"/> 
-           <InputText placeholderText=" Village"/> 
-           <InputText placeholderText="Sub-District"/> 
-           <InputText placeholderText="District"/> 
-           <InputText placeholderText="Pin"/> 
-           <InputText placeholderText="AAdhar Number"/> 
+           <InputText placeholderText={transcription[lang.language]["empCode"]}/> 
+           <InputText placeholderText={transcription[lang.language]["designation"]} /> 
+           <InputText placeholderText={transcription[lang.language]["OffAddress"]}  multiline={true}/> 
+           <InputText placeholderText={transcription[lang.language]["subDist"]}/> 
+           <InputText placeholderText={transcription[lang.language]["village"]}/> 
+           <InputText placeholderText={transcription[lang.language]["district"]}/> 
+           <InputText placeholderText={transcription[lang.language]["pin"]}/> 
+           <InputText placeholderText={transcription[lang.language]["aadhaarnum"]}/> 
 
            </KeyboardAvoidingView>
            <View style={styles.submit}>
-           <RouteButton text='Register Now'  onPress={() => navigation.navigate('Login')}/>
+           <RouteButton text={transcription[lang.language]["registerNow"]} onPress={() => navigation.navigate('Login')}/>
            <Text> Or Go back</Text>
           
            </View>
