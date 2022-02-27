@@ -4,37 +4,36 @@ import Option from "./components/LoginOrRegister/Option";
 import Admin from "./pages/AdminDashboard";
 import Farmer from "./pages/FarmerDashboard";
 import Routepage from "./pages/RoutePage";
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LanguageProvider from "./providers/languageProvider";
+import Hello from "./pages/Hello";
 
 export default function App() {
-
   const Stack = createNativeStackNavigator();
 
   return (
     <LanguageProvider>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{
-          headerShown: false
-        }} initialRouteName="RoutePage">
-          <Stack.Screen
-            name='RoutePage'
-            component={Routepage}
-          />
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+          initialRouteName="RoutePage"
+        >
+          <Stack.Screen name="RoutePage" component={Routepage} />
           <Stack.Screen name="FarmerReg" component={Farmer} />
           <Stack.Screen name="AdminReg" component={Admin} />
           <Stack.Screen name="Option" component={Option} />
           <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Hello" component={Hello} />
         </Stack.Navigator>
-
       </NavigationContainer>
     </LanguageProvider>
   );
 }
 
-
-// const styles = StyleSheet.create({  <Routepage /> <Farmer/><Login/> 
+// const styles = StyleSheet.create({  <Routepage /> <Farmer/><Login/>
 //   container: {
 //     flex: 1,
 //     backgroundColor: '#fff',
@@ -45,8 +44,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   safeArea: {
-    display: 'flex',
+    display: "flex",
     flex: 1,
-
   },
 });
