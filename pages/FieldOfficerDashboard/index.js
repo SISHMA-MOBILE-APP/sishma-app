@@ -22,10 +22,11 @@ import {
   import { transcription } from "../../utils/lang";   
   
   const Officer = ({navigation}) => {
+    const [page, setPage] = React.useState(0);
     const [signInOptions, setSignOptions] = React.useState(false);
     const lang = useContext(Language);
     return (
-      <ScrollView  style={styles.container}>
+      <ScrollView  style={styles.container} contentContainerStyle={{flex: 1, minHeight: hp(100)}}>
        <LinearGradient
           style={[
             styles.circle,
@@ -62,32 +63,48 @@ import {
         />
   
   <View>
-  {/*<View style={{ flexDirection: "row" }}>
-            <View style={[styles.dots, { marginRight: 5, marginBottom: 5 }]} />
-            <View style={styles.dots} />
-          </View>
-          <View style={{ flexDirection: "row" }}>
-            <View style={[styles.dots, { marginRight: 5 }]} />
-            <View style={styles.dots} />
-        </View>*/}
         </View>
-        <Text style={styles.greet}>{"Officer Registration"}</Text>
+        <Text style={styles.greet}>{"Officer\nRegistration"}</Text>
         <View style={styles.buttonContainer}>
         <KeyboardAvoidingView behavior="padding" >
-           <InputText placeholderText={transcription[lang.language]["name"]}/> 
-           <InputText placeholderText={transcription[lang.language]["empCode"]} multiline={true}/> 
-           <InputText placeholderText={transcription[lang.language]["designation"]} /> 
+          <View style={{ flexDirection: "row", justifyContent: "space-around", marginBottom: 20, }}>
+            <View style={{ width: "45%", height: 5, borderRadius: 2.5, backgroundColor: page === 0 ? "green" : "rgba(0, 255, 0, 0.5)" }} />
+            <View style={{ width: "45%", height: 5, borderRadius: 2.5, backgroundColor: page === 1 ? "green" : "grey" }} />
+          </View>
+          <Text style={styles.pagetitle}>{page === 0 ? "Personal Details" : "Address Details"}</Text>
+          {page == 0 && 
+           <View>
+           <InputText style={{marginBottom: hp(3), marginTop: hp(3)}} placeholderText={transcription[lang.language]["name"]}/> 
+           <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["empCode"]} multiline={true}/> 
+           <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["designation"]} /> 
+           <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["aadhaarnum"]}/> 
+           </View>
+          }
+          {page == 1 &&
+          <View>
+
            <InputText placeholderText={transcription[lang.language]["OffAddress"]}/> 
            <InputText placeholderText={transcription[lang.language]["village"]}/> 
            <InputText placeholderText={transcription[lang.language]["subDist"]}/> 
            <InputText placeholderText={transcription[lang.language]["district"]}/> 
            <InputText placeholderText={transcription[lang.language]["pin"]}/> 
-           <InputText placeholderText={transcription[lang.language]["aadhaarnum"]}/> 
+           </View>
+  }
            </KeyboardAvoidingView>
            <View style={styles.submit}>
-            <RouteButton  onPress={() => navigation.navigate('Login')} text={transcription[lang.language]["registerNow"]}/>
+            <RouteButton  onPress={() => {
+              setPage(1);
+              // navigation.navigate('Login')
+            }} text={transcription[lang.language]["registerNow"]}/>
       
-            <Text style={{alignSelf: "center"}}>Go back</Text>
+            {
+            page === 1 ?
+            <TouchableOpacity
+             onPress={()=>setPage(0)}>
+
+            <Text style={{ alignSelf: "center",width: wp(50),textAlign: "center", }}>Go back</Text>
+             </TouchableOpacity> : null
+          }
            </View>
           
         </View>
@@ -109,11 +126,13 @@ import {
       borderRadius: 469 / 2,
     },
     greet: {
-      top: hp('3%'),
+      position: "absolute",
+      top: hp(10),
       alignSelf: "center",
-      // letterSpacing: 10,
+      letterSpacing: 7,
       color: "white",
       fontSize: hp('5%'),
+      textAlign: "center"
     },
     dots: {
       width: 23.82,
@@ -171,13 +190,14 @@ import {
       marginLeft: "10%",
     },
     buttonContainer: {
-      top: hp('5%'),
+      top: hp(30),
       paddingTop: 30,
       backgroundColor: "#d0e8db",
       borderTopRightRadius: 30,
       borderTopLeftRadius: 30,
       padding: "5%",
       paddingBottom: "20%",
+      height: hp(70),
       alignItems: "center",
       elevation: 20,
       opacity: 1,
@@ -187,6 +207,11 @@ import {
       width:wp('80%'),
       justifyContent:'center',
       // alignItems:'center',
+    },
+    pagetitle: {
+      alignSelf: "center",
+      color: "#444",
+      fontSize: 25,
     }
   });
   

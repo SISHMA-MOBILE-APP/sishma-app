@@ -203,7 +203,7 @@ const Farmer = ({ navigation }) => {
 
               <InputText
                 value={data.Name}
-                style={{marginBottom: hp(2)}}
+                style={{marginBottom: hp(3), marginTop: hp(3)}}
                 placeholderText="Full name"
                 onChangeText={textInputName}
               />
@@ -217,7 +217,7 @@ const Farmer = ({ navigation }) => {
                 <Validation
                   placeholderText="Aadhar Number"
                   value={data.Aadhar}
-                  style={{marginBottom: hp(2)}}
+                  style={{marginBottom: hp(3)}}
                   onChangeText={(val) => textInputAadhar(val)}
                   onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
                   maxLength={10}
@@ -250,7 +250,7 @@ const Farmer = ({ navigation }) => {
                 <Validation
                   placeholderText="Mobile Number"
                   value={data.Mobile}
-                  style={{marginBottom: hp(2)}}
+                  style={{marginBottom: hp(3)}}
                   onChangeText={textInputMobile}
                   onEndEditing={(e) => handleValidMobile(e.nativeEvent.text)}
                   maxLength={10}
@@ -274,7 +274,7 @@ const Farmer = ({ navigation }) => {
                 </Animatable.View>
               ) : null}
 
-              <InputText value={data.Kit} placeholderText="Kit number" />
+              <InputText value={data.Kit} onChangeText={(e)=>setData({...data, Kit:e })} placeholderText="Kit number" />
             </View>
           }
 
