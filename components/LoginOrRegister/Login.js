@@ -137,8 +137,8 @@ export default function Login({ navigation }) {
             true
           ) : (
             <Animatable.View animation="fadeInLeft" duration={500}>
-              <Text style={{ color: "black" }}>
-                Aadhar must be 10 characters long.
+              <Text style={{ color: "red" }}>
+                Aadhar must be 12 characters long.
               </Text>
             </Animatable.View>
           )}
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     borderRadius: 469 / 2, //469/2
   },
   greet: {
-    top: hp("25%"),
+    top: hp(30),
     alignSelf: "center",
     letterSpacing: 10,
     color: "white",
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     position: "absolute",
-    top: hp("7.5%"),
+    top: hp(14),
     left: Dimensions.get("screen").width / 2 - 27,
     borderWidth: 1.17,
     borderColor: "white",
@@ -251,9 +251,15 @@ const styles = StyleSheet.create({
     elevation: 20,
   },
   loginContainer: {
-    height: hp("100%"),
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    position: "absolute",
+    top: hp("60"),
+    height: hp(40),
     width: wp("100%"),
+    elevation: 80,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "white"
   },
 });

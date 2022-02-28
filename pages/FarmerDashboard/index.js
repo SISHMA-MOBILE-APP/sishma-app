@@ -13,16 +13,9 @@ import { AntDesign } from "@expo/vector-icons";
 import colors from "../../utils/colors";
 import RouteButton from "../../components/CustomButton";
 import InputText from "../../components/CustomTextField";
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-
 // Language Provider
 import { Language } from "../../providers/languageProvider";
 import { transcription } from "../../utils/lang";   
- 
-
-const Farmer = ({navigation}) => {
-  const [signInOptions, setSignOptions] = React.useState(false);
-  const lang = useContext(Language);
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -195,10 +188,10 @@ const Farmer = ({ navigation }) => {
       <Text style={styles.greet}>{"REGISTER"}</Text>
       <View style={styles.buttonContainer}>
          
-//          <InputText placeholderText={transcription[lang.language]["pin"]}/> 
+{/* //          <InputText placeholderText={transcription[lang.language]["pin"]}/> 
 //          <InputText placeholderText={transcription[lang.language]["aadhaarnum"]}/> 
 //          <InputText placeholderText={transcription[lang.language]["mobileNum"]}/> 
-//          <InputText placeholderText={transcription[lang.language]["sishmaKitNo"]}/> 
+//          <InputText placeholderText={transcription[lang.language]["sishmaKitNo"]}/>  */}
          
     
         <KeyboardAvoidingView behavior="padding">
