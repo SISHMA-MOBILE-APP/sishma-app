@@ -2,11 +2,7 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
-  Modal,
   Dimensions,
-  TouchableOpacity,
-  SafeAreaView,
   ScrollView,
   KeyboardAvoidingView,
   Alert,
@@ -41,15 +37,36 @@ const Farmer = ({ navigation }) => {
       Aadhar: "",
       Mobile: "",
       Pin: "",
+      Name: "",
+      Address: "",
+      Village: "",
+      District: "",
+      SubDistrict: "",
       isValidPin: false,
       isValidMobile: false,
       isValidAadhar: false,
       check_textInputAadhar: false,
       check_textInputMobile: false,
       check_textInputPin: false,
-      isValidUser: false,
+      count: true,
     },
   ]);
+  const textInputName = (val) => {
+    setData({ ...data, Name: val });
+  };
+  const textInputAddress = (val) => {
+    setData({ ...data, Address: val });
+  };
+  const textInputVillage = (val) => {
+    setData({ ...data, Village: val });
+  };
+  const textInputDistrict = (val) => {
+    setData({ ...data, District: val });
+  };
+  const textInputSubDistrict = (val) => {
+    setData({ ...data, SubDistrict: val });
+  };
+
   const textInputAadhar = (val) => {
     if (val.trim().length == 10) {
       setData({
@@ -62,6 +79,7 @@ const Farmer = ({ navigation }) => {
         ...data,
         Aadhar: val,
         check_textInputAadhar: false,
+        isValidAadhar: true,
       });
     }
   };
@@ -71,6 +89,7 @@ const Farmer = ({ navigation }) => {
         ...data,
         Pin: val,
         check_textInputPin: true,
+        isValidPin: true,
       });
     } else {
       setData({
@@ -86,12 +105,13 @@ const Farmer = ({ navigation }) => {
         ...data,
         Mobile: val,
         check_textInputMobile: true,
+        isValidMobile: true,
       });
     } else {
       setData({
         ...data,
-        Mobile: val,
-        check_textInputPin: false,
+        Pin: val,
+        check_textInputMobile: false,
       });
     }
   };
@@ -171,16 +191,7 @@ const Farmer = ({ navigation }) => {
         end={{ x: 0.75, y: 0.8 }}
       />
 
-      <View>
-        {/*<View style={{ flexDirection: "row" }}>
-          <View style={[styles.dots, { marginRight: 5, marginBottom: 5 }]} />
-          <View style={styles.dots} />
-        </View>
-        <View style={{ flexDirection: "row" }}>
-          <View style={[styles.dots, { marginRight: 5 }]} />
-          <View style={styles.dots} />
-      </View>*/}
-      </View>
+      <View></View>
       <Text style={styles.greet}>{"REGISTER"}</Text>
       <View style={styles.buttonContainer}>
          
@@ -191,11 +202,27 @@ const Farmer = ({ navigation }) => {
          
     
         <KeyboardAvoidingView behavior="padding">
-          <InputText placeholderText={transcription[lang.language]["name"]}/> 
-         <InputText placeholderText={transcription[lang.language]["residenAddress"]} multiline={true}/> 
-         <InputText placeholderText={transcription[lang.language]["village"]} /> 
-         <InputText placeholderText={transcription[lang.language]["district"]}/> 
-         <InputText placeholderText={transcription[lang.language]["subDist"]}/> 
+          <InputText
+            placeholderText="Full name"
+            onChangeText={(val) => textInputName(val)}
+          />
+          <InputText
+            placeholderText="Residential Adress"
+            multiline={true}
+            onChangeText={(val) => textInputAddress(val)}
+          />
+          <InputText
+            placeholderText="Village "
+            onChangeText={(val) => textInputVillage(val)}
+          />
+          <InputText
+            placeholderText="District"
+            onChangeText={(val) => textInputDistrict(val)}
+          />
+          <InputText
+            placeholderText="Sub-district"
+            onChangeText={(val) => textInputSubDistrict(val)}
+          />
           <View
             style={{
               flexDirection: "row",
@@ -220,13 +247,13 @@ const Farmer = ({ navigation }) => {
               </Animatable.View>
             ) : null}
           </View>
-          {data.isValidPin ? null : (
+          {data.isValidPin == false && data.count == false ? (
             <Animatable.View animation="fadeInLeft" duration={500}>
               <Text style={{ color: "red" }}>
                 Pincode must be 6 characters long.
               </Text>
             </Animatable.View>
-          )}
+          ) : null}
 
           <View
             style={{
@@ -252,15 +279,13 @@ const Farmer = ({ navigation }) => {
               </Animatable.View>
             ) : null}
           </View>
-          {data.isValidAadhar ? (
-            null
-          ) : (
+          {data.isValidAadhar == false && data.count == false ? (
             <Animatable.View animation="fadeInLeft" duration={500}>
               <Text style={{ color: "red" }}>
                 Aadhar must be 10 characters long.
               </Text>
             </Animatable.View>
-          )}
+          ) : null}
           <View
             style={{
               flexDirection: "row",
@@ -285,15 +310,13 @@ const Farmer = ({ navigation }) => {
               </Animatable.View>
             ) : null}
           </View>
-          {data.isValidMobile ? (
-            null
-          ) : (
+          {data.isValidMobile == false && data.count == false ? (
             <Animatable.View animation="fadeInLeft" duration={500}>
               <Text style={{ color: "red" }}>
                 Mobile must be 10 characters long.
               </Text>
             </Animatable.View>
-          )}
+          ) : null}
 
           <InputText placeholderText="Kit number" />
         </KeyboardAvoidingView>
@@ -303,12 +326,15 @@ const Farmer = ({ navigation }) => {
             onPress={() => {
               {
                 data.isValidAadhar && data.isValidMobile && data.isValidPin
-                  ? navigation.navigate("Login")
-                  : Alert.alert(
-                      "Registrstion Error!",
-                      "Please recheck the from and fill correctly!",
-                      [{ text: "Okay" }]
-                    );
+                  ? navigation.navigate("Login") &&
+                    setData({
+                      ...data,
+                      count: true,
+                    })
+                  : setData({
+                      ...data,
+                      count: false,
+                    });
               }
             }}
             text="Register Now"
