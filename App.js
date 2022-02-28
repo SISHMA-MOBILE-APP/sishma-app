@@ -3,6 +3,7 @@ import Login from "./components/LoginOrRegister/Login";
 import Option from "./components/LoginOrRegister/Option";
 import Admin from "./pages/AdminDashboard";
 import Farmer from "./pages/FarmerDashboard";
+import Officer from "./pages/FieldOfficerDashboard";
 import Routepage from "./pages/RoutePage";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -24,6 +25,7 @@ export default function App() {
           <Stack.Screen name="RoutePage" component={Routepage} />
           <Stack.Screen name="FarmerReg" component={Farmer} />
           <Stack.Screen name="AdminReg" component={Admin} />
+          <Stack.Screen name="OfficerReg" component={Officer} />
           <Stack.Screen name="Option" component={Option} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Hello" component={Hello} />
