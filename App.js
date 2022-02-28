@@ -24,7 +24,7 @@ export default function App() {
         >
           <Stack.Screen name="RoutePage" component={Routepage} />
           <Stack.Screen name="FarmerReg" component={Farmer} />
-          <Stack.Screen name="AdminReg" component={Admin} />
+          <Stack.Screen name="AdminReg" component={Login} />
           <Stack.Screen name="OfficerReg" component={Officer} />
           <Stack.Screen name="Option" component={Option} />
           <Stack.Screen name="Login" component={Login} />
