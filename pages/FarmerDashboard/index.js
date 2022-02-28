@@ -6,6 +6,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Alert,
+  TouchableOpacity
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState, useContext } from "react";
@@ -15,7 +16,7 @@ import RouteButton from "../../components/CustomButton";
 import InputText from "../../components/CustomTextField";
 // Language Provider
 import { Language } from "../../providers/languageProvider";
-import { transcription } from "../../utils/lang";   
+import { transcription } from "../../utils/lang";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -25,7 +26,8 @@ import * as Animatable from "react-native-animatable";
 import Feather from "react-native-vector-icons/Feather";
 
 const Farmer = ({ navigation }) => {
-  const [data, setData] = useState([
+  const [page, setPage] = useState(0);
+  const [data, setData] = useState(
     {
       Aadhar: "",
       Mobile: "",
@@ -35,6 +37,7 @@ const Farmer = ({ navigation }) => {
       Village: "",
       District: "",
       SubDistrict: "",
+      Kit: "",
       isValidPin: false,
       isValidMobile: false,
       isValidAadhar: false,
@@ -42,8 +45,7 @@ const Farmer = ({ navigation }) => {
       check_textInputMobile: false,
       check_textInputPin: false,
       count: true,
-    },
-  ]);
+    });
   const textInputName = (val) => {
     setData({ ...data, Name: val });
   };
@@ -103,7 +105,7 @@ const Farmer = ({ navigation }) => {
     } else {
       setData({
         ...data,
-        Pin: val,
+        Mobile: val,
         check_textInputMobile: false,
       });
     }
@@ -148,7 +150,10 @@ const Farmer = ({ navigation }) => {
     }
   };
   return (
-    <ScrollView style={styles.container}>
+        <ScrollView contentContainerStyle={{flexGrow: 1, minHeight: "100%"}}>
+      {/* <View style={styles.container}> */}
+    
+
       <LinearGradient
         style={[
           styles.circle,
@@ -184,134 +189,155 @@ const Farmer = ({ navigation }) => {
         end={{ x: 0.75, y: 0.8 }}
       />
 
-      <View></View>
-      <Text style={styles.greet}>{"REGISTER"}</Text>
+      <Text style={styles.greet}>{"Farmer\nRegistration"}</Text>
+
       <View style={styles.buttonContainer}>
-         
-{/* //          <InputText placeholderText={transcription[lang.language]["pin"]}/> 
-//          <InputText placeholderText={transcription[lang.language]["aadhaarnum"]}/> 
-//          <InputText placeholderText={transcription[lang.language]["mobileNum"]}/> 
-//          <InputText placeholderText={transcription[lang.language]["sishmaKitNo"]}/>  */}
-         
-    
         <KeyboardAvoidingView behavior="padding">
-          <InputText
-            placeholderText="Full name"
-            onChangeText={(val) => textInputName(val)}
-          />
-          <InputText
-            placeholderText="Residential Adress"
-            multiline={true}
-            onChangeText={(val) => textInputAddress(val)}
-          />
-          <InputText
-            placeholderText="Village "
-            onChangeText={(val) => textInputVillage(val)}
-          />
-          <InputText
-            placeholderText="District"
-            onChangeText={(val) => textInputDistrict(val)}
-          />
-          <InputText
-            placeholderText="Sub-district"
-            onChangeText={(val) => textInputSubDistrict(val)}
-          />
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-around",
-              alignItems: "center",
-            }}
-          >
-            <Validation
-              placeholderText="Pin"
-              onChangeText={(val) => textInputPin(val)}
-              onEndEditing={(e) => handleValidPin(e.nativeEvent.text)}
-              maxLength={6}
-            />
-            {data.check_textInputPin ? (
-              <Animatable.View animation="bounceIn">
-                <Feather
-                  style={{ right: wp("10%") }}
-                  name="check-circle"
-                  color="green"
-                  size={20}
-                />
-              </Animatable.View>
-            ) : null}
+          <View style={{ flexDirection: "row", justifyContent: "space-around", marginBottom: 20, }}>
+            <View style={{ width: "45%", height: 5, borderRadius: 2.5, backgroundColor: page === 0 ? "green" : "rgba(0, 255, 0, 0.5)" }} />
+            <View style={{ width: "45%", height: 5, borderRadius: 2.5, backgroundColor: page === 1 ? "green" : "grey" }} />
           </View>
-          {data.isValidPin == false && data.count == false ? (
-            <Animatable.View animation="fadeInLeft" duration={500}>
-              <Text style={{ color: "red" }}>
-                Pincode must be 6 characters long.
-              </Text>
-            </Animatable.View>
-          ) : null}
+          <Text style={styles.pagetitle}>{page === 0 ? "Personal Details" : "Address Details"}</Text>
+          {page == 0 &&
+            <View>
 
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-around",
-              alignItems: "center",
-            }}
-          >
-            <Validation
-              placeholderText="AAdhar Number"
-              onChangeText={(val) => textInputAadhar(val)}
-              onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
-              maxLength={10}
-            />
-            {data.check_textInputAadhar ? (
-              <Animatable.View animation="bounceIn">
-                <Feather
-                  style={{ right: wp("10%") }}
-                  name="check-circle"
-                  color="green"
-                  size={20}
+              <InputText
+                value={data.Name}
+                style={{marginBottom: hp(2)}}
+                placeholderText="Full name"
+                onChangeText={textInputName}
+              />
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                }}
+              >
+                <Validation
+                  placeholderText="Aadhar Number"
+                  value={data.Aadhar}
+                  style={{marginBottom: hp(2)}}
+                  onChangeText={(val) => textInputAadhar(val)}
+                  onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
+                  maxLength={10}
                 />
-              </Animatable.View>
-            ) : null}
-          </View>
-          {data.isValidAadhar == false && data.count == false ? (
-            <Animatable.View animation="fadeInLeft" duration={500}>
-              <Text style={{ color: "red" }}>
-                Aadhar must be 10 characters long.
-              </Text>
-            </Animatable.View>
-          ) : null}
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-around",
-              alignItems: "center",
-            }}
-          >
-            <Validation
-              placeholderText="Mobile Number"
-              onChangeText={(val) => textInputMobile(val)}
-              onEndEditing={(e) => handleValidMobile(e.nativeEvent.text)}
-              maxLength={10}
-            />
-            {data.check_textInputMobile ? (
-              <Animatable.View animation="bounceIn">
-                <Feather
-                  style={{ right: wp("10%") }}
-                  name="check-circle"
-                  color="green"
-                  size={20}
+                {data.check_textInputAadhar ? (
+                  <Animatable.View animation="bounceIn">
+                    <Feather
+                      style={{ right: wp("10%") }}
+                      name="check-circle"
+                      color="green"
+                      size={20}
+                    />
+                  </Animatable.View>
+                ) : null}
+              </View>
+              {data.isValidAadhar == false && data.count == false ? (
+                <Animatable.View animation="fadeInLeft" duration={500}>
+                  <Text style={{ color: "red" }}>
+                    Aadhar must be 10 characters long.
+                  </Text>
+                </Animatable.View>
+              ) : null}
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                }}
+              >
+                <Validation
+                  placeholderText="Mobile Number"
+                  value={data.Mobile}
+                  style={{marginBottom: hp(2)}}
+                  onChangeText={textInputMobile}
+                  onEndEditing={(e) => handleValidMobile(e.nativeEvent.text)}
+                  maxLength={10}
                 />
-              </Animatable.View>
-            ) : null}
-          </View>
-          {data.isValidMobile == false && data.count == false ? (
-            <Animatable.View animation="fadeInLeft" duration={500}>
-              <Text style={{ color: "red" }}>
-                Mobile must be 10 characters long.
-              </Text>
-            </Animatable.View>
-          ) : null}
+                {data.check_textInputMobile ? (
+                  <Animatable.View animation="bounceIn">
+                    <Feather
+                      style={{ right: wp("10%") }}
+                      name="check-circle"
+                      color="green"
+                      size={20}
+                    />
+                  </Animatable.View>
+                ) : null}
+              </View>
+              {data.isValidMobile == false && data.count == false ? (
+                <Animatable.View animation="fadeInLeft" duration={500}>
+                  <Text style={{ color: "red" }}>
+                    Mobile must be 10 characters long.
+                  </Text>
+                </Animatable.View>
+              ) : null}
 
-          <InputText placeholderText="Kit number" />
+              <InputText value={data.Kit} placeholderText="Kit number" />
+            </View>
+          }
+
+
+          {/* Address Section  */}
+          {page === 1 &&
+            <View>
+
+              <InputText
+                value={data.Address}
+                placeholderText="Residential Adress"
+                multiline={true}
+                onChangeText={textInputAddress}
+              />
+              <InputText
+                value={data.Village}
+                placeholderText="Village "
+                onChangeText={textInputVillage}
+              />
+              <InputText
+                value={data.District}
+                placeholderText="District"
+                onChangeText={textInputDistrict}
+              />
+              <InputText
+                value={data.SubDistrict}
+                placeholderText="Sub-district"
+                onChangeText={textInputSubDistrict}
+              />
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                }}
+              >
+                <Validation
+                  value={data.Pin}
+                  placeholderText="Pin"
+                  onChangeText={(val) => textInputPin(val)}
+                  onEndEditing={(e) => handleValidPin(e.nativeEvent.text)}
+                  maxLength={6}
+                />
+                {data.check_textInputPin ? (
+                  <Animatable.View animation="bounceIn">
+                    <Feather
+                      style={{ right: wp("10%") }}
+                      name="check-circle"
+                      color="green"
+                      size={20}
+                    />
+                  </Animatable.View>
+                ) : null}
+              </View>
+              {data.isValidPin == false && data.count == false ? (
+                <Animatable.View animation="fadeInLeft" duration={500}>
+                  <Text style={{ color: "red" }}>
+                    Pincode must be 6 characters long.
+                  </Text>
+                </Animatable.View>
+              ) : null}
+            </View>
+          }
         </KeyboardAvoidingView>
 
         <View style={styles.submit}>
@@ -319,24 +345,36 @@ const Farmer = ({ navigation }) => {
             onPress={() => {
               {
                 data.isValidAadhar && data.isValidMobile && data.isValidPin
-                  ? navigation.navigate("Login") &&
-                    setData({
-                      ...data,
-                      count: true,
-                    })
-                  : setData({
-                      ...data,
-                      count: false,
-                    });
+                ? navigation.navigate("Login") &&
+                setData({
+                  ...data,
+                  count: true,
+                })
+                : setData({
+                  ...data,
+                  count: false,
+                });
+                console.log(page);
+                if(page == 0 && data.isValidAadhar && data.isValidMobile){
+                  setPage(1);
+                }
               }
             }}
-            text="Register Now"
-          />
+            text={page===0? "Next" : "Register Now"}
+            />
+          {
+            page === 1 ?
+            <TouchableOpacity
+             onPress={()=>setPage(0)}>
 
-          <Text style={{ alignSelf: "center" }}>Go back</Text>
+            <Text style={{ alignSelf: "center",width: wp(50),textAlign: "center", }}>Go back</Text>
+             </TouchableOpacity> : null
+          }
         </View>
       </View>
-    </ScrollView>
+
+      {/* </View> */}
+            </ScrollView>
   );
 };
 
@@ -344,7 +382,8 @@ export default Farmer;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width:"100%",
+    height: "100%",
     backgroundColor: "#d0e8db",
   },
   circle: {
@@ -354,9 +393,11 @@ const styles = StyleSheet.create({
     borderRadius: 469 / 2,
   },
   greet: {
-    top: hp("2.5%"),
+    textAlign: "center",
+    position: "absolute",
+    top: hp("7%"),
     alignSelf: "center",
-    letterSpacing: 10,
+    letterSpacing: 4,
     color: "white",
     fontSize: hp("5%"),
   },
@@ -416,21 +457,27 @@ const styles = StyleSheet.create({
     marginLeft: "10%",
   },
   buttonContainer: {
-    top: hp("5%"),
+    top: hp(30),
     paddingTop: 30,
     backgroundColor: "#d0e8db",
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
     padding: "5%",
+    height: hp(70),
     paddingBottom: "20%",
     alignItems: "center",
     elevation: 20,
-    opacity: 0.9,
+    opacity: 1,
   },
   submit: {
     marginTop: hp("4"),
     width: wp("80%"),
     justifyContent: "center",
     // alignItems:'center',
+  },
+  pagetitle: {
+    alignSelf: "center",
+    color: "#444",
+    fontSize: 25
   }
 })

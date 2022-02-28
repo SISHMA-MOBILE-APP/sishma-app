@@ -3,16 +3,15 @@ import { StyleSheet, TextInput, View } from "react-native";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 export default function InputText(props) {
-  const [text, setText] = useState(null);
   return (
-    <View style={styles.inputView}>
+    <View style={[styles.inputView, props.style]}>
       <TextInput 
+        value= {props.value}
         style={styles.inputText}
         placeholder={props.placeholderText}
         placeholderTextColor="#808080"
         secureTextEntry={props.visibility}
-        onChangeText={(newText) => setText(newText)}
-        defaultValue={text}
+        onChangeText={(newText) => props.onChangeText(newText)}
         multiline={props.multiline}
       />
     </View>

@@ -5,14 +5,15 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 export default function Validation(props) {
  
   return (
-    <View style={styles.inputView}>
+    <View style={[styles.inputView, props.style]}>
       <TextInput 
+        value={props.value}
         style={styles.inputText}
         placeholder={props.placeholderText}
         placeholderTextColor="#808080"
         secureTextEntry={props.visibility}
         onChangeText={props.onChangeText}
-       keyboardType="phone-pad"
+        keyboardType="phone-pad"
         multiline={props.multiline}
         maxLength={props.maxLength}
         onEndEditing={props.onEndEditing}

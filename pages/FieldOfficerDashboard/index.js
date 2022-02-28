@@ -71,7 +71,7 @@ import {
             <View style={styles.dots} />
         </View>*/}
         </View>
-        <Text style={styles.greet}>{"REGISTER"}</Text>
+        <Text style={styles.greet}>{"Officer Registration"}</Text>
         <View style={styles.buttonContainer}>
         <KeyboardAvoidingView behavior="padding" >
            <InputText placeholderText={transcription[lang.language]["name"]}/> 
@@ -109,9 +109,9 @@ import {
       borderRadius: 469 / 2,
     },
     greet: {
-      top: hp('2.5%'),
+      top: hp('3%'),
       alignSelf: "center",
-      letterSpacing: 10,
+      // letterSpacing: 10,
       color: "white",
       fontSize: hp('5%'),
     },
@@ -180,7 +180,7 @@ import {
       paddingBottom: "20%",
       alignItems: "center",
       elevation: 20,
-      opacity: 0.9,
+      opacity: 1,
     },
     submit:{
       marginTop: hp("4"),

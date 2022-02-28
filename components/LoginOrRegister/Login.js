@@ -32,7 +32,7 @@ export default function Login({ navigation }) {
     },
   ]);
   const textInputAadhar = (val) => {
-    if (val.trim().length == 10) {
+    if (val.trim().length ==  12) {
       setData({
         ...data,
         Aadhar: val,
@@ -47,7 +47,7 @@ export default function Login({ navigation }) {
     }
   };
   const handleValidAadhar = (val) => {
-    if (val.trim().length == 10) {
+    if (val.trim().length == 12) {
       setData({
         ...data,
         isValidAadhar: true,
@@ -161,7 +161,6 @@ export default function Login({ navigation }) {
           />
         </View>
       </View>
-      {/* <InputText placeholderText="Full name"/> */}
     </View>
   );
 }
@@ -254,6 +253,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     position: "absolute",
+    opacity: 0.8,
     top: hp("60"),
     height: hp(40),
     width: wp("100%"),
