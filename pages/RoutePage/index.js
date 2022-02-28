@@ -74,7 +74,7 @@ export default function Welcome({navigation}) {
           style={{borderWidth: 5, height: 70}}
           icon={<AntDesign name="right" size={30} color="white" />}
         />
-        <RouteButton
+        <RouteButton onPress={() => navigation.navigate('OfficerReg')}
           text="Officer Registration"
           style={{borderWidth: 5, height: 70}}
           icon={<AntDesign name="right" size={30} color="white" />}
