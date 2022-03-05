@@ -85,7 +85,7 @@ import {
 
            <InputText placeholderText={transcription[lang.language]["OffAddress"]}/> 
            <InputText placeholderText={transcription[lang.language]["village"]}/> 
-           <InputText placeholderText={transcription[lang.language]["subDist"]}/> 
+           <InputText placeholderText={transcription[lang.language]["state"]}/> 
            <InputText placeholderText={transcription[lang.language]["district"]}/> 
            <InputText placeholderText={transcription[lang.language]["pin"]}/> 
            </View>

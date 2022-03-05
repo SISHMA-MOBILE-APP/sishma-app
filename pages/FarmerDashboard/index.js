@@ -14,6 +14,8 @@ import { AntDesign } from "@expo/vector-icons";
 import colors from "../../utils/colors";
 import RouteButton from "../../components/CustomButton";
 import InputText from "../../components/CustomTextField";
+import DropdownComponent from "../../components/Dropdown/dropdown";
+
 // Language Provider
 import { Language } from "../../providers/languageProvider";
 import { transcription } from "../../utils/lang";
@@ -36,7 +38,7 @@ const Farmer = ({ navigation }) => {
       Address: "",
       Village: "",
       District: "",
-      SubDistrict: "",
+      State: "",
       Kit: "",
       isValidPin: false,
       isValidMobile: false,
@@ -58,8 +60,8 @@ const Farmer = ({ navigation }) => {
   const textInputDistrict = (val) => {
     setData({ ...data, District: val });
   };
-  const textInputSubDistrict = (val) => {
-    setData({ ...data, SubDistrict: val });
+  const textInputState = (val) => {
+    setData({ ...data, State: val });
   };
 
   const textInputAadhar = (val) => {
@@ -289,21 +291,32 @@ const Farmer = ({ navigation }) => {
                 multiline={true}
                 onChangeText={textInputAddress}
               />
-              <InputText
+              {/* <InputText
+                value={data.State}
+                placeholderText="State"
+                onChangeText={textInputState}
+              /> */}
+              <DropdownComponent
+                placeholderText="Select State"
+              />
+              {/* <InputText
                 value={data.Village}
                 placeholderText="Village "
                 onChangeText={textInputVillage}
+              /> */}
+              <DropdownComponent
+                placeholderText="Select Village"
               />
-              <InputText
+              {/* <InputText
                 value={data.District}
                 placeholderText="District"
-                onChangeText={textInputDistrict}
+                onChange
+                Text={textInputDistrict}
+              /> */}
+              <DropdownComponent
+                placeholderText="Select District"
               />
-              <InputText
-                value={data.SubDistrict}
-                placeholderText="Sub-district"
-                onChangeText={textInputSubDistrict}
-              />
+              
               <View
                 style={{
                   flexDirection: "row",
