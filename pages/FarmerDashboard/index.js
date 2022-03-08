@@ -24,6 +24,8 @@ import {
 import Validation from "../../components/CustomTextField/Validation";
 import * as Animatable from "react-native-animatable";
 import Feather from "react-native-vector-icons/Feather";
+import { Dropdown } from "react-native-material-dropdown-v2-fixed";
+import state_list from "../../utils/statelist";
 
 const Farmer = ({ navigation }) => {
   const [page, setPage] = useState(0);
@@ -34,6 +36,7 @@ const Farmer = ({ navigation }) => {
       Pin: "",
       Name: "",
       Address: "",
+      State: "",
       Village: "",
       District: "",
       SubDistrict: "",
@@ -289,6 +292,18 @@ const Farmer = ({ navigation }) => {
                 multiline={true}
                 onChangeText={textInputAddress}
               />
+              <Dropdown
+                label="state"
+                data={state_list}
+                iconColor="#efefef"
+                labelFontSize={16}
+                onChangeText={(val)=>{
+                  console.log(val);
+                  setData({
+                  ...data,
+                  "State": val
+                })}}
+              />
               <InputText
                 value={data.Village}
                 placeholderText="Village "
@@ -336,6 +351,7 @@ const Farmer = ({ navigation }) => {
                   </Text>
                 </Animatable.View>
               ) : null}
+              
             </View>
           }
         </KeyboardAvoidingView>
