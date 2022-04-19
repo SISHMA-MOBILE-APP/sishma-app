@@ -64,7 +64,7 @@ import {
   
   <View>
         </View>
-        <Text style={styles.greet}>{"Officer\nRegistration"}</Text>
+        <Text style={styles.greet}>{"Soil Sample\nDetails"}</Text>
         <View style={styles.buttonContainer}>
         <KeyboardAvoidingView behavior="padding" >
           <View style={{ flexDirection: "row", justifyContent: "space-around", marginBottom: 20, }}>
@@ -72,30 +72,34 @@ import {
             <View style={{ width: "30%", height: 5, borderRadius: 2.5, backgroundColor: page === 1 ? "green" : "rgba(0, 255, 0, 0.5)" }} />
             <View style={{ width: "30%", height: 5, borderRadius: 2.5, backgroundColor: page === 2 ? "green" : "rgba(0, 255, 0, 0.5)" }} />
           </View>
-          <Text style={styles.pagetitle}>{page === 0 ? "Organisation Details" : page===1? "Personal Details": "Address Details"}</Text>
+          <Text style={styles.pagetitle}>{page === 0 ? "Soil Sample Details" : page===1? "Soil Test Details": "Soil Test Details"}</Text>
           {page == 0 && 
            <View>
-           <InputText style={{marginBottom: hp(3), marginTop: hp(3)}} placeholderText={transcription[lang.language]["deptName"]}/> 
-           <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["officeAddress"]} multiline={true}/> 
-           <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["designation"]} /> 
-           <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language][""]}/> 
+           <InputText style={{marginBottom: hp(1), marginTop: hp(2)}} placeholderText={transcription[lang.language]["soilSampleNum"]}/> 
+           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["date"]} /> 
+           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["surveyNum"]} /> 
+           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["farmSize"]}/> 
+           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["gps"]}/> 
+           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["crop"]}/> 
            </View>
           }
           {page == 1 && 
            <View>
-           <InputText style={{marginBottom: hp(3), marginTop: hp(3)}} placeholderText={transcription[lang.language]["name"]}/> 
-           <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["empCode"]} multiline={true}/> 
-           <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["designation"]} /> 
-           <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["aadhaarnum"]}/> 
+           <InputText style={{marginBottom: hp(2), marginTop: hp(2)}} placeholderText={transcription[lang.language]["pH"]}/> 
+           <InputText style={{marginBottom: hp(2)}} placeholderText={transcription[lang.language]["soilMoisture"]}/> 
+           <InputText style={{marginBottom: hp(2)}} placeholderText={transcription[lang.language]["nitrogen"]} /> 
+           <InputText style={{marginBottom: hp(2)}} placeholderText={transcription[lang.language]["phosphorus"]}/> 
+           <InputText style={{marginBottom: hp(2)}} placeholderText={transcription[lang.language]["potassium"]}/> 
            </View>
           }
           {page == 2 &&
           <View>
-           <InputText placeholderText={transcription[lang.language]["OffAddress"]}/> 
-           <InputText placeholderText={transcription[lang.language]["village"]}/> 
-           <InputText placeholderText={transcription[lang.language]["state"]}/> 
-           <InputText placeholderText={transcription[lang.language]["district"]}/> 
-           <InputText placeholderText={transcription[lang.language]["pin"]}/> 
+           <InputText style={{marginBottom: hp(1), marginTop: hp(1)}}  placeholderText={transcription[lang.language]["sulphur"]}/> 
+           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["iron"]}/> 
+           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["boron"]}/> 
+           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["copper"]}/> 
+           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["manganese"]}/> 
+           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["zinc"]}/> 
            </View>
           }
            </KeyboardAvoidingView>
@@ -104,7 +108,7 @@ import {
               count === 0? setPage(1) : setPage(2);
               count++
               // navigation.navigate('Login')
-            }} text={transcription[lang.language]["registerNow"]}/>
+            }} text={transcription[lang.language]["next"]}/>
       
             {
             page === 1 ?

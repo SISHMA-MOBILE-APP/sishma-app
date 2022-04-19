@@ -9,6 +9,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LanguageProvider from "./providers/languageProvider";
 import Hello from "./pages/Hello";
+import SoilSampleDetails from "./pages/SoilSampleDetails";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -29,6 +30,7 @@ export default function App() {
           <Stack.Screen name="Option" component={Option} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Hello" component={Hello} />
+          <Stack.Screen name="SoilSampleDetails" component={SoilSampleDetails} />
         </Stack.Navigator>
       </NavigationContainer>
     </LanguageProvider>
