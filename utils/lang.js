@@ -26,6 +26,31 @@ const transcription ={
         empCode: "Employee Code",
         designation: "Designation",
         OffAddress: "Official address",
+        officeAddress: "Office address",
+        deptName: "Department name",
+        next: "Next",
+
+        /* Soil sample details */
+        soilSampleNum: "Soil Sample Number",
+        date: "Date",
+        surveyNum: "Survey Number",
+        farmSize: "Farm Size",
+        gps: "GPS",
+        crop: "Crop",
+
+        /* Soil test details */
+        pH: "pH",
+        soilMoisture: "Soil Moisture Content",
+        nitrogen: "Available Nitrogen",
+        phosphorus: "Available Phosphorus",
+        potassium: "Available Potassium",
+
+        sulphur: "Sulphur (S)",
+        iron: "Iron (Fe)",
+        boron: "Boron (B)",
+        copper: "Copper (Cu)",
+        manganese: "Manganese (Mn)",
+        zinc: "Zinc (Zn)",
     },
     hindi:{
         /* Admin Dashboard */
