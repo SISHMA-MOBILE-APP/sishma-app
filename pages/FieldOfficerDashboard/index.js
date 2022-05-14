@@ -9,6 +9,7 @@ import {
     TouchableOpacity,
     SafeAreaView,ScrollView, KeyboardAvoidingView 
   } from "react-native";
+  import Icon from 'react-native-vector-icons/FontAwesome5';
   import { LinearGradient } from "expo-linear-gradient";
   import React, {useContext} from "react";
   import { AntDesign } from "@expo/vector-icons";
@@ -74,20 +75,66 @@ import {
           <Text style={styles.pagetitle}>{page === 0 ? "Personal Details" : "Address Details"}</Text>
           {page == 0 && 
            <View>
-           <InputText style={{marginBottom: hp(3), marginTop: hp(3)}} placeholderText={transcription[lang.language]["name"]}/> 
-           <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["empCode"]} multiline={true}/> 
+             <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                  marginLeft:5
+                }}
+              >
+          
+           <InputText style={{marginBottom: hp(3), marginTop: hp(3)}} placeholderText={transcription[lang.language]["name"]}/><Icon name="user-plus"  style={{left:-10}} size={20} color="#000" /></View> 
+           <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                  marginLeft:5
+                }}
+              >
+           <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["empCode"]} multiline={true}/><Icon name="sort-numeric-down"  style={{left:-10}} size={20} color="#000" /></View>
            <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["designation"]} /> 
+           <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                  marginLeft:5
+                }}
+              >
            <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["aadhaarnum"]}/> 
+           <Icon name="address-card"  style={{left:-10}} size={20} color="#000" />
+           </View>
            </View>
           }
           {page == 1 &&
           <View>
-
+  <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                  marginLeft:5
+                }}
+              >
            <InputText placeholderText={transcription[lang.language]["OffAddress"]}/> 
+           <Icon name="home"  style={{left:-10}} size={20} color="#000" />
+           </View>
            <InputText placeholderText={transcription[lang.language]["village"]}/> 
            <InputText placeholderText={transcription[lang.language]["subDist"]}/> 
            <InputText placeholderText={transcription[lang.language]["district"]}/> 
-           <InputText placeholderText={transcription[lang.language]["pin"]}/> 
+           <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                  marginLeft:5
+                }}
+              >
+           <InputText placeholderText={transcription[lang.language]["pin"]}/>
+           <Icon name="sort-numeric-down"  style={{left:-10}} size={20} color="#000" />
+           </View> 
            </View>
   }
            </KeyboardAvoidingView>

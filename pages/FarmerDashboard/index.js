@@ -8,6 +8,7 @@ import {
   Alert,
   TouchableOpacity
 } from "react-native";
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState, useContext } from "react";
 import { AntDesign } from "@expo/vector-icons";
@@ -203,13 +204,23 @@ const Farmer = ({ navigation }) => {
           <Text style={styles.pagetitle}>{page === 0 ? "Personal Details" : "Address Details"}</Text>
           {page == 0 &&
             <View>
-
+ <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                  marginLeft:5
+                }}
+              >
               <InputText
                 value={data.Name}
-                style={{marginBottom: hp(3), marginTop: hp(3)}}
+             
                 placeholderText="Full name"
                 onChangeText={textInputName}
+            
               />
+                  <Icon name="user-plus"  style={{left:-10}} size={20} color="#000" />
+                  </View>
               <View
                 style={{
                   flexDirection: "row",
@@ -217,6 +228,7 @@ const Farmer = ({ navigation }) => {
                   alignItems: "center",
                 }}
               >
+                
                 <Validation
                   placeholderText="Aadhar Number"
                   value={data.Aadhar}
@@ -225,6 +237,7 @@ const Farmer = ({ navigation }) => {
                   onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
                   maxLength={10}
                 />
+               <Icon name="address-card"  style={{left:-10}} size={20} color="#000" />
                 {data.check_textInputAadhar ? (
                   <Animatable.View animation="bounceIn">
                     <Feather
@@ -246,10 +259,11 @@ const Farmer = ({ navigation }) => {
               <View
                 style={{
                   flexDirection: "row",
-                  justifyContent: "space-around",
+                  justifyContent: "space-evenly",
                   alignItems: "center",
                 }}
               >
+                 
                 <Validation
                   placeholderText="Mobile Number"
                   value={data.Mobile}
@@ -257,7 +271,10 @@ const Farmer = ({ navigation }) => {
                   onChangeText={textInputMobile}
                   onEndEditing={(e) => handleValidMobile(e.nativeEvent.text)}
                   maxLength={10}
+                  
                 />
+               <Icon name="phone"  style={{left:-10}} size={20} color="#000" />
+              
                 {data.check_textInputMobile ? (
                   <Animatable.View animation="bounceIn">
                     <Feather
@@ -277,7 +294,18 @@ const Farmer = ({ navigation }) => {
                 </Animatable.View>
               ) : null}
 
-              <InputText value={data.Kit} onChangeText={(e)=>setData({...data, Kit:e })} placeholderText="Kit number" />
+              
+<View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                  marginLeft:5
+                }}
+              >
+          <InputText value={data.Kit} onChangeText={(e)=>setData({...data, Kit:e })} placeholderText="Kit number" />
+          <Icon name="sort-numeric-down"  style={{left:-10}} size={20} color="#000" />
+          </View>
             </View>
           }
 
@@ -285,13 +313,23 @@ const Farmer = ({ navigation }) => {
           {/* Address Section  */}
           {page === 1 &&
             <View>
-
+           <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                  marginLeft:5
+                }}
+              >
               <InputText
                 value={data.Address}
                 placeholderText="Residential Adress"
                 multiline={true}
                 onChangeText={textInputAddress}
               />
+               <Icon name="home"  style={{left:-10}} size={20} color="#000" />
+               </View>
+             
               <Dropdown
                 label="state"
                 data={state_list}
@@ -304,11 +342,14 @@ const Farmer = ({ navigation }) => {
                   "State": val
                 })}}
               />
+
               <InputText
                 value={data.Village}
                 placeholderText="Village "
                 onChangeText={textInputVillage}
               />
+            
+
               <InputText
                 value={data.District}
                 placeholderText="District"
@@ -333,6 +374,7 @@ const Farmer = ({ navigation }) => {
                   onEndEditing={(e) => handleValidPin(e.nativeEvent.text)}
                   maxLength={6}
                 />
+                <Icon name="sort-numeric-down"  style={{left:-10}} size={20} color="#000" />
                 {data.check_textInputPin ? (
                   <Animatable.View animation="bounceIn">
                     <Feather
