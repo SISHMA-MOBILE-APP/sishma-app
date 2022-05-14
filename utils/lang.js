@@ -21,6 +21,7 @@ const transcription ={
         pin: "PIN",
         mobileNum: "Mobile Number",
         sishmaKitNo : "Sishma kit no",
+        email: "Email",
 
         /* Registration Dashboard */
         empCode: "Employee Code",
