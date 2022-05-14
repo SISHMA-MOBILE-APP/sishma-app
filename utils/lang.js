@@ -16,16 +16,42 @@ const transcription ={
         name: "Name",
         residenAddress: "Residential address",
         village: "Village",
-        subDist: "Sub District",
+        state: "State",
         district: "District",
         pin: "PIN",
         mobileNum: "Mobile Number",
         sishmaKitNo : "Sishma kit no",
+        email: "Email",
 
         /* Registration Dashboard */
         empCode: "Employee Code",
         designation: "Designation",
         OffAddress: "Official address",
+        officeAddress: "Office address",
+        deptName: "Department name",
+        next: "Next",
+
+        /* Soil sample details */
+        soilSampleNum: "Soil Sample Number",
+        date: "Date",
+        surveyNum: "Survey Number",
+        farmSize: "Farm Size",
+        gps: "GPS",
+        crop: "Crop",
+
+        /* Soil test details */
+        pH: "pH",
+        soilMoisture: "Soil Moisture Content",
+        nitrogen: "Available Nitrogen",
+        phosphorus: "Available Phosphorus",
+        potassium: "Available Potassium",
+
+        sulphur: "Sulphur (S)",
+        iron: "Iron (Fe)",
+        boron: "Boron (B)",
+        copper: "Copper (Cu)",
+        manganese: "Manganese (Mn)",
+        zinc: "Zinc (Zn)",
     },
     hindi:{
         /* Admin Dashboard */
@@ -44,7 +70,7 @@ const transcription ={
         name: "नाम",
         residenAddress: "आवासीय पता",
         village: "गाँव",
-        subDist: "उप जिला",
+        state: "राज्य",
         district: "जिला",
         pin: "PIN",
         mobileNum: "मोबाइल नंबर",
@@ -72,7 +98,7 @@ const transcription ={
         name: "பெயர்",
         residenAddress: "வீட்டு முகவரி",
         village: "கிராமம்",
-        subDist: "துணைமாவட்டம்",
+        state: "நிலை",
         district: "மாவட்டம்",
         pin: "PIN",
         mobileNum: "கைபேசி எண்",

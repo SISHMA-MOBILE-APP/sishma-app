@@ -21,6 +21,8 @@ import {
 import * as Animatable from "react-native-animatable";
 import Feather from "react-native-vector-icons/Feather";
 import Validation from "../CustomTextField/Validation";
+import Routepage from "../../pages/RoutePage";
+
 export default function Login({ navigation }) {
   const [data, setData] = useState([
     {
@@ -32,7 +34,7 @@ export default function Login({ navigation }) {
     },
   ]);
   const textInputAadhar = (val) => {
-    if (val.trim().length ==  12) {
+    if (val.trim().length == 12) {
       setData({
         ...data,
         Aadhar: val,
@@ -143,7 +145,7 @@ export default function Login({ navigation }) {
             </Animatable.View>
           )}
           <View style={{ paddingBottom: wp("2%") }} />
-          <InputText placeholderText="password" visibility={true} />
+          <InputText placeholderText="Password" visibility={true} />
           <View style={{ padding: wp("5%") }} />
           <RouteButton
             onPress={() => {
@@ -160,6 +162,18 @@ export default function Login({ navigation }) {
             text="Submit"
           />
         </View>
+        <TouchableOpacity  onPress={() => {
+              //setPage(1);
+              navigation.navigate('RoutePage')
+            }}>
+          <Text
+            style={{
+              marginTop: hp(2),
+            }}
+          >Not yet registered? 
+            Register Now!
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -260,6 +274,6 @@ const styles = StyleSheet.create({
     elevation: 80,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
 });

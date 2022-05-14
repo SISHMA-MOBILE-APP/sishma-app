@@ -79,6 +79,11 @@ export default function Welcome({navigation}) {
           style={{borderWidth: 5, height: 70, marginBottom: 10}}
           icon={<AntDesign name="right" size={30} color="white" />}
         />
+        <RouteButton onPress={() => navigation.navigate('SoilSampleDetails')}
+          text="Soil Sample Details"
+          style={{borderWidth: 5, height: 70, marginBottom: 10}}
+          icon={<AntDesign name="right" size={30} color="white" />}
+        />
         {/* <InputText placeholderText="Full name"/> */}
       </View>
     </View>

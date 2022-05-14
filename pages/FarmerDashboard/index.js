@@ -14,6 +14,8 @@ import { AntDesign } from "@expo/vector-icons";
 import colors from "../../utils/colors";
 import RouteButton from "../../components/CustomButton";
 import InputText from "../../components/CustomTextField";
+import DropdownComponent from "../../components/Dropdown/dropdown";
+
 // Language Provider
 import { Language } from "../../providers/languageProvider";
 import { transcription } from "../../utils/lang";
@@ -24,8 +26,6 @@ import {
 import Validation from "../../components/CustomTextField/Validation";
 import * as Animatable from "react-native-animatable";
 import Feather from "react-native-vector-icons/Feather";
-import { Dropdown } from "react-native-material-dropdown-v2-fixed";
-import state_list from "../../utils/statelist";
 
 const Farmer = ({ navigation }) => {
   const [page, setPage] = useState(0);
@@ -36,10 +36,9 @@ const Farmer = ({ navigation }) => {
       Pin: "",
       Name: "",
       Address: "",
-      State: "",
       Village: "",
       District: "",
-      SubDistrict: "",
+      State: "",
       Kit: "",
       isValidPin: false,
       isValidMobile: false,
@@ -61,8 +60,8 @@ const Farmer = ({ navigation }) => {
   const textInputDistrict = (val) => {
     setData({ ...data, District: val });
   };
-  const textInputSubDistrict = (val) => {
-    setData({ ...data, SubDistrict: val });
+  const textInputState = (val) => {
+    setData({ ...data, State: val });
   };
 
   const textInputAadhar = (val) => {
@@ -292,33 +291,32 @@ const Farmer = ({ navigation }) => {
                 multiline={true}
                 onChangeText={textInputAddress}
               />
-              <Dropdown
-                label="state"
-                data={state_list}
-                iconColor="#efefef"
-                labelFontSize={16}
-                onChangeText={(val)=>{
-                  console.log(val);
-                  setData({
-                  ...data,
-                  "State": val
-                })}}
+              {/* <InputText
+                value={data.State}
+                placeholderText="State"
+                onChangeText={textInputState}
+              /> */}
+              <DropdownComponent
+                placeholderText="Select State"
               />
-              <InputText
+              {/* <InputText
                 value={data.Village}
                 placeholderText="Village "
                 onChangeText={textInputVillage}
+              /> */}
+              <DropdownComponent
+                placeholderText="Select Village"
               />
-              <InputText
+              {/* <InputText
                 value={data.District}
                 placeholderText="District"
-                onChangeText={textInputDistrict}
+                onChange
+                Text={textInputDistrict}
+              /> */}
+              <DropdownComponent
+                placeholderText="Select District"
               />
-              <InputText
-                value={data.SubDistrict}
-                placeholderText="Sub-district"
-                onChangeText={textInputSubDistrict}
-              />
+              
               <View
                 style={{
                   flexDirection: "row",
@@ -351,7 +349,6 @@ const Farmer = ({ navigation }) => {
                   </Text>
                 </Animatable.View>
               ) : null}
-              
             </View>
           }
         </KeyboardAvoidingView>
