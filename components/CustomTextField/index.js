@@ -11,7 +11,7 @@ export default function InputText(props) {
         placeholder={props.placeholderText}
         placeholderTextColor="#808080"
         secureTextEntry={props.visibility}
-        onChangeText={(newText) => props.onChangeText(newText)}
+        onChangeText={props.onChangeText}
         multiline={props.multiline}
       />
     </View>

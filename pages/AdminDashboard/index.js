@@ -7,6 +7,7 @@ Dimensions,
   KeyboardAvoidingView,
   Alert,
 } from "react-native";
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useContext, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
@@ -190,10 +191,37 @@ const Admin = ({ navigation }) => {
       <Text style={styles.greet}>{"REGISTER"}</Text>
       <View style={styles.buttonContainer}>
         <KeyboardAvoidingView behavior="padding">
-          <InputText placeholderText={transcription[lang.language]["name"] } onChangeText={(val) => textInputName(val)}/>
-          <InputText placeholderText="Employee Code" />
-          <InputText placeholderText="Designation " />
-          <InputText placeholderText="Official address" multiline={true}  onChangeText={(val) => textInputAddress(val)} />
+        <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+          <InputText placeholderText={transcription[lang.language]["name"] } onChangeText={(val) => textInputName(val)}/><Icon name="user-plus"  style={{left:-10}} size={20} color="#000" /></View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+          <InputText placeholderText="Employee Code" /><Icon name="sort-numeric-down"  style={{left:-10}} size={20} color="#000" /></View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+          <InputText placeholderText="Designation " /><Icon name="briefcase"  style={{left:-10}} size={20} color="#000" /></View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          ><InputText placeholderText="Official address" multiline={true}  onChangeText={(val) => textInputAddress(val)} /><Icon name="building"  style={{left:-10}} size={20} color="#000" /></View>
           <InputText placeholderText="Sub-district" />
           <InputText placeholderText=" Village" onChangeText={(val) => textInputVillage(val)}/>
           <InputText placeholderText="Sub-District" onChangeText={(val) => textInputSubDistrict(val)}/>
@@ -211,6 +239,7 @@ const Admin = ({ navigation }) => {
               onEndEditing={(e) => handleValidPin(e.nativeEvent.text)}
               maxLength={6}
             />
+            <Icon name="sort-numeric-down"  style={{left:-10}} size={20} color="#000" />
             {data.check_textInputPin ? (
               <Animatable.View animation="bounceIn">
                 <Feather
@@ -242,6 +271,7 @@ const Admin = ({ navigation }) => {
               onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
               maxLength={10}
             />
+             <Icon name="address-card"  style={{left:-10}} size={20} color="#000" />
             {data.check_textInputAadhar ? (
               <Animatable.View animation="bounceIn">
                 <Feather
