@@ -33,7 +33,7 @@ const Officer = ({ navigation }) => {
   return (
     <ScrollView
       style={styles.container}
-      contentContainerStyle={{ flex: 1, minHeight: hp(100) }}
+      contentContainerStyle={{ flex: 1, height: hp(100) }}
     >
       <LinearGradient
         style={[
@@ -180,7 +180,7 @@ const Officer = ({ navigation }) => {
                 }}
             onPress={() => {
               //setPage(1);
-              navigation.navigate('Login')
+              navigation.navigate('FieldOfficerRecommendation')
             }}
             text={transcription[lang.language]["registerNow"]}
           />}
