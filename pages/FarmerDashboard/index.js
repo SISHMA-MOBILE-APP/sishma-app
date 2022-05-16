@@ -217,7 +217,7 @@ const Farmer = ({ navigation }) => {
                 placeholderText="Full name"
                 onChangeText={textInputName}
               />
-              <Icon name="user-plus"  style={{left:-10}} size={20} color="#000" />
+              <Icon name="user-plus"  style={{left:-20}} size={20} color="#6e6e6e" />
               </View>
               <View
                 style={{
@@ -234,11 +234,11 @@ const Farmer = ({ navigation }) => {
                   onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
                   maxLength={10}
                 />
-                <Icon name="address-card"  style={{left:-10}} size={20} color="#000" />
+                <Icon name="address-card"  style={{left:-20, bottom : 15}} size={25} color="#6e6e6e" />
                 {data.check_textInputAadhar ? (
                   <Animatable.View animation="bounceIn">
                     <Feather
-                      style={{ right: wp("10%") }}
+                      style={{ right: wp("15%"), bottom : 15 }}
                       name="check-circle"
                       color="green"
                       size={20}
@@ -268,11 +268,11 @@ const Farmer = ({ navigation }) => {
                   onEndEditing={(e) => handleValidMobile(e.nativeEvent.text)}
                   maxLength={10}
                 />
-                <Icon name="phone"  style={{left:-10}} size={20} color="#000" />
+                <Icon name="phone"  style={{left:-20, bottom: 15}} size={25} color="#6e6e6e" />
                 {data.check_textInputMobile ? (
                   <Animatable.View animation="bounceIn">
                     <Feather
-                      style={{ right: wp("10%") }}
+                      style={{ right: wp("15%"), bottom : 15 }}
                       name="check-circle"
                       color="green"
                       size={20}
@@ -295,7 +295,7 @@ const Farmer = ({ navigation }) => {
                 }}
               >
               <InputText value={data.Kit} onChangeText={(e)=>setData({...data, Kit:e })} placeholderText="Kit number" />
-              <Icon name="sort-numeric-down"  style={{left:-10}} size={20} color="#000" />
+              <Icon name="sort-numeric-down"  style={{left:-20, bottom : 15}} size={25} color="#6e6e6e" />
               </View>
             </View>
           }
@@ -317,7 +317,7 @@ const Farmer = ({ navigation }) => {
                 multiline={true}
                 onChangeText={textInputAddress}
               />
-              <Icon name="home"  style={{left:-10}} size={20} color="#000" />
+              <Icon name="home"  style={{left:-20}} size={25} color="#6e6e6e" />
               </View>
               {/* <InputText
                 value={data.State}
@@ -359,14 +359,14 @@ const Farmer = ({ navigation }) => {
                   onEndEditing={(e) => handleValidPin(e.nativeEvent.text)}
                   maxLength={6}
                 />
-                <Icon name="sort-numeric-down"  style={{left:-10}} size={20} color="#000" />
+                <Icon name="sort-numeric-down"  style={{left:-20}} size={25} color="#6e6e6e" />
                 {data.check_textInputPin ? (
                   <Animatable.View animation="bounceIn">
                     <Feather
-                      style={{ right: wp("10%") }}
+                      style={{ right: wp("15%") }}
                       name="check-circle"
                       color="green"
-                      size={20}
+                      size={25}
                     />
                   </Animatable.View>
                 ) : null}

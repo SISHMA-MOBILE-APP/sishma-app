@@ -198,7 +198,8 @@ const Admin = ({ navigation }) => {
               alignItems: "center",
             }}
           >
-          <InputText placeholderText={transcription[lang.language]["name"] } onChangeText={(val) => textInputName(val)}/><Icon name="user-plus"  style={{left:-10}} size={20} color="#000" /></View>
+          <InputText placeholderText={transcription[lang.language]["name"] } onChangeText={(val) => textInputName(val)}/>
+          <Icon name="user-plus"  style={{left:-20}} size={25} color="#6e6e6e" /></View>
           <View
             style={{
               flexDirection: "row",
@@ -206,7 +207,8 @@ const Admin = ({ navigation }) => {
               alignItems: "center",
             }}
           >
-          <InputText placeholderText="Employee Code" /><Icon name="sort-numeric-down"  style={{left:-10}} size={20} color="#000" /></View>
+          <InputText placeholderText="Employee Code" />
+          <Icon name="sort-numeric-down"  style={{left:-20}} size={25} color="#6e6e6e" /></View>
           <View
             style={{
               flexDirection: "row",
@@ -214,14 +216,16 @@ const Admin = ({ navigation }) => {
               alignItems: "center",
             }}
           >
-          <InputText placeholderText="Designation " /><Icon name="briefcase"  style={{left:-10}} size={20} color="#000" /></View>
+          <InputText placeholderText="Designation " />
+          <Icon name="briefcase"  style={{left:-20}} size={25} color="#6e6e6e" /></View>
           <View
             style={{
               flexDirection: "row",
               justifyContent: "space-around",
               alignItems: "center",
             }}
-          ><InputText placeholderText="Official address" multiline={true}  onChangeText={(val) => textInputAddress(val)} /><Icon name="building"  style={{left:-10}} size={20} color="#000" /></View>
+          ><InputText placeholderText="Official address" multiline={true}  onChangeText={(val) => textInputAddress(val)} />
+          <Icon name="building"  style={{left:-20}} size={25} color="#6e6e6e" /></View>
           <InputText placeholderText="Sub-district" />
           <InputText placeholderText=" Village" onChangeText={(val) => textInputVillage(val)}/>
           <InputText placeholderText="Sub-District" onChangeText={(val) => textInputSubDistrict(val)}/>
@@ -239,7 +243,7 @@ const Admin = ({ navigation }) => {
               onEndEditing={(e) => handleValidPin(e.nativeEvent.text)}
               maxLength={6}
             />
-            <Icon name="sort-numeric-down"  style={{left:-10}} size={20} color="#000" />
+            <Icon name="sort-numeric-down"  style={{left:-20}} size={25} color="#6e6e6e" />
             {data.check_textInputPin ? (
               <Animatable.View animation="bounceIn">
                 <Feather
@@ -271,7 +275,7 @@ const Admin = ({ navigation }) => {
               onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
               maxLength={10}
             />
-             <Icon name="address-card"  style={{left:-10}} size={20} color="#000" />
+             <Icon name="address-card"  style={{left:-20}} size={25} color="#6e6e6e" />
             {data.check_textInputAadhar ? (
               <Animatable.View animation="bounceIn">
                 <Feather

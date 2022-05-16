@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
-import { AntDesign } from "@expo/vector-icons";
+import Icon from 'react-native-vector-icons/FontAwesome5';  
 import colors from "../../utils/colors";
 import RouteButton from "../../components/CustomButton";
 import InputText from "../../components/CustomTextField";
@@ -124,10 +124,11 @@ export default function Login({ navigation }) {
               onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
               maxLength={10}
             />
+            <Icon name="address-card"  style={{left:-20, bottom : 5}} size={25} color="#6e6e6e" />
             {data.check_textInputAadhar ? (
               <Animatable.View animation="bounceIn">
                 <Feather
-                  style={{ right: wp("10%") }}
+                  style={{ right: wp("15%") }}
                   name="check-circle"
                   color="green"
                   size={20}
@@ -145,7 +146,16 @@ export default function Login({ navigation }) {
             </Animatable.View>
           )}
           <View style={{ paddingBottom: wp("2%") }} />
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
           <InputText placeholderText="Password" visibility={true} />
+          <Icon name="ellipsis-h"  style={{left:-20, bottom : 5}} size={25} color="#6e6e6e" />
+          </View>
           <View style={{ padding: wp("5%") }} />
           <RouteButton
             onPress={() => {
