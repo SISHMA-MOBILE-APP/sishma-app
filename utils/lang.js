@@ -46,12 +46,12 @@ const transcription ={
         phosphorus: "Available Phosphorus",
         potassium: "Available Potassium",
 
-        sulphur: "Sulphur (S)",
-        iron: "Iron (Fe)",
-        boron: "Boron (B)",
-        copper: "Copper (Cu)",
-        manganese: "Manganese (Mn)",
-        zinc: "Zinc (Zn)",
+        sulphur: "Sulphur",
+        iron: "Iron",
+        boron: "Boron",
+        copper: "Copper",
+        manganese: "Manganese",
+        zinc: "Zinc",
     },
     hindi:{
         /* Admin Dashboard */

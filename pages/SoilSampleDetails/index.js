@@ -3,6 +3,7 @@ import {
     StyleSheet,
     Text,
     View,
+    Image,
     TextInput,
     Modal,
     Dimensions,
@@ -74,33 +75,119 @@ import {
           </View>
           <Text style={styles.pagetitle}>{page === 0 ? "Soil Sample Details" : page===1? "Soil Test Details": "Soil Test Details"}</Text>
           {page == 0 && 
-           <View>
-           <InputText style={{marginBottom: hp(1), marginTop: hp(2)}} placeholderText={transcription[lang.language]["soilSampleNum"]}/> 
-           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["date"]} /> 
-           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["surveyNum"]} /> 
-           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["farmSize"]}/> 
-           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["gps"]}/> 
-           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["crop"]}/> 
+           <ScrollView>
+           <View style={{ flexDirection: "row",marginBottom: hp(1), marginTop: hp(2)}}>
+           <Image style={styles.icon} source={require('./icons/soil.png')} />
+           <Text style={styles.iconName}>{transcription[lang.language]["soilSampleNum"]}</Text>
+           <InputText style={{}} />
            </View>
+
+           <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
+           <Image style={styles.icon} source={require('./icons/date.png')}/>
+           <Text style={styles.iconName}>{transcription[lang.language]["date"]} </Text>
+           <InputText style={{}}/> 
+           </View>
+
+           <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
+           <Image style={styles.icon} source={require('./icons/surveyNum.png')} />
+           <Text style={styles.iconName}>{transcription[lang.language]["surveyNum"]}</Text>
+           <InputText style={{}}/> 
+            </View>
+
+           <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
+           <Image style={styles.icon} source={require('./icons/farmSize.png')} />
+           <Text style={styles.iconName}>{transcription[lang.language]["farmSize"]}</Text>
+           <InputText style={{}}/> 
+            </View>
+
+           <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
+           <Image style={styles.icon} source={require('./icons/gps.png')} />
+           <Text style={styles.iconName}>{transcription[lang.language]["gps"]}</Text>
+           <InputText style={{}}/> 
+           </View>
+
+           <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
+           <Image style={styles.icon} source={require('./icons/crops.png')} />
+           <Text style={styles.iconName}>{transcription[lang.language]["crop"]}</Text>
+           <InputText style={{}}/> 
+           </View>
+
+           </ScrollView>
           }
           {page == 1 && 
-           <View>
-           <InputText style={{marginBottom: hp(2), marginTop: hp(2)}} placeholderText={transcription[lang.language]["pH"]}/> 
-           <InputText style={{marginBottom: hp(2)}} placeholderText={transcription[lang.language]["soilMoisture"]}/> 
-           <InputText style={{marginBottom: hp(2)}} placeholderText={transcription[lang.language]["nitrogen"]} /> 
-           <InputText style={{marginBottom: hp(2)}} placeholderText={transcription[lang.language]["phosphorus"]}/> 
-           <InputText style={{marginBottom: hp(2)}} placeholderText={transcription[lang.language]["potassium"]}/> 
+          <ScrollView>
+
+           <View style={{ flexDirection: "row",marginBottom: hp(1), marginTop: hp(2)}}>
+           <Image style={styles.icon} source={require('./icons/pH.png')} />
+           <Text style={styles.iconName}>{transcription[lang.language]["pH"]}</Text>
+           <InputText style={{}}/> 
            </View>
+
+           <View style={{ flexDirection: "row",marginBottom: hp(2)}}>
+           <Image style={styles.icon} source={require('./icons/soilMoisture.png')} />
+           <Text style={styles.iconName}>{transcription[lang.language]["soilMoisture"]}</Text>
+           <InputText style={{}}/> 
+           </View>
+
+           <View style={{ flexDirection: "row",marginBottom: hp(2)}}>
+           <Image style={styles.icon} source={require('./icons/nitrogen.png')} />
+           <Text style={styles.iconName}>{transcription[lang.language]["nitrogen"]} </Text>
+           <InputText style={{}}/> 
+           </View>
+
+           <View style={{ flexDirection: "row",marginBottom: hp(2)}}>
+           <Image style={styles.icon} source={require('./icons/phosphorus.png')} />
+           <Text style={styles.iconName}>{transcription[lang.language]["phosphorus"]}</Text>
+           <InputText style={{}}/> 
+           </View>
+
+           <View style={{ flexDirection: "row",marginBottom: hp(2)}}>
+           <Image style={styles.icon} source={require('./icons/potassium.png')} />
+           <Text style={styles.iconName}>{transcription[lang.language]["potassium"]}</Text>
+           <InputText style={{}}/> 
+           </View>
+
+          </ScrollView>
           }
           {page == 2 &&
-          <View>
-           <InputText style={{marginBottom: hp(1), marginTop: hp(1)}}  placeholderText={transcription[lang.language]["sulphur"]}/> 
-           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["iron"]}/> 
-           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["boron"]}/> 
-           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["copper"]}/> 
-           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["manganese"]}/> 
-           <InputText style={{marginBottom: hp(1)}} placeholderText={transcription[lang.language]["zinc"]}/> 
+          <ScrollView>
+           <View style={{ flexDirection: "row",marginBottom: hp(1), marginTop: hp(2)}}>
+           <Image style={styles.icon} source={require('./icons/sulphur.png')} />
+           <Text style={styles.iconName}>{transcription[lang.language]["sulphur"]}</Text>
+           <InputText style={{}}/> 
            </View>
+
+           <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
+           <Image style={styles.icon} source={require('./icons/iron.png')} />
+           <Text style={styles.iconName}>{transcription[lang.language]["iron"]}</Text>
+           <InputText style={{}}/> 
+           </View>
+
+           <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
+           <Image style={styles.icon} source={require('./icons/boron.png')} />
+           <Text style={styles.iconName}>{transcription[lang.language]["boron"]}</Text>
+           <InputText style={{}}/> 
+           </View>
+
+           <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
+           <Image style={styles.icon} source={require('./icons/copper.png')} />
+           <Text style={styles.iconName}>{transcription[lang.language]["copper"]}</Text>
+           <InputText style={{}}/> 
+           </View>
+
+           <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
+           <Image style={styles.icon} source={require('./icons/manganese.png')} />
+           <Text style={styles.iconName}>{transcription[lang.language]["manganese"]}</Text>
+           <InputText style={{}}/> 
+           </View>
+
+           <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
+           <Image style={styles.icon} source={require('./icons/zinc.png')} />
+           <Text style={styles.iconName}>{transcription[lang.language]["zinc"]}</Text>
+           <InputText style={{}}/> 
+           </View>
+           
+          </ScrollView>
           }
            </KeyboardAvoidingView>
            <View style={styles.submit}>
@@ -238,6 +325,17 @@ import {
       alignSelf: "center",
       color: "#444",
       fontSize: 25,
-    }
+    },
+    icon:{
+      width:40,
+      height:40,
+    },
+    iconName: {
+      alignSelf: "center",
+      color: "#444",
+      fontSize: 18,
+      paddingLeft:"5%",
+      paddingRight:"5%",
+    },
   });
   

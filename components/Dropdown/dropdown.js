@@ -53,6 +53,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderBottomWidth:1,
     borderBottomColor:'rgba(54, 69, 79, 0.5)' ,
+    marginBottom: hp(3), 
+  
   },
   // icon: {
   //   marginRight: 5,

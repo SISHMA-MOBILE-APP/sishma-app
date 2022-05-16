@@ -316,6 +316,7 @@ const Farmer = ({ navigation }) => {
                 placeholderText="Residential Adress"
                 multiline={true}
                 onChangeText={textInputAddress}
+                style={{ marginBottom: hp(3), marginTop: hp(3) }}
               />
               <Icon name="home"  style={{left:-20}} size={25} color="#6e6e6e" />
               </View>
@@ -397,7 +398,7 @@ const Farmer = ({ navigation }) => {
                   count: false,
                 });
                 console.log(page);
-                if(page == 0 && data.isValidAadhar && data.isValidMobile){
+                if(page == 0){
                   setPage(1);
                 }
               }
