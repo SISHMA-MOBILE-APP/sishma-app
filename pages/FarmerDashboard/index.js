@@ -2,6 +2,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Image,
   Dimensions,
   ScrollView,
   KeyboardAvoidingView,
@@ -360,7 +361,7 @@ const Farmer = ({ navigation }) => {
                   onEndEditing={(e) => handleValidPin(e.nativeEvent.text)}
                   maxLength={6}
                 />
-                <Icon name="sort-numeric-down"  style={{left:-20}} size={25} color="#6e6e6e" />
+                <Image style={styles.icon} source={require('../../utils/icons/pin.png')} />
                 {data.check_textInputPin ? (
                   <Animatable.View animation="bounceIn">
                     <Feather
@@ -522,5 +523,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     color: "#444",
     fontSize: 25
-  }
+  },
+  icon:{
+    width:30,
+    height:30,
+    left:-20,
+    bottom:5
+  },
 })

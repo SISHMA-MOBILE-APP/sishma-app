@@ -77,37 +77,37 @@ import {
           {page == 0 && 
            <ScrollView>
            <View style={{ flexDirection: "row",marginBottom: hp(1), marginTop: hp(2)}}>
-           <Image style={styles.icon} source={require('./icons/soil.png')} />
+           <Image style={styles.icon} source={require('../../utils/icons/soil.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["soilSampleNum"]}</Text>
            <InputText style={{}} />
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
-           <Image style={styles.icon} source={require('./icons/date.png')}/>
+           <Image style={styles.icon} source={require('../../utils/icons/date.png')}/>
            <Text style={styles.iconName}>{transcription[lang.language]["date"]} </Text>
            <InputText style={{}}/> 
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
-           <Image style={styles.icon} source={require('./icons/surveyNum.png')} />
+           <Image style={styles.icon} source={require('../../utils/icons/surveyNum.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["surveyNum"]}</Text>
            <InputText style={{}}/> 
             </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
-           <Image style={styles.icon} source={require('./icons/farmSize.png')} />
+           <Image style={styles.icon} source={require('../../utils/icons/farmSize.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["farmSize"]}</Text>
            <InputText style={{}}/> 
             </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
-           <Image style={styles.icon} source={require('./icons/gps.png')} />
+           <Image style={styles.icon} source={require('../../utils/icons/gps.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["gps"]}</Text>
            <InputText style={{}}/> 
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
-           <Image style={styles.icon} source={require('./icons/crops.png')} />
+           <Image style={styles.icon} source={require('../../utils/icons/crops.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["crop"]}</Text>
            <InputText style={{}}/> 
            </View>
@@ -118,31 +118,31 @@ import {
           <ScrollView>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1), marginTop: hp(2)}}>
-           <Image style={styles.icon} source={require('./icons/pH.png')} />
+           <Image style={styles.icon} source={require('../../utils/icons/pH.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["pH"]}</Text>
            <InputText style={{}}/> 
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(2)}}>
-           <Image style={styles.icon} source={require('./icons/soilMoisture.png')} />
+           <Image style={styles.icon} source={require('../../utils/icons/soilMoisture.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["soilMoisture"]}</Text>
            <InputText style={{}}/> 
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(2)}}>
-           <Image style={styles.icon} source={require('./icons/nitrogen.png')} />
+           <Image style={styles.icon} source={require('../../utils/icons/nitrogen.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["nitrogen"]} </Text>
            <InputText style={{}}/> 
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(2)}}>
-           <Image style={styles.icon} source={require('./icons/phosphorus.png')} />
+           <Image style={styles.icon} source={require('../../utils/icons/phosphorus.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["phosphorus"]}</Text>
            <InputText style={{}}/> 
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(2)}}>
-           <Image style={styles.icon} source={require('./icons/potassium.png')} />
+           <Image style={styles.icon} source={require('../../utils/icons/potassium.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["potassium"]}</Text>
            <InputText style={{}}/> 
            </View>
@@ -152,37 +152,37 @@ import {
           {page == 2 &&
           <ScrollView>
            <View style={{ flexDirection: "row",marginBottom: hp(1), marginTop: hp(2)}}>
-           <Image style={styles.icon} source={require('./icons/sulphur.png')} />
+           <Image style={styles.icon} source={require('../../utils/icons/sulphur.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["sulphur"]}</Text>
            <InputText style={{}}/> 
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
-           <Image style={styles.icon} source={require('./icons/iron.png')} />
+           <Image style={styles.icon} source={require('../../utils/icons/iron.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["iron"]}</Text>
            <InputText style={{}}/> 
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
-           <Image style={styles.icon} source={require('./icons/boron.png')} />
+           <Image style={styles.icon} source={require('../../utils/icons/boron.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["boron"]}</Text>
            <InputText style={{}}/> 
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
-           <Image style={styles.icon} source={require('./icons/copper.png')} />
+           <Image style={styles.icon} source={require('../../utils/icons/copper.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["copper"]}</Text>
            <InputText style={{}}/> 
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
-           <Image style={styles.icon} source={require('./icons/manganese.png')} />
+           <Image style={styles.icon} source={require('../../utils/icons/manganese.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["manganese"]}</Text>
            <InputText style={{}}/> 
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
-           <Image style={styles.icon} source={require('./icons/zinc.png')} />
+           <Image style={styles.icon} source={require('../../utils/icons/zinc.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["zinc"]}</Text>
            <InputText style={{}}/> 
            </View>
@@ -309,8 +309,8 @@ import {
       borderTopRightRadius: 30,
       borderTopLeftRadius: 30,
       padding: "5%",
-      paddingBottom: "20%",
-      height: hp(70),
+      paddingBottom: "28%",
+      height: hp(79),
       alignItems: "center",
       elevation: 20,
       opacity: 1,
