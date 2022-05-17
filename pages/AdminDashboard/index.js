@@ -2,8 +2,9 @@ import {
   StyleSheet,
   Text,
   View,
-Dimensions,
- ScrollView,
+  Image,
+  Dimensions,
+  ScrollView,
   KeyboardAvoidingView,
   Alert,
 } from "react-native";
@@ -243,7 +244,7 @@ const Admin = ({ navigation }) => {
               onEndEditing={(e) => handleValidPin(e.nativeEvent.text)}
               maxLength={6}
             />
-            <Icon name="hashtag"  style={{left:-20}} size={25} color="#6e6e6e" />
+            <Image style={styles.icon} source={require('../../utils/icons/pin.png')} />
             {data.check_textInputPin ? (
               <Animatable.View animation="bounceIn">
                 <Feather
@@ -412,5 +413,11 @@ const styles = StyleSheet.create({
     width: wp("80%"),
     justifyContent: "center",
     marginTop: hp("3"),
+  },
+  icon:{
+    width:30,
+    height:30,
+    left:-20,
+    bottom:5
   },
 });

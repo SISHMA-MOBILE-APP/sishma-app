@@ -2,6 +2,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Image,
   Dimensions,
   ScrollView,
   KeyboardAvoidingView,
@@ -320,6 +321,7 @@ const Farmer = ({ navigation }) => {
                 placeholderText="Residential Adress"
                 multiline={true}
                 onChangeText={textInputAddress}
+                style={{ marginBottom: hp(3), marginTop: hp(3) }}
               />
               <Icon name="home"  style={{left:-20}} size={25} color="#6e6e6e" />
               </View>
@@ -366,7 +368,7 @@ const Farmer = ({ navigation }) => {
                   onEndEditing={(e) => handleValidPin(e.nativeEvent.text)}
                   maxLength={6}
                 />
-                <Icon name="hashtag"  style={{left:-20}} size={25} color="#6e6e6e" />
+                <Image style={styles.icon} source={require('../../utils/icons/pin.png')} />
                 {data.check_textInputPin ? (
                   <Animatable.View animation="bounceIn">
                     <Feather
@@ -404,7 +406,7 @@ const Farmer = ({ navigation }) => {
                   count: false,
                 });
                 console.log(page);
-                if(page == 0 && data.isValidAadhar && data.isValidMobile){
+                if(page == 0){
                   setPage(1);
                 }
               }
@@ -528,5 +530,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     color: "#444",
     fontSize: 25
-  }
+  },
+  icon:{
+    width:30,
+    height:30,
+    left:-20,
+    bottom:5
+  },
 })
