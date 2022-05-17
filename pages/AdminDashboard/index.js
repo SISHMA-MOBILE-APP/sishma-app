@@ -243,7 +243,7 @@ const Admin = ({ navigation }) => {
               onEndEditing={(e) => handleValidPin(e.nativeEvent.text)}
               maxLength={6}
             />
-            <Icon name="sort-numeric-down"  style={{left:-20}} size={25} color="#6e6e6e" />
+            <Icon name="hashtag"  style={{left:-20}} size={25} color="#6e6e6e" />
             {data.check_textInputPin ? (
               <Animatable.View animation="bounceIn">
                 <Feather

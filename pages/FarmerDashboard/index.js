@@ -11,6 +11,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState, useContext } from "react";
 import { AntDesign } from "@expo/vector-icons";
+import Octicons from 'react-native-vector-icons/Octicons';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import colors from "../../utils/colors";
 import RouteButton from "../../components/CustomButton";
@@ -20,6 +21,9 @@ import DropdownComponent from "../../components/Dropdown/dropdown";
 // Language Provider
 import { Language } from "../../providers/languageProvider";
 import { transcription } from "../../utils/lang";
+import villageData, { selum } from '../../utils/villages';
+
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -326,6 +330,7 @@ const Farmer = ({ navigation }) => {
               /> */}
               <DropdownComponent
                 placeholderText="Select State"
+                data={[{label: "Tamil Nadu", value: "Tamil Nadu"}]}
               />
               {/* <InputText
                 value={data.Village}
@@ -334,6 +339,7 @@ const Farmer = ({ navigation }) => {
               /> */}
               <DropdownComponent
                 placeholderText="Select Village"
+                data={selum}
               />
               {/* <InputText
                 value={data.District}
@@ -343,6 +349,7 @@ const Farmer = ({ navigation }) => {
               /> */}
               <DropdownComponent
                 placeholderText="Select District"
+                data = {[{label: "Selum", value: "Selum"}]}
               />
               
               <View
@@ -359,7 +366,7 @@ const Farmer = ({ navigation }) => {
                   onEndEditing={(e) => handleValidPin(e.nativeEvent.text)}
                   maxLength={6}
                 />
-                <Icon name="sort-numeric-down"  style={{left:-20}} size={25} color="#6e6e6e" />
+                <Icon name="hashtag"  style={{left:-20}} size={25} color="#6e6e6e" />
                 {data.check_textInputPin ? (
                   <Animatable.View animation="bounceIn">
                     <Feather

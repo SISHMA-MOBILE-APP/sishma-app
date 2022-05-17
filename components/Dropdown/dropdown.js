@@ -5,12 +5,12 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const data = [
-  { label: 'Item 1', value: '1' },
-  { label: 'Item 2', value: '2' },
-  { label: 'Item 3', value: '3' },
-  { label: 'Item 4', value: '4' },
-  { label: 'Item 5', value: '5' },
-  { label: 'Item 6', value: '6' },
+  { label: 'Achanguttaipatti', value: '1' },
+  { label: 'Achanguttapattipudur', value: '2' },
+  { label: 'Adikarapatti', value: '3' },
+  { label: 'Adimalaipatti', value: '4' },
+  { label: 'Agraharapulaveri', value: '5' },
+  { label: 'Agraharapulaveri', value: '6' },
   { label: 'Item 7', value: '7' },
   { label: 'Item 8', value: '8' },
 ];
@@ -25,7 +25,7 @@ const DropdownComponent = (props) => {
       selectedTextStyle={styles.selectedTextStyle}
       inputSearchStyle={styles.inputSearchStyle}
       // iconStyle={styles.iconStyle}
-      data={data}
+      data={props.data}
       search
       maxHeight={300}
       labelField="label"
