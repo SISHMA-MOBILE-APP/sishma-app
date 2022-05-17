@@ -56,6 +56,10 @@ const transcription ={
 
         soilSampDetails:"Soil Sample Details",
         soilTestDetails:"Soil Test Details",
+
+        officerReg:"Officer Registration",
+        organisationDetails:"Organisation Details",
+        personalDetails:"Personal Details",
     },
     hindi:{
         /* Admin Dashboard */
@@ -67,7 +71,7 @@ const transcription ={
         agriActDB: "कृषि गतिविधियों डेटाबेस",
         loginDash: "लॉगिन डैशबोर्ड",
         aadhaarnum: "आधार नंबर",
-        otp: "OTP",
+        otp: "ओटीपी",
 
         /* Farmer Dashboard */
         regDash: "पंजीकरण डैशबोर्ड",
@@ -76,10 +80,10 @@ const transcription ={
         village: "गाँव",
         state: "राज्य",
         district: "जिला",
-        pin: "PIN",
+        pin: "पिन",
         mobileNum: "मोबाइल नंबर",
         sishmaKitNo : "सिशमा किट नंबर",
-        email: "Email",
+        email: "ईमेल",
         
         /* Registration Dashboard */
         empCode: "कर्मचारी कोड",
@@ -114,6 +118,10 @@ const transcription ={
 
         soilSampDetails:"मृदा नमूना विवरण",
         soilTestDetails:"मृदा परीक्षण विवरण",
+
+        officerReg:"अधिकारी पंजीकरण",
+        organisationDetails:"संगठन विवरण",
+        personalDetails:"निजी विवरण",
     },
 
     tamil:{
