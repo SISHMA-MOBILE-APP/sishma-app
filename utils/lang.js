@@ -30,6 +30,7 @@ const transcription ={
         officeAddress: "Office address",
         deptName: "Department name",
         next: "Next",
+        back: "Go Back",
 
         /* Soil sample details */
         soilSampleNum: "Soil Sample Number",
@@ -52,6 +53,9 @@ const transcription ={
         copper: "Copper",
         manganese: "Manganese",
         zinc: "Zinc",
+
+        soilSampDetails:"Soil Sample Details",
+        soilTestDetails:"Soil Test Details",
     },
     hindi:{
         /* Admin Dashboard */
@@ -75,12 +79,43 @@ const transcription ={
         pin: "PIN",
         mobileNum: "मोबाइल नंबर",
         sishmaKitNo : "सिशमा किट नंबर",
-
+        email: "Email",
+        
         /* Registration Dashboard */
         empCode: "कर्मचारी कोड",
         designation: "पद",
         OffAddress: "आधिकारिक पता",
+        officeAddress: "कार्यालय का पता",
+        deptName: "विभाग का नाम",
+        next: "आगे जाएँ",
+        back: "पीछे जाएँ",
+
+        /* Soil sample details */
+        soilSampleNum: "मिट्टी नमूना संख्या",
+        date: "दिनांक",
+        surveyNum: "सर्वेक्षण संख्या",
+        farmSize: "खेत का माप",
+        gps: "जीपीएस",
+        crop: "फसल",
+
+        /* Soil test details */
+        pH: "पीएच",
+        soilMoisture: "मिट्टी की नमी",
+        nitrogen: "उपलब्ध नाइट्रोजन",
+        phosphorus: "उपलब्ध फास्फोरस",
+        potassium: "उपलब्ध पोटैशियम",
+
+        sulphur: "गंधक",
+        iron: "लोहा",
+        boron: "बोरान",
+        copper: "ताँबा",
+        manganese: "मैंगनीज",
+        zinc: "जस्ता",
+
+        soilSampDetails:"मृदा नमूना विवरण",
+        soilTestDetails:"मृदा परीक्षण विवरण",
     },
+
     tamil:{
         /* Admin Dashboard */
         signIn: "உள்நுழைக",

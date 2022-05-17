@@ -65,7 +65,7 @@ import {
   
   <View>
         </View>
-        <Text style={styles.greet}>{"Soil Sample\nDetails"}</Text>
+        <Text style={styles.greet}> {transcription[lang.language]["soilSampDetails"]}</Text>
         <View style={styles.buttonContainer}>
         <KeyboardAvoidingView behavior="padding" >
           <View style={{ flexDirection: "row", justifyContent: "space-around", marginBottom: 20, }}>
@@ -73,7 +73,7 @@ import {
             <View style={{ width: "30%", height: 5, borderRadius: 2.5, backgroundColor: page === 1 ? "green" : "rgba(0, 255, 0, 0.5)" }} />
             <View style={{ width: "30%", height: 5, borderRadius: 2.5, backgroundColor: page === 2 ? "green" : "rgba(0, 255, 0, 0.5)" }} />
           </View>
-          <Text style={styles.pagetitle}>{page === 0 ? "Soil Sample Details" : page===1? "Soil Test Details": "Soil Test Details"}</Text>
+          <Text style={styles.pagetitle}>{page === 0 ? transcription[lang.language]["soilSampDetails"] : page===1? transcription[lang.language]["soilTestDetails"]: transcription[lang.language]["soilTestDetails"]}</Text>
           {page == 0 && 
            <ScrollView>
            <View style={{ flexDirection: "row",marginBottom: hp(1), marginTop: hp(2)}}>
@@ -205,7 +205,7 @@ import {
                count=0
                }}>
 
-            <Text style={{ alignSelf: "center",width: wp(50),textAlign: "center", }}>Go back</Text>
+            <Text style={{ alignSelf: "center",width: wp(50),textAlign: "center", }}>{transcription[lang.language]["back"]}</Text>
              </TouchableOpacity> : 
 
              page === 2 ?
@@ -215,7 +215,7 @@ import {
                count=1
                }}>
 
-            <Text style={{ alignSelf: "center",width: wp(50),textAlign: "center", }}>Go back</Text>
+            <Text style={{ alignSelf: "center",width: wp(50),textAlign: "center", }}>{transcription[lang.language]["back"]}</Text>
              </TouchableOpacity> : null
           }
            </View>
@@ -310,7 +310,7 @@ import {
       borderTopLeftRadius: 30,
       padding: "5%",
       paddingBottom: "28%",
-      height: hp(79),
+      height: hp(70),
       alignItems: "center",
       elevation: 20,
       opacity: 1,
