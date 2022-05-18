@@ -406,7 +406,7 @@ const Farmer = ({ navigation }) => {
                   count: false,
                 });
                 console.log(page);
-                if(page == 0){
+                if(page == 0 && data.isValidAadhar && data.isValidMobile){
                   setPage(1);
                 }
               }
