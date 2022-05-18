@@ -24,7 +24,6 @@ import { Language } from "../../providers/languageProvider";
 import { transcription } from "../../utils/lang";
 import villageData, { selum } from '../../utils/villages';
 
-
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -34,6 +33,7 @@ import * as Animatable from "react-native-animatable";
 import Feather from "react-native-vector-icons/Feather";
 
 const Farmer = ({ navigation }) => {
+  const lang = useContext(Language);
   const [page, setPage] = useState(0);
   const [data, setData] = useState(
     {
@@ -197,7 +197,7 @@ const Farmer = ({ navigation }) => {
         end={{ x: 0.75, y: 0.8 }}
       />
 
-      <Text style={styles.greet}>{"Farmer\nRegistration"}</Text>
+      <Text style={styles.greet}>{transcription[lang.language]["farmerReg"]}</Text>
 
       <View style={styles.buttonContainer}>
         <KeyboardAvoidingView behavior="padding">
@@ -205,7 +205,7 @@ const Farmer = ({ navigation }) => {
             <View style={{ width: "45%", height: 5, borderRadius: 2.5, backgroundColor: page === 0 ? "green" : "rgba(0, 255, 0, 0.5)" }} />
             <View style={{ width: "45%", height: 5, borderRadius: 2.5, backgroundColor: page === 1 ? "green" : "grey" }} />
           </View>
-          <Text style={styles.pagetitle}>{page === 0 ? "Personal Details" : "Address Details"}</Text>
+          <Text style={styles.pagetitle}>{page === 0 ? transcription[lang.language]["personalDetails"] : transcription[lang.language]["addressDetails"]}</Text>
           {page == 0 &&
             <View>
              <View
@@ -219,7 +219,7 @@ const Farmer = ({ navigation }) => {
               <InputText
                 value={data.Name}
                 style={{marginBottom: hp(3), marginTop: hp(3)}}
-                placeholderText="Full name"
+                placeholderText={transcription[lang.language]["name"]}
                 onChangeText={textInputName}
               />
               <Icon name="user-plus"  style={{left:-20}} size={20} color="#6e6e6e" />
@@ -232,7 +232,7 @@ const Farmer = ({ navigation }) => {
                 }}
               >
                 <Validation
-                  placeholderText="Aadhar Number"
+                  placeholderText={transcription[lang.language]["aadhaarnum"]}
                   value={data.Aadhar}
                   style={{marginBottom: hp(3)}}
                   onChangeText={(val) => textInputAadhar(val)}
@@ -266,7 +266,7 @@ const Farmer = ({ navigation }) => {
                 }}
               >
                 <Validation
-                  placeholderText="Mobile Number"
+                  placeholderText={transcription[lang.language]["mobileNum"]}
                   value={data.Mobile}
                   style={{marginBottom: hp(3)}}
                   onChangeText={textInputMobile}
@@ -299,7 +299,7 @@ const Farmer = ({ navigation }) => {
                   alignItems: "center",
                 }}
               >
-              <InputText value={data.Kit} onChangeText={(e)=>setData({...data, Kit:e })} placeholderText="Kit number" />
+              <InputText value={data.Kit} onChangeText={(e)=>setData({...data, Kit:e })} placeholderText={transcription[lang.language]["sishmaKitNo"]} />
               <Icon name="sort-numeric-down"  style={{left:-20, bottom : 15}} size={25} color="#6e6e6e" />
               </View>
             </View>
@@ -318,7 +318,7 @@ const Farmer = ({ navigation }) => {
               >
               <InputText
                 value={data.Address}
-                placeholderText="Residential Adress"
+                placeholderText={transcription[lang.language]["residenAddress"]}
                 multiline={true}
                 onChangeText={textInputAddress}
                 style={{ marginBottom: hp(3), marginTop: hp(3) }}
@@ -331,7 +331,7 @@ const Farmer = ({ navigation }) => {
                 onChangeText={textInputState}
               /> */}
               <DropdownComponent
-                placeholderText="Select State"
+                placeholderText={transcription[lang.language]["state"]}
                 data={[{label: "Tamil Nadu", value: "Tamil Nadu"}]}
               />
               {/* <InputText
@@ -340,8 +340,8 @@ const Farmer = ({ navigation }) => {
                 onChangeText={textInputVillage}
               /> */}
               <DropdownComponent
-                placeholderText="Select Village"
-                data={selum}
+                placeholderText={transcription[lang.language]["district"]}
+                data = {[{label: "Selum", value: "Selum"}]}
               />
               {/* <InputText
                 value={data.District}
@@ -349,9 +349,10 @@ const Farmer = ({ navigation }) => {
                 onChange
                 Text={textInputDistrict}
               /> */}
+             
               <DropdownComponent
-                placeholderText="Select District"
-                data = {[{label: "Selum", value: "Selum"}]}
+                placeholderText={transcription[lang.language]["village"]}
+                data={selum}
               />
               
               <View
@@ -363,7 +364,7 @@ const Farmer = ({ navigation }) => {
               >
                 <Validation
                   value={data.Pin}
-                  placeholderText="Pin"
+                  placeholderText={transcription[lang.language]["pin"]}
                   onChangeText={(val) => textInputPin(val)}
                   onEndEditing={(e) => handleValidPin(e.nativeEvent.text)}
                   maxLength={6}
@@ -406,19 +407,19 @@ const Farmer = ({ navigation }) => {
                   count: false,
                 });
                 console.log(page);
-                if(page == 0){
+                if(page == 0 && data.isValidAadhar && data.isValidMobile){
                   setPage(1);
                 }
               }
             }}
-            text={page===0? "Next" : "Register Now"}
+            text={page===0? transcription[lang.language]["next"] : transcription[lang.language]["registerNow"]}
             />
           {
             page === 1 ?
             <TouchableOpacity
              onPress={()=>setPage(0)}>
 
-            <Text style={{ alignSelf: "center",width: wp(50),textAlign: "center", }}>Go back</Text>
+            <Text style={{ alignSelf: "center",width: wp(50),textAlign: "center", }}>{transcription[lang.language]["back"]}</Text>
              </TouchableOpacity> : null
           }
         </View>

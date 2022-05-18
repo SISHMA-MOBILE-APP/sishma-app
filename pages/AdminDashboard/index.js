@@ -22,11 +22,15 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import * as Animatable from "react-native-animatable";
 import Feather from "react-native-vector-icons/Feather";
+import Validation from "../../components/CustomTextField/Validation";
+
+import DropdownComponent from "../../components/Dropdown/dropdown";
 
 // Language Provider
 import { Language } from "../../providers/languageProvider";
 import { transcription } from "../../utils/lang";
-import Validation from "../../components/CustomTextField/Validation";
+import villageData, { selum } from '../../utils/villages';
+
 
 const Admin = ({ navigation }) => {
   const [signInOptions, setSignOptions] = React.useState(false);
@@ -189,7 +193,7 @@ const Admin = ({ navigation }) => {
         start={{ x: 0.75, y: 0.25 }}
         end={{ x: 0.75, y: 0.8 }}
       />
-      <Text style={styles.greet}>{"REGISTER"}</Text>
+      <Text style={styles.greet}>{transcription[lang.language]["adminReg"]}</Text>
       <View style={styles.buttonContainer}>
         <KeyboardAvoidingView behavior="padding">
         <View
@@ -199,7 +203,7 @@ const Admin = ({ navigation }) => {
               alignItems: "center",
             }}
           >
-          <InputText placeholderText={transcription[lang.language]["name"] } onChangeText={(val) => textInputName(val)}/>
+          <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["name"]} onChangeText={(val) => textInputName(val)}/>
           <Icon name="user-plus"  style={{left:-20}} size={25} color="#6e6e6e" /></View>
           <View
             style={{
@@ -208,7 +212,7 @@ const Admin = ({ navigation }) => {
               alignItems: "center",
             }}
           >
-          <InputText placeholderText="Employee Code" />
+          <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["empCode"]}/>
           <Icon name="sort-numeric-down"  style={{left:-20}} size={25} color="#6e6e6e" /></View>
           <View
             style={{
@@ -217,7 +221,7 @@ const Admin = ({ navigation }) => {
               alignItems: "center",
             }}
           >
-          <InputText placeholderText="Designation " />
+          <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["designation"]}/>
           <Icon name="briefcase"  style={{left:-20}} size={25} color="#6e6e6e" /></View>
           <View
             style={{
@@ -225,12 +229,24 @@ const Admin = ({ navigation }) => {
               justifyContent: "space-around",
               alignItems: "center",
             }}
-          ><InputText placeholderText="Official address" multiline={true}  onChangeText={(val) => textInputAddress(val)} />
+          ><InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["OffAddress"]} multiline={true}  onChangeText={(val) => textInputAddress(val)} />
           <Icon name="building"  style={{left:-20}} size={25} color="#6e6e6e" /></View>
-          <InputText placeholderText="Sub-district" />
-          <InputText placeholderText=" Village" onChangeText={(val) => textInputVillage(val)}/>
-          <InputText placeholderText="Sub-District" onChangeText={(val) => textInputSubDistrict(val)}/>
-          <InputText placeholderText="District" onChangeText={(val) => textInputDistrict(val)}/>
+            <View>
+              <DropdownComponent
+                placeholderText={transcription[lang.language]["state"]}
+                data={[{label: "Tamil Nadu", value: "Tamil Nadu"}]}
+              />
+             
+              <DropdownComponent
+                placeholderText={transcription[lang.language]["district"]}
+                data = {[{label: "Selum", value: "Selum"}]}
+              />
+             
+              <DropdownComponent
+                placeholderText={transcription[lang.language]["village"]}
+                data={selum}
+              />
+            </View>
           <View
             style={{
               flexDirection: "row",
@@ -239,10 +255,11 @@ const Admin = ({ navigation }) => {
             }}
           >
             <Validation
-              placeholderText="Pin"
+              placeholderText={transcription[lang.language]["pin"]}
               onChangeText={(val) => textInputPin(val)}
               onEndEditing={(e) => handleValidPin(e.nativeEvent.text)}
               maxLength={6}
+              style={{marginBottom: hp(3)}}
             />
             <Image style={styles.icon} source={require('../../utils/icons/pin.png')} />
             {data.check_textInputPin ? (
@@ -271,10 +288,11 @@ const Admin = ({ navigation }) => {
             }}
           >
             <Validation
-              placeholderText="Aadhar Number"
+              placeholderText={transcription[lang.language]["aadhaarnum"]}
               onChangeText={(val) => textInputAadhar(val)}
               onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
               maxLength={10}
+              style={{marginBottom: hp(3)}}
             />
              <Icon name="address-card"  style={{left:-20}} size={25} color="#6e6e6e" />
             {data.check_textInputAadhar ? (
@@ -314,9 +332,9 @@ const Admin = ({ navigation }) => {
                     });
               }
             }}
-            text="Register Now"
+            text={transcription[lang.language]["registerNow"]}
           />
-          <Text> Or Go back</Text>
+          <Text>{transcription[lang.language]["back"]}</Text>
         </View>
       </View>
     </ScrollView>
@@ -337,9 +355,10 @@ const styles = StyleSheet.create({
     borderRadius: 469 / 2,
   },
   greet: {
+    textAlign:"center",
     top: hp("2.5%"),
     alignSelf: "center",
-    letterSpacing: 10,
+    letterSpacing: 4,
     color: "white",
     fontSize: hp("5%"),
   },

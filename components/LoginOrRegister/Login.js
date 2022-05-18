@@ -9,7 +9,7 @@ import {
   Alert,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Icon from 'react-native-vector-icons/FontAwesome5';  
 import colors from "../../utils/colors";
 import RouteButton from "../../components/CustomButton";
@@ -23,7 +23,12 @@ import Feather from "react-native-vector-icons/Feather";
 import Validation from "../CustomTextField/Validation";
 import Routepage from "../../pages/RoutePage";
 
+// Language Provider
+import { Language } from "../../providers/languageProvider";
+import { transcription } from "../../utils/lang";
+
 export default function Login({ navigation }) {
+  const lang = useContext(Language);
   const [data, setData] = useState([
     {
       Aadhar: "",
@@ -108,7 +113,7 @@ export default function Login({ navigation }) {
           <View style={styles.dots} />
         </View>
       </View>
-      <Text style={styles.greet}>{"LOGIN"}</Text>
+      <Text style={styles.greet}>{transcription[lang.language]["login"]}</Text>
       <View style={styles.loginContainer}>
         <View style={{ width: wp("75%") }}>
           <View
@@ -119,7 +124,7 @@ export default function Login({ navigation }) {
             }}
           >
             <Validation
-              placeholderText="Aadhar Number"
+              placeholderText={transcription[lang.language]["aadhaarnum"]}
               onChangeText={(val) => textInputAadhar(val)}
               onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
               maxLength={10}
@@ -153,7 +158,7 @@ export default function Login({ navigation }) {
               alignItems: "center",
             }}
           >
-          <InputText placeholderText="Password" visibility={true} />
+          <InputText placeholderText={transcription[lang.language]["password"]} visibility={true} />
           <Icon name="ellipsis-h"  style={{left:-20, bottom : 5}} size={25} color="#6e6e6e" />
           </View>
           <View style={{ padding: wp("5%") }} />
@@ -169,7 +174,7 @@ export default function Login({ navigation }) {
                     );
               }
             }}
-            text="Submit"
+            text={transcription[lang.language]["submit"]}
           />
         </View>
         <TouchableOpacity  onPress={() => {
@@ -180,8 +185,7 @@ export default function Login({ navigation }) {
             style={{
               marginTop: hp(2),
             }}
-          >Not yet registered? 
-            Register Now!
+          >{transcription[lang.language]["notReg"]}
           </Text>
         </TouchableOpacity>
       </View>

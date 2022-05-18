@@ -15,9 +15,9 @@ const transcription ={
         regDash: "Registration dashboard",
         name: "Name",
         residenAddress: "Residential address",
-        village: "Village",
-        state: "State",
-        district: "District",
+        village: "Select Village",
+        state: "Select State",
+        district: "Select District",
         pin: "PIN",
         mobileNum: "Mobile Number",
         sishmaKitNo : "Sishma kit no",
@@ -30,6 +30,7 @@ const transcription ={
         officeAddress: "Office address",
         deptName: "Department name",
         next: "Next",
+        back: "Go Back",
 
         /* Soil sample details */
         soilSampleNum: "Soil Sample Number",
@@ -52,6 +53,28 @@ const transcription ={
         copper: "Copper",
         manganese: "Manganese",
         zinc: "Zinc",
+
+        soilSampDetails:"Soil Sample Details",
+        soilTestDetails:"Soil Test Details",
+
+        officerReg:"Officer\nRegistration",
+        organisationDetails:"Organisation Details",
+        personalDetails:"Personal Details",
+        addressDetails:"Address Details",
+        farmerReg:"Farmer\nRegistration",
+        adminReg:"Admin\nRegistration",
+
+        /* Login Screen */
+        login:"Login",
+        password:"Password",
+        submit:"Submit",
+        notReg:"Not yet registered? Register Now!",
+
+        /* Route Page */
+        farmerRegistration:"Farmer Registration",
+        adminRegistration:"Admin Registration",
+        officerRegistration:"Officer Registration",
+        sishma:"SISHMA",
     },
     hindi:{
         /* Admin Dashboard */
@@ -63,24 +86,74 @@ const transcription ={
         agriActDB: "कृषि गतिविधियों डेटाबेस",
         loginDash: "लॉगिन डैशबोर्ड",
         aadhaarnum: "आधार नंबर",
-        otp: "OTP",
+        otp: "ओटीपी",
 
         /* Farmer Dashboard */
         regDash: "पंजीकरण डैशबोर्ड",
         name: "नाम",
         residenAddress: "आवासीय पता",
-        village: "गाँव",
-        state: "राज्य",
-        district: "जिला",
-        pin: "PIN",
+        village: "गाँव का चयन करें",
+        state: "राज्य का चयन करें",
+        district: "जिला का चयन करें",
+        pin: "पिन",
         mobileNum: "मोबाइल नंबर",
         sishmaKitNo : "सिशमा किट नंबर",
-
+        email: "ईमेल",
+        
         /* Registration Dashboard */
         empCode: "कर्मचारी कोड",
         designation: "पद",
         OffAddress: "आधिकारिक पता",
+        officeAddress: "कार्यालय का पता",
+        deptName: "विभाग का नाम",
+        next: "आगे जाएँ",
+        back: "पीछे जाएँ",
+
+        /* Soil sample details */
+        soilSampleNum: "मिट्टी नमूना संख्या",
+        date: "दिनांक",
+        surveyNum: "सर्वेक्षण संख्या",
+        farmSize: "खेत का माप",
+        gps: "जीपीएस",
+        crop: "फसल",
+
+        /* Soil test details */
+        pH: "पीएच",
+        soilMoisture: "मिट्टी की नमी",
+        nitrogen: "उपलब्ध नाइट्रोजन",
+        phosphorus: "उपलब्ध फास्फोरस",
+        potassium: "उपलब्ध पोटैशियम",
+
+        sulphur: "गंधक",
+        iron: "लोहा",
+        boron: "बोरान",
+        copper: "ताँबा",
+        manganese: "मैंगनीज",
+        zinc: "जस्ता",
+
+        soilSampDetails:"मृदा नमूना विवरण",
+        soilTestDetails:"मृदा परीक्षण विवरण",
+
+        officerReg:"अधिकारी\nपंजीकरण",
+        organisationDetails:"संगठन विवरण",
+        personalDetails:"निजी विवरण",
+        addressDetails:"पता विवरण",
+        farmerReg:"किसान\nपंजीकरण",
+        adminReg:"व्यवस्थापक\nपंजीकरण",
+
+        /* Login Screen */
+        login:"लॉग इन करें",
+        password:"पासवर्ड",
+        submit:"अभी जमा करे",
+        notReg:"अभी तक पंजीकृत नहीं किया गया? अभी पंजीकरण करें!",
+
+        /* Route Page */
+        farmerRegistration:"किसान पंजीकरण",
+        adminRegistration:"व्यवस्थापक पंजीकरण",
+        officerRegistration:"अधिकारी पंजीकरण",
+        sishma:"सिष्मा",
     },
+
     tamil:{
         /* Admin Dashboard */
         signIn: "உள்நுழைக",

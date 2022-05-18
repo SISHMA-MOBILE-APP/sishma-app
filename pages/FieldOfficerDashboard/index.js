@@ -70,7 +70,7 @@ const Officer = ({ navigation }) => {
         end={{ x: 0.75, y: 0.8 }}
       />
 
-      <Text style={styles.greet}>{"Officer\nRegistration"}</Text>
+      <Text style={styles.greet}>{transcription[lang.language]["officerReg"]}</Text>
       <View style={styles.buttonContainer}>
       <ScrollView>
         <KeyboardAvoidingView behavior="padding">
@@ -99,7 +99,7 @@ const Officer = ({ navigation }) => {
             />
           </View>
           <Text style={styles.pagetitle}>
-            {page === 0 ? "Organisation Details" : "Personal Details"}
+            {page === 0 ? transcription[lang.language]["organisationDetails"] : transcription[lang.language]["personalDetails"]}
           </Text>
           {page == 0 && (
             <View>
@@ -197,7 +197,7 @@ const Officer = ({ navigation }) => {
                   marginTop: hp(1),
                 }}
               >
-                Go back
+                {transcription[lang.language]["back"]}
               </Text>
             </TouchableOpacity>
           ) : null}
