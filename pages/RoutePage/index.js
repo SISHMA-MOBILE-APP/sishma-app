@@ -2,8 +2,7 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
-  Modal,
+  Image,
   Dimensions,
   TouchableOpacity,
 } from "react-native";
@@ -56,8 +55,8 @@ export default function Welcome({navigation}) {
         start={{ x: 0.75, y: 0.25 }}
         end={{ x: 0.75, y: 0.8 }}
       />
-
-      <View style={styles.logo}>
+      <Image source={require("../../assets/sishma-white.png")} style={[styles.logo, {width: 140, height: 140, borderRadius: 70}]} />
+      {/* <View style={styles.logo}>
         <View style={{ flexDirection: "row" }}>
           <View style={[styles.dots, { marginRight: 5, marginBottom: 5 }]} />
           <View style={styles.dots} />
@@ -66,7 +65,7 @@ export default function Welcome({navigation}) {
           <View style={[styles.dots, { marginRight: 5 }]} />
           <View style={styles.dots} />
         </View>
-      </View>
+      </View> */}
       <Text style={styles.greet}>{transcription[lang.language]["sishma"]}</Text>
       <View style={styles.buttonContainer}>
         <RouteButton onPress={() => navigation.navigate('FarmerReg')}
@@ -121,13 +120,12 @@ const styles = StyleSheet.create({
   },
   logo: {
     position: "absolute",
-    top: 114,
-    left: Dimensions.get("screen").width / 2 - 27,
+    top: 70,
+    left: Dimensions.get("screen").width / 2 - 70,
     borderWidth: 1.17,
     borderColor: "white",
     padding: 4,
     borderRadius: 15,
-    transform: [{ rotate: "45deg" }, { scale: 1.7 }],
   },
   centeredView: {
     width: "100%",

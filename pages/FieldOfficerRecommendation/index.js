@@ -8,7 +8,7 @@ export default function FieldOfficerRecommendation(props){
         <View style={styles.container}>
 
         <ScrollView contentContainerStyle={[styles.container, {alignItems: "center"}]}>
-            <Card heading="Recommended Crop :" image={<Image source={require("../../assets/crop.png")} style={{width: 60, height: 60, borderRadius: 5, marginRight:"10%"}} />}>
+            <Card heading="Recommended Crop :" image={<Image source={require("../../assets/wheat-sack.png")} style={{width: 60, height: 60, borderRadius: 5, marginRight:"10%"}} />}>
                 <Text style={{color: "#0e6e3a", fontSize: 30}}>Wheat</Text>
             </Card>
             <Card heading="Fertilizer Combination 1 :">
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     container:{
         width: "100%",
         // alignItems:"center",
-        backgroundColor: "#dedede",
+        backgroundColor: "white",
         paddingTop:"5%"
     }
 })

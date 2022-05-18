@@ -204,7 +204,7 @@ const Admin = ({ navigation }) => {
             }}
           >
           <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["name"]} onChangeText={(val) => textInputName(val)}/>
-          <Icon name="user-plus"  style={{left:-20}} size={25} color="#6e6e6e" /></View>
+          <Icon name="user-plus"  style={{left:-20, bottom: 10,}} size={25} color="#6e6e6e" /></View>
           <View
             style={{
               flexDirection: "row",
@@ -213,7 +213,7 @@ const Admin = ({ navigation }) => {
             }}
           >
           <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["empCode"]}/>
-          <Icon name="sort-numeric-down"  style={{left:-20}} size={25} color="#6e6e6e" /></View>
+          <Icon name="sort-numeric-down"  style={{left:-20, bottom: 10,}} size={25} color="#6e6e6e" /></View>
           <View
             style={{
               flexDirection: "row",
@@ -222,7 +222,7 @@ const Admin = ({ navigation }) => {
             }}
           >
           <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["designation"]}/>
-          <Icon name="briefcase"  style={{left:-20}} size={25} color="#6e6e6e" /></View>
+          <Icon name="briefcase"  style={{left:-20, bottom: 10,}} size={25} color="#6e6e6e" /></View>
           <View
             style={{
               flexDirection: "row",
@@ -230,7 +230,7 @@ const Admin = ({ navigation }) => {
               alignItems: "center",
             }}
           ><InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["OffAddress"]} multiline={true}  onChangeText={(val) => textInputAddress(val)} />
-          <Icon name="building"  style={{left:-20}} size={25} color="#6e6e6e" /></View>
+          <Icon name="building"  style={{left:-20, bottom: 10,}} size={25} color="#6e6e6e" /></View>
             <View>
               <DropdownComponent
                 placeholderText={transcription[lang.language]["state"]}
@@ -261,7 +261,7 @@ const Admin = ({ navigation }) => {
               maxLength={6}
               style={{marginBottom: hp(3)}}
             />
-            <Image style={styles.icon} source={require('../../utils/icons/pin.png')} />
+            <Icon name="hashtag"  style={{left:-20, bottom: 10,}} size={25} color="#6e6e6e" />
             {data.check_textInputPin ? (
               <Animatable.View animation="bounceIn">
                 <Feather
@@ -294,7 +294,7 @@ const Admin = ({ navigation }) => {
               maxLength={10}
               style={{marginBottom: hp(3)}}
             />
-             <Icon name="address-card"  style={{left:-20}} size={25} color="#6e6e6e" />
+             <Icon name="address-card"  style={{left:-20, bottom: 10,}} size={25} color="#6e6e6e" />
             {data.check_textInputAadhar ? (
               <Animatable.View animation="bounceIn">
                 <Feather
@@ -437,6 +437,6 @@ const styles = StyleSheet.create({
     width:30,
     height:30,
     left:-20,
-    bottom:5
+    bottom:10
   },
 });

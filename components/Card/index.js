@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         marginLeft: "10%"
     },
     heading:{
-        fontSize: 20,
+        fontSize: 23,
         color: "#3d3d3d",
         fontWeight: "bold"
     }
