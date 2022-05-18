@@ -8,12 +8,17 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
+import React, { useState, useContext } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import colors from "../../utils/colors";
 import RouteButton from "../../components/CustomButton";
 import InputText from "../../components/CustomTextField";
+// Language Provider
+import { Language } from "../../providers/languageProvider";
+import { transcription } from "../../utils/lang";
+
 export default function Welcome({navigation}) {
+  const lang = useContext(Language);
   const [signInOptions, setSignOptions] = React.useState(false);
   return (
     <View style={styles.container}>
@@ -62,25 +67,25 @@ export default function Welcome({navigation}) {
           <View style={styles.dots} />
         </View>
       </View>
-      <Text style={styles.greet}>{"SISHMA"}</Text>
+      <Text style={styles.greet}>{transcription[lang.language]["sishma"]}</Text>
       <View style={styles.buttonContainer}>
         <RouteButton onPress={() => navigation.navigate('FarmerReg')}
-          text="Farmer Registration"
+          text={transcription[lang.language]["farmerRegistration"]}
           style={{borderWidth: 5, height: 70, marginBottom: 10}}
           icon={<AntDesign name="right" size={30} color="white" />}
         />
         <RouteButton  onPress={() => navigation.navigate('AdminReg')}
-          text="Admin Registration"
+          text={transcription[lang.language]["adminRegistration"]}
           style={{borderWidth: 5, height: 70, marginBottom: 10}}
           icon={<AntDesign name="right" size={30} color="white" />}
         />
         <RouteButton onPress={() => navigation.navigate('OfficerReg')}
-          text="Officer Registration"
+          text={transcription[lang.language]["officerRegistration"]}
           style={{borderWidth: 5, height: 70, marginBottom: 10}}
           icon={<AntDesign name="right" size={30} color="white" />}
         />
         <RouteButton onPress={() => navigation.navigate('SoilSampleDetails')}
-          text="Soil Sample Details"
+          text={transcription[lang.language]["soilSampDetails"]}
           style={{borderWidth: 5, height: 70, marginBottom: 10}}
           icon={<AntDesign name="right" size={30} color="white" />}
         />
