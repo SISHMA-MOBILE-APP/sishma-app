@@ -15,19 +15,19 @@ export default function FieldOfficerRecommendation(props){
                 <View style={{flexDirection: "row", justifyContent: "space-around", width: "95%", marginTop: 15}}>
                     <View style={{alignItems: "center"}}>
                         <Text>Nitrogen</Text>
-                        <Image source={require("../../assets/nitrogen.png")} style={{width: 50, height: 50, borderRadius: 25, marginTop: 5, marginBottom: 10}} />
+                        <Image source={require("../../assets/nitrogen.png")} style={{width: 50, height: 50, borderRadius: 0, marginTop: 5, marginBottom: 10}} />
                         <Text style={{color: "green",fontSize: 25}}>44.5%</Text>
                     </View>
                     <View style={{width: 0.5, height :"85%", backgroundColor: "black"}} />
                     <View style={{alignItems: "center"}}>
                         <Text>Phosphorus</Text>
-                        <Image source={require("../../assets/phosphorus.png")} style={{width: 50, height: 50, borderRadius: 25, marginTop: 5, marginBottom: 10}} />
+                        <Image source={require("../../assets/phosphorus.png")} style={{width: 50, height: 50, borderRadius: 0, marginTop: 5, marginBottom: 10}} />
                         <Text style={{color: "green",fontSize: 25}}>30.0%</Text>
                     </View>
                     <View style={{width: 0.5, height :"85%", backgroundColor: "black"}} />
                     <View style={{alignItems: "center"}}>
                         <Text>Potassium</Text>
-                        <Image source={require("../../assets/potassium.png")} style={{width: 50, height: 50, borderRadius: 25, marginTop: 5, marginBottom: 10}} />
+                        <Image source={require("../../assets/potassium.png")} style={{width: 50, height: 50, borderRadius: 0, marginTop: 5, marginBottom: 10}} />
                         <Text style={{color: "green",fontSize: 25}}>25.5%</Text>
                     </View>
                 </View>
@@ -37,19 +37,19 @@ export default function FieldOfficerRecommendation(props){
                 <View style={{flexDirection: "row", justifyContent: "space-around", width: "95%", marginTop: 15}}>
                     <View style={{alignItems: "center"}}>
                         <Text>Nitrogen</Text>
-                        <Image source={require("../../assets/nitrogen2.png")} style={{width: 50, height: 50, borderRadius: 5, marginTop: 5, marginBottom: 10}} />
+                        <Image source={require("../../assets/nitrogen.png")} style={{width: 50, height: 50, borderRadius: 5, marginTop: 5, marginBottom: 10}} />
                         <Text style={{color: "green",fontSize: 25}}>42.0%</Text>
                     </View>
                     <View style={{width: 0.5, height :"85%", backgroundColor: "green"}} />
                     <View style={{alignItems: "center"}}>
                         <Text>Phosphorus</Text>
-                        <Image source={require("../../assets/phosphorus2.png")} style={{width: 50, height: 50, borderRadius: 5, marginTop: 5, marginBottom: 10}} />
+                        <Image source={require("../../assets/phosphorus.png")} style={{width: 50, height: 50, borderRadius: 5, marginTop: 5, marginBottom: 10}} />
                         <Text style={{color: "green",fontSize: 25}}>33.0%</Text>
                     </View>
                     <View style={{width: 0.5, height :"85%", backgroundColor: "green"}} />
                     <View style={{alignItems: "center"}}>
                         <Text>Potassium</Text>
-                        <Image source={require("../../assets/potassium2.png")} style={{width: 50, height: 50, borderRadius: 5, marginTop: 5, marginBottom: 10}} />
+                        <Image source={require("../../assets/potassium.png")} style={{width: 50, height: 50, borderRadius: 5, marginTop: 5, marginBottom: 10}} />
                         <Text style={{color: "green",fontSize: 25}}>25.0%</Text>
                     </View>
                 </View>
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     container:{
         width: "100%",
         // alignItems:"center",
-        backgroundColor: "#dedede"
+        backgroundColor: "#dedede",
+        paddingTop:"5%"
     }
 })
