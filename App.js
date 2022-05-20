@@ -12,6 +12,8 @@ import Hello from "./pages/Hello";
 import SoilSampleDetails from "./pages/SoilSampleDetails";
 import FieldOfficerRecommendation from "./pages/FieldOfficerRecommendation";
 import FarmerDashboard from "./pages/FarmerDashboard";
+import Loading from "./pages/Loading";
+import LanguagePicker from "./pages/LanguagePicker";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -23,7 +25,7 @@ export default function App() {
           screenOptions={{
             headerShown: false,
           }}
-          initialRouteName="Login"
+          initialRouteName="LanguagePicker"
         >
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="RoutePage" component={Routepage} />
@@ -35,6 +37,8 @@ export default function App() {
           <Stack.Screen name="SoilSampleDetails" component={SoilSampleDetails} />
           <Stack.Screen name="FieldOfficerRecommendation" component={FieldOfficerRecommendation} />
           <Stack.Screen name="FarmerDashboard" component={FarmerDashboard} />
+          <Stack.Screen name="Loading" component={Loading} />
+          <Stack.Screen name="LanguagePicker" component={LanguagePicker} />
         </Stack.Navigator>
       </NavigationContainer>
     </LanguageProvider>

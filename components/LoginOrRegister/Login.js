@@ -26,6 +26,7 @@ import Routepage from "../../pages/RoutePage";
 // Language Provider
 import { Language } from "../../providers/languageProvider";
 import { transcription } from "../../utils/lang";
+import ConfirmGoogleCaptcha from "react-native-google-recaptcha-v2";
 
 export default function Login({ navigation }) {
   const lang = useContext(Language);
@@ -66,6 +67,25 @@ export default function Login({ navigation }) {
       });
     }
   };
+
+  // Captcha Setup
+  let captchaForm = null;
+  let siteKey = "hololo";
+  onMessage = event => {
+      if (event && event.nativeEvent.data) {
+        if (['cancel', 'error', 'expired'].includes(event.nativeEvent.data)) {
+            captchaForm.hide();
+            return;
+        } else {
+            console.log('Verified code from Google', event.nativeEvent.data);
+            setTimeout(() => {
+                captchaForm.hide();
+                // do what ever you want here
+            }, 1500);
+        }
+    }
+  };
+
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -168,6 +188,13 @@ export default function Login({ navigation }) {
             text={transcription[lang.language]["submit"]}
           />
         </View>
+        {/* <ConfirmGoogleCaptcha
+            ref={_ref => captchaForm = _ref}
+            siteKey={siteKey}
+            baseUrl={baseUrl}
+            languageCode='en'
+            onMessage={this.onMessage}
+        /> */}
         <TouchableOpacity  onPress={() => {
               //setPage(1);
               navigation.navigate('RoutePage')

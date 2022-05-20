@@ -158,29 +158,77 @@ const transcription ={
         /* Admin Dashboard */
         signIn: "உள்நுழைக",
         registerNow: "இப்போது பதிவு செய்யவும்",
-        adminDash: "நிர்வாக டாஷ்ப ோர்ட",
+        adminDash: "நிர்வாக முகப்புப்பெட்டி",
         agriFieldOffDB: "வேளாண் துறை அலுவலர்கள் தரவுத்தளம",
         farmersDB: "விவசாயிகள் தரவுத்தளம",
         agriActDB: "விவசாய நடவடிக்கைகள் தரவுத்தளம",
-        loginDash: "உள்நுழைவு டாஷ்போர்டு",
+        loginDash: "உள்நுழைவு முகப்புப்பெட்டி",
         aadhaarnum: "ஆதார் எண்",
-        otp: "OTP",
+        otp: "ஒரு முறை கடவுச்சொல்",
 
         /* Farmer Dashboard */
-        regDash: "பதிவு டேஷ்போர்டு",
+        regDash: "பதிவு முகப்புப்பெட்டி",
         name: "பெயர்",
         residenAddress: "வீட்டு முகவரி",
         village: "கிராமம்",
         state: "நிலை",
         district: "மாவட்டம்",
-        pin: "PIN",
+        pin: "பின்",
         mobileNum: "கைபேசி எண்",
         sishmaKitNo : "சிஷ்மா கிட் எண்",
 
         /* Registration Dashboard */
         empCode: "பணியாளர் குறியீடு",
+        deptName: "துறை பெயர்",
+        officeAddress: "அலுவலக முகவரி",
+        email: "மின்னஞ்சல் முகவரி",
+        next: "அடுத்தது",
         designation: "பதவி",
         OffAddress: "அதிகாரப்பூர்வ முகவரி",
+
+        // soil sample details
+        soilSampleNum: "மண் மாதிரி எண்",
+        date: "தேதி",
+        surveyNum: "கணக்கெடுப்பு எண்",
+        farmSize: "பண்ணை அளவு",
+        gps: "ஜி.பி.எஸ்",
+        crop: "பயிர்",
+
+        /* Soil test details */
+        pH: "காரகாடித்தன்மைச் சுட்டெண்",
+        soilMoisture: "மண்ணின் ஈரப்பதத்தின் உள்ளடக்கம்",
+        nitrogen: "நைட்ரஜன் அளவு",
+        phosphorus: "பாஸ்பரஸ் அளவு",
+        potassium: "பொட்டாசியம் அளவு",
+
+        sulphur: "கந்தகம்",
+        iron: "இரும்பு",
+        boron: "போரான்",
+        copper: "செம்பு",
+        manganese: "மாங்கனீசு",
+        zinc: "துத்தநாகம்",
+
+        soilSampDetails:"மண் மாதிரி விவரங்கள்",
+        soilTestDetails:"மண் பரிசோதனை விவரங்கள்",
+
+        officerReg:"அதிகாரி பதிவு",
+        organisationDetails:"அமைப்பின் விவரங்கள்",
+        personalDetails:"சொந்த விவரங்கள்",
+        addressDetails:"முகவரி விவரங்கள்",
+        farmerReg:"விவசாயி பதிவு",
+        adminReg:"நிர்வாக பதிவு",
+
+        /* Login Screen */
+        login:"உள்நுழைய",
+        password:"கடவுச்சொல்",
+        submit:"சமர்ப்பிக்கவும்",
+        notReg:"இன்னும் பதிவு செய்யவில்லையா? இப்போது பதிவு செய்யுங்கள்!",
+
+        /* Route Page */
+        farmerRegistration:"விவசாயி பதிவு",
+        adminRegistration:"நிர்வாக பதிவு",
+        officerRegistration:"அதிகாரி பதிவு",
+        sishma:"சிஷ்மா",
     }
 };
 
