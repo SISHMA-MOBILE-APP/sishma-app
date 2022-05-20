@@ -2,7 +2,7 @@ import { StyleSheet, StatusBar, SafeAreaView } from "react-native";
 import Login from "./components/LoginOrRegister/Login";
 import Option from "./components/LoginOrRegister/Option";
 import Admin from "./pages/AdminDashboard";
-import Farmer from "./pages/FarmerDashboard";
+import Farmer from "./pages/FarmerRegistration";
 import Officer from "./pages/FieldOfficerDashboard";
 import Routepage from "./pages/RoutePage";
 import { NavigationContainer } from "@react-navigation/native";
@@ -11,6 +11,7 @@ import LanguageProvider from "./providers/languageProvider";
 import Hello from "./pages/Hello";
 import SoilSampleDetails from "./pages/SoilSampleDetails";
 import FieldOfficerRecommendation from "./pages/FieldOfficerRecommendation";
+import FarmerDashboard from "./pages/FarmerDashboard";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -33,6 +34,7 @@ export default function App() {
           <Stack.Screen name="Hello" component={Hello} />
           <Stack.Screen name="SoilSampleDetails" component={SoilSampleDetails} />
           <Stack.Screen name="FieldOfficerRecommendation" component={FieldOfficerRecommendation} />
+          <Stack.Screen name="FarmerDashboard" component={FarmerDashboard} />
         </Stack.Navigator>
       </NavigationContainer>
     </LanguageProvider>
