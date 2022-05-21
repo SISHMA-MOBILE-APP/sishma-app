@@ -245,7 +245,7 @@ import {
       letterSpacing: 7,
       color: "white",
       fontSize: hp('5%'),
-      textAlign: "center"
+      textAlign: "center",
     },
     dots: {
       width: 23.82,
@@ -325,6 +325,7 @@ import {
       alignSelf: "center",
       color: "#444",
       fontSize: 25,
+      textAlign:"center",
     },
     icon:{
       width:40,
