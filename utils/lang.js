@@ -43,9 +43,9 @@ const transcription ={
         /* Soil test details */
         pH: "pH",
         soilMoisture: "Soil Moisture Content",
-        nitrogen: "Available Nitrogen",
-        phosphorus: "Available Phosphorus",
-        potassium: "Available Potassium",
+        nitrogen: "Nitrogen",
+        phosphorus: "Phosphorus",
+        potassium: "Potassium",
 
         sulphur: "Sulphur",
         iron: "Iron",
@@ -75,6 +75,12 @@ const transcription ={
         adminRegistration:"Admin Registration",
         officerRegistration:"Officer Registration",
         sishma:"SISHMA",
+
+        /* FO recommendations */
+        recommendCrop:"Recommended Crop :",
+        fertilizerComb:"Fertilizer Combination ",
+        organicManure:"Organic Manure :",
+        bioFertilizer:"Bio Fertilizer :",
     },
     hindi:{
         /* Admin Dashboard */
@@ -120,9 +126,9 @@ const transcription ={
         /* Soil test details */
         pH: "पीएच",
         soilMoisture: "मिट्टी की नमी",
-        nitrogen: "उपलब्ध नाइट्रोजन",
-        phosphorus: "उपलब्ध फास्फोरस",
-        potassium: "उपलब्ध पोटैशियम",
+        nitrogen: "नाइट्रोजन",
+        phosphorus: "फास्फोरस",
+        potassium: "पोटैशियम",
 
         sulphur: "गंधक",
         iron: "लोहा",
@@ -152,6 +158,12 @@ const transcription ={
         adminRegistration:"व्यवस्थापक पंजीकरण",
         officerRegistration:"अधिकारी पंजीकरण",
         sishma:"सिष्मा",
+
+        /* FO recommendations */
+        recommendCrop:"अनुशंसित फसल :",
+        fertilizerComb:"उर्वरक संयोजन ",
+        organicManure:"जैविक खाद :",
+        bioFertilizer:"जैव उर्वरक :",        
     },
 
     tamil:{
@@ -185,6 +197,7 @@ const transcription ={
         next: "அடுத்தது",
         designation: "பதவி",
         OffAddress: "அதிகாரப்பூர்வ முகவரி",
+        back:"திரும்பி போ",
 
         // soil sample details
         soilSampleNum: "மண் மாதிரி எண்",
@@ -195,11 +208,11 @@ const transcription ={
         crop: "பயிர்",
 
         /* Soil test details */
-        pH: "காரகாடித்தன்மைச் சுட்டெண்",
-        soilMoisture: "மண்ணின் ஈரப்பதத்தின் உள்ளடக்கம்",
-        nitrogen: "நைட்ரஜன் அளவு",
-        phosphorus: "பாஸ்பரஸ் அளவு",
-        potassium: "பொட்டாசியம் அளவு",
+        pH: "காரகாடித்தன்மைச்\nசுட்டெண்",
+        soilMoisture: "மண்ணின்\nஈரப்பதத்தின்\nஉள்ளடக்கம்",
+        nitrogen: "நைட்ரஜன்",
+        phosphorus: "பாஸ்பரஸ்",
+        potassium: "பொட்டாசியம்",
 
         sulphur: "கந்தகம்",
         iron: "இரும்பு",
@@ -208,27 +221,33 @@ const transcription ={
         manganese: "மாங்கனீசு",
         zinc: "துத்தநாகம்",
 
-        soilSampDetails:"மண் மாதிரி விவரங்கள்",
+        soilSampDetails:"மண் மாதிரி\nவிவரங்கள்",
         soilTestDetails:"மண் பரிசோதனை விவரங்கள்",
 
-        officerReg:"அதிகாரி பதிவு",
+        officerReg:"அதிகாரி\nபதிவு",
         organisationDetails:"அமைப்பின் விவரங்கள்",
         personalDetails:"சொந்த விவரங்கள்",
         addressDetails:"முகவரி விவரங்கள்",
-        farmerReg:"விவசாயி பதிவு",
-        adminReg:"நிர்வாக பதிவு",
+        farmerReg:"விவசாயி\nபதிவு",
+        adminReg:"நிர்வாக\nபதிவு",
 
         /* Login Screen */
         login:"உள்நுழைய",
         password:"கடவுச்சொல்",
         submit:"சமர்ப்பிக்கவும்",
-        notReg:"இன்னும் பதிவு செய்யவில்லையா? இப்போது பதிவு செய்யுங்கள்!",
+        notReg:"இன்னும் பதிவு செய்யவில்லையா?\nஇப்போது பதிவு செய்யுங்கள்!",
 
         /* Route Page */
         farmerRegistration:"விவசாயி பதிவு",
         adminRegistration:"நிர்வாக பதிவு",
         officerRegistration:"அதிகாரி பதிவு",
         sishma:"சிஷ்மா",
+
+        /* FO recommendations */
+        recommendCrop:"பரிந்துரைக்கப்பட்ட\nபயிர் :",
+        fertilizerComb:"உர கலவை ",
+        organicManure:"கரிம உரம் :",
+        bioFertilizer:"உயிர் உரம் :",
     }
 };
 
