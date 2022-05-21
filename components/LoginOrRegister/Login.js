@@ -202,6 +202,7 @@ export default function Login({ navigation }) {
           <Text
             style={{
               marginTop: hp(2),
+              textAlign:"center",
             }}
           >{transcription[lang.language]["notReg"]}
           </Text>
