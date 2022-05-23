@@ -40,7 +40,7 @@ export default function Login({ navigation }) {
     },
   ]);
   const textInputAadhar = (val) => {
-    if (val.trim().length == 10) {
+    if (val.trim().length == 12) {
       setData({
         ...data,
         Aadhar: val,
@@ -55,7 +55,7 @@ export default function Login({ navigation }) {
     }
   };
   const handleValidAadhar = (val) => {
-    if (val.trim().length == 10) {
+    if (val.trim().length == 12) {
       setData({
         ...data,
         isValidAadhar: true,
@@ -138,7 +138,7 @@ export default function Login({ navigation }) {
               placeholderText={transcription[lang.language]["aadhaarnum"]}
               onChangeText={(val) => textInputAadhar(val)}
               onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
-              maxLength={10}
+              maxLength={12}
             />
             <Icon name="address-card"  style={{left:-20, bottom : 5}} size={25} color="#6e6e6e" />
             {data.check_textInputAadhar ? (
@@ -157,7 +157,7 @@ export default function Login({ navigation }) {
           ) : (
             <Animatable.View animation="fadeInLeft" duration={500}>
               <Text style={{ color: "red" }}>
-                Aadhar must be 10 characters long.
+                Aadhar must be 12 characters long.
               </Text>
             </Animatable.View>
           )}

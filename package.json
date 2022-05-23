@@ -24,6 +24,7 @@
     "react-native-element-dropdown": "^1.8.10",
     "react-native-gesture-handler": "~2.1.0",
     "react-native-google-recaptcha-v2": "^1.1.0",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-modal": "^13.0.1",
     "react-native-reanimated": "~2.3.1",
     "react-native-responsive-screen": "^1.4.2",

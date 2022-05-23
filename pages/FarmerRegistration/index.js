@@ -6,6 +6,7 @@ import {
   Dimensions,
   ScrollView,
   KeyboardAvoidingView,
+
   Alert,
   TouchableOpacity
 } from "react-native";
@@ -18,7 +19,7 @@ import colors from "../../utils/colors";
 import RouteButton from "../../components/CustomButton";
 import InputText from "../../components/CustomTextField";
 import DropdownComponent from "../../components/Dropdown/dropdown";
-
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 // Language Provider
 import { Language } from "../../providers/languageProvider";
 import { transcription } from "../../utils/lang";
@@ -34,6 +35,7 @@ import Feather from "react-native-vector-icons/Feather";
 
 const Farmer = ({ navigation }) => {
   const lang = useContext(Language);
+  
   const [page, setPage] = useState(0);
   const [data, setData] = useState(
     {
@@ -71,7 +73,7 @@ const Farmer = ({ navigation }) => {
   };
 
   const textInputAadhar = (val) => {
-    if (val.trim().length == 10) {
+    if (val.trim().length == 12) {
       setData({
         ...data,
         Aadhar: val,
@@ -119,7 +121,7 @@ const Farmer = ({ navigation }) => {
     }
   };
   const handleValidAadhar = (val) => {
-    if (val.trim().length == 10) {
+    if (val.trim().length == 12) {
       setData({
         ...data,
         isValidAadhar: true,
@@ -161,7 +163,7 @@ const Farmer = ({ navigation }) => {
         <ScrollView contentContainerStyle={{flexGrow: 1, minHeight: "100%"}}>
       {/* <View style={styles.container}> */}
     
-
+      
       <LinearGradient
         style={[
           styles.circle,
@@ -200,11 +202,12 @@ const Farmer = ({ navigation }) => {
       <Text style={styles.greet}>{transcription[lang.language]["farmerReg"]}</Text>
 
       <View style={styles.buttonContainer}>
-        <KeyboardAvoidingView behavior="padding">
+        
           <View style={{ flexDirection: "row", justifyContent: "space-around", marginBottom: 20, }}>
             <View style={{ width: "45%", height: 5, borderRadius: 2.5, backgroundColor: page === 0 ? "green" : "rgba(0, 255, 0, 0.5)" }} />
             <View style={{ width: "45%", height: 5, borderRadius: 2.5, backgroundColor: page === 1 ? "green" : "grey" }} />
           </View>
+          <KeyboardAwareScrollView behavior="padding">
           <Text style={styles.pagetitle}>{page === 0 ? transcription[lang.language]["personalDetails"] : transcription[lang.language]["addressDetails"]}</Text>
           {page == 0 &&
             <View>
@@ -237,7 +240,7 @@ const Farmer = ({ navigation }) => {
                   style={{marginBottom: hp(3)}}
                   onChangeText={(val) => textInputAadhar(val)}
                   onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
-                  maxLength={10}
+                  maxLength={12}
                 />
                 <Icon name="address-card"  style={{left:-20, bottom : 15}} size={25} color="#6e6e6e" />
                 {data.check_textInputAadhar ? (
@@ -254,7 +257,7 @@ const Farmer = ({ navigation }) => {
               {data.isValidAadhar == false && data.count == false ? (
                 <Animatable.View animation="fadeInLeft" duration={500}>
                   <Text style={{ color: "red" }}>
-                    Aadhar must be 10 characters long.
+                    Aadhar must be 12 characters long.
                   </Text>
                 </Animatable.View>
               ) : null}
@@ -390,7 +393,7 @@ const Farmer = ({ navigation }) => {
               ) : null}
             </View>
           }
-        </KeyboardAvoidingView>
+         </KeyboardAwareScrollView>
 
         <View style={styles.submit}>
           <RouteButton
@@ -422,10 +425,13 @@ const Farmer = ({ navigation }) => {
             <Text style={{ alignSelf: "center",width: wp(50),textAlign: "center", }}>{transcription[lang.language]["back"]}</Text>
              </TouchableOpacity> : null
           }
+          
         </View>
+        
       </View>
 
       {/* </View> */}
+    
             </ScrollView>
   );
 };
