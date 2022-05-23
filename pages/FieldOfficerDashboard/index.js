@@ -420,7 +420,7 @@ const styles = StyleSheet.create({
   },
   submit: {
     marginTop: "10%",
-    width: "67%",
+    width: "70%",
     alignSelf: "center"
     // justifyContent: "center",
     // width: "80%"
