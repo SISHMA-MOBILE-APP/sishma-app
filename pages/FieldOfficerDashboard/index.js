@@ -31,9 +31,8 @@ const Officer = ({ navigation }) => {
   const [signInOptions, setSignOptions] = React.useState(false);
   const lang = useContext(Language);
   return (
-    <ScrollView
+    <View
       style={styles.container}
-      contentContainerStyle={{ flex: 1, height: hp(100) }}
     >
       <LinearGradient
         style={[
@@ -72,139 +71,132 @@ const Officer = ({ navigation }) => {
 
       <Text style={styles.greet}>{transcription[lang.language]["officerReg"]}</Text>
       <View style={styles.buttonContainer}>
-      <ScrollView>
-        <KeyboardAvoidingView behavior="padding">
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-around",
-              marginBottom: 20,
-            }}
-          >
+        <ScrollView contentContainerStyle={{width: "95%"}}>
+          <KeyboardAvoidingView behavior="padding">
             <View
               style={{
-                width: "45%",
-                height: 5,
-                borderRadius: 2.5,
-                backgroundColor: page === 0 ? "green" : "rgba(0, 255, 0, 0.5)",
+                flexDirection: "row",
+                justifyContent: "space-around",
+                marginBottom: 20,
               }}
-            />
-            <View
-              style={{
-                width: "45%",
-                height: 5,
-                borderRadius: 2.5,
-                backgroundColor: page === 1 ? "green" : "grey",
-              }}
-            />
-          </View>
-          <Text style={styles.pagetitle}>
-            {page === 0 ? transcription[lang.language]["organisationDetails"] : transcription[lang.language]["personalDetails"]}
-          </Text>
-          {page == 0 && (
-            <View>
-              <InputText
-                style={{ marginBottom: hp(3), marginTop: hp(3) }}
-                placeholderText={transcription[lang.language]["deptName"]}
-              />
-              <InputText
-                style={{ marginBottom: hp(3) }}
-                placeholderText={transcription[lang.language]["officeAddress"]}
-              />
-              <InputText
-                style={{ marginBottom: hp(3) }}
-                placeholderText={transcription[lang.language]["village"]}
-              />
-              <InputText
-                style={{ marginBottom: hp(3) }}
-                placeholderText={transcription[lang.language]["state"]}
-              />
-              <InputText
-                style={{ marginBottom: hp(3) }}
-                placeholderText={transcription[lang.language]["district"]}
-              />
-              <InputText
-                style={{ marginBottom: hp(0) }}
-                placeholderText={transcription[lang.language]["pin"]}
-              />
-            </View>
-          )}
-          {page == 1 && (
-            <View>
-              <InputText
-                style={{ marginBottom: hp(3), marginTop: hp(3) }}
-                placeholderText={transcription[lang.language]["name"]}
-              />
-              <InputText
-                style={{ marginBottom: hp(3) }}
-                placeholderText={transcription[lang.language]["empCode"]}
-                multiline={true}
-              />
-              <InputText
-                style={{ marginBottom: hp(3) }}
-                placeholderText={transcription[lang.language]["designation"]}
-              />
-              <InputText
-                style={{ marginBottom: hp(3) }}
-                placeholderText={transcription[lang.language]["aadhaarnum"]}
-              />
-              <InputText
-                style={{ marginBottom: hp(3) }}
-                placeholderText={transcription[lang.language]["email"]}
-              />
-              <InputText
-                style={{ marginBottom: hp(0) }}
-                placeholderText={transcription[lang.language]["mobileNum"]}
-              />
-            </View>
-           
-          )}
-        </KeyboardAvoidingView>
-        <View style={styles.submit}>
-        {page===0?(
-          <RouteButton  style={{
-                  alignSelf: "center",
-                  textAlign: "center",
-                  alignItems:"center",
-                }}
-            onPress={() => {
-              setPage(1);
-              // navigation.navigate('Login')
-            }}
-            text={transcription[lang.language]["next"]}
-          />
-        ):<RouteButton  style={{
-                  alignSelf: "center",
-                  textAlign: "center",
-                  alignItems:"center",
-                }}
-            onPress={() => {
-              //setPage(1);
-              navigation.navigate('FieldOfficerRecommendation')
-            }}
-            text={transcription[lang.language]["registerNow"]}
-          />}
-          
-
-          {page === 1 ? (
-            <TouchableOpacity onPress={() => setPage(0)}>
-              <Text
+            >
+              <View
                 style={{
-                  alignSelf: "center",
-                  width: wp(50),
-                  textAlign: "center",
-                  marginBottom: hp(1),
-                  marginTop: hp(1),
+                  width: "45%",
+                  height: 5,
+                  borderRadius: 2.5,
+                  backgroundColor: page === 0 ? "green" : "rgba(0, 255, 0, 0.5)",
                 }}
-              >
-                {transcription[lang.language]["back"]}
-              </Text>
-            </TouchableOpacity>
-          ) : null}
-        </View>
+              />
+              <View
+                style={{
+                  width: "45%",
+                  height: 5,
+                  borderRadius: 2.5,
+                  backgroundColor: page === 1 ? "green" : "grey",
+                }}
+              />
+            </View>
+            <Text style={styles.pagetitle}>
+              {page === 0 ? transcription[lang.language]["organisationDetails"] : transcription[lang.language]["personalDetails"]}
+            </Text>
+            {page == 0 && (
+              <View>
+                <InputText
+                  style={{ marginBottom: hp(3), marginTop: hp(3) }}
+                  placeholderText={transcription[lang.language]["deptName"]}
+                />
+                <InputText
+                  style={{ marginBottom: hp(3) }}
+                  placeholderText={transcription[lang.language]["officeAddress"]}
+                />
+                <InputText
+                  style={{ marginBottom: hp(3) }}
+                  placeholderText={transcription[lang.language]["village"]}
+                />
+                <InputText
+                  style={{ marginBottom: hp(3) }}
+                  placeholderText={transcription[lang.language]["state"]}
+                />
+                <InputText
+                  style={{ marginBottom: hp(3) }}
+                  placeholderText={transcription[lang.language]["district"]}
+                />
+                <InputText
+                  style={{ marginBottom: hp(0) }}
+                  placeholderText={transcription[lang.language]["pin"]}
+                />
+              </View>
+            )}
+            {page == 1 && (
+              <View>
+                <InputText
+                  style={{ marginBottom: hp(3), marginTop: hp(3) }}
+                  placeholderText={transcription[lang.language]["name"]}
+                />
+                <InputText
+                  style={{ marginBottom: hp(3) }}
+                  placeholderText={transcription[lang.language]["empCode"]}
+                  multiline={true}
+                />
+                <InputText
+                  style={{ marginBottom: hp(3) }}
+                  placeholderText={transcription[lang.language]["designation"]}
+                />
+                <InputText
+                  style={{ marginBottom: hp(3) }}
+                  placeholderText={transcription[lang.language]["aadhaarnum"]}
+                />
+                <InputText
+                  style={{ marginBottom: hp(3) }}
+                  placeholderText={transcription[lang.language]["email"]}
+                />
+                <InputText
+                  style={{ marginBottom: hp(0) }}
+                  placeholderText={transcription[lang.language]["mobileNum"]}
+                />
+              </View>
+
+            )}
+          </KeyboardAvoidingView>
+          <View style={styles.submit}>
+            {page === 0 ? (
+              <RouteButton 
+                onPress={() => {
+                  setPage(1);
+                  // navigation.navigate('Login')
+                }}
+                text={transcription[lang.language]["next"]}
+              />
+            ) : <RouteButton 
+              style={{width: "106%"}}
+              onPress={() => {
+                //setPage(1);
+                navigation.navigate('FieldOfficerRecommendation')
+              }}
+              text={transcription[lang.language]["registerNow"]}
+            />}
+
+
+            {page === 1 ? (
+              <TouchableOpacity onPress={() => setPage(0)}>
+                <Text
+                  style={{
+                    alignSelf: "center",
+                    width: wp(50),
+                    textAlign: "center",
+                    marginBottom: hp(1),
+                    marginTop: hp(1),
+                  }}
+                >
+                  {transcription[lang.language]["back"]}
+                </Text>
+              </TouchableOpacity>
+            ) : null}
+          </View>
         </ScrollView>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
@@ -212,7 +204,8 @@ export default Officer;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: "100%",
+    height:"100%",
     backgroundColor: "#d0e8db",
   },
   circle: {
@@ -286,8 +279,10 @@ const styles = StyleSheet.create({
     marginLeft: "10%",
   },
   buttonContainer: {
-    top: hp(30),
+    position: "absolute",
+    bottom: 0,
     paddingTop: 30,
+    width: "100%",
     backgroundColor: "#d0e8db",
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
@@ -299,9 +294,11 @@ const styles = StyleSheet.create({
     opacity: 1,
   },
   submit: {
-    marginTop: hp("4"),
-    width: wp("80%"),
-    justifyContent: "center",
+    marginTop: "10%",
+    width:"67%",
+    alignSelf:"center"
+    // justifyContent: "center",
+    // width: "80%"
     // alignItems:'center',
   },
   pagetitle: {

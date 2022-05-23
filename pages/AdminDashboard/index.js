@@ -158,7 +158,7 @@ const Admin = ({ navigation }) => {
     }
   };
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <LinearGradient
         style={[
           styles.circle,
@@ -195,6 +195,8 @@ const Admin = ({ navigation }) => {
       />
       <Text style={styles.greet}>{transcription[lang.language]["adminReg"]}</Text>
       <View style={styles.buttonContainer}>
+        <ScrollView>
+
         <KeyboardAvoidingView behavior="padding">
         <View
             style={{
@@ -330,14 +332,15 @@ const Admin = ({ navigation }) => {
                       ...data,
                       count: false,
                     });
-              }
+                  }
             }}
             text={transcription[lang.language]["registerNow"]}
           />
           <Text>{transcription[lang.language]["back"]}</Text>
         </View>
+</ScrollView>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
@@ -356,7 +359,7 @@ const styles = StyleSheet.create({
   },
   greet: {
     textAlign:"center",
-    top: hp("2.5%"),
+    top: 45,
     alignSelf: "center",
     letterSpacing: 4,
     color: "white",
@@ -418,9 +421,13 @@ const styles = StyleSheet.create({
     marginLeft: "10%",
   },
   buttonContainer: {
-    top: hp("5%"),
+    // top: hp("5%"),
     paddingTop: 30,
-    height: "100%",
+    // height: "100%",
+    height: "65%",
+    position:"absolute",
+    bottom: 0,
+    width: "100%",
     backgroundColor: "#d0e8db",
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
