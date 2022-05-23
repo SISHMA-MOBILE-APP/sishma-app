@@ -501,7 +501,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
     padding: "5%",
-    height: hp(78),
+    height: hp(77),
     alignItems: "center",
     elevation: 20,
     opacity: 1,

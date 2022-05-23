@@ -5,6 +5,7 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  KeyboardAvoidingView
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState, useContext } from "react";
@@ -68,6 +69,7 @@ export default function Welcome({navigation}) {
       </View> */}
       <Text style={styles.greet}>{transcription[lang.language]["sishma"]}</Text>
       <View style={styles.buttonContainer}>
+        
         <RouteButton onPress={() => navigation.navigate('FarmerReg')}
           text={transcription[lang.language]["farmerRegistration"]}
           style={{borderWidth: 5, height: 70, marginBottom: 10}}
@@ -88,6 +90,7 @@ export default function Welcome({navigation}) {
           style={{borderWidth: 5, height: 70, marginBottom: 10}}
           icon={<AntDesign name="right" size={30} color="white" />}
         />
+        
         {/* <InputText placeholderText="Full name"/> */}
       </View>
     </View>
@@ -168,12 +171,19 @@ const styles = StyleSheet.create({
     marginLeft: "10%",
   },
   buttonContainer: {
+<<<<<<< HEAD
     // top: 380,
     position: "absolute",
     bottom: 0,
     width:"100%",
     paddingTop: 30,
     // height: "100%",
+=======
+    top: 380,
+    
+    paddingTop:20,
+    height: "100%",
+>>>>>>> ff9c408d1a5fdbc483118619156cd78627f22731
     backgroundColor: "white",
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
