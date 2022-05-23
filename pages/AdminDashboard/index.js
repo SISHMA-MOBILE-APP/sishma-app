@@ -195,7 +195,7 @@ const Admin = ({ navigation }) => {
       />
       <Text style={styles.greet}>{transcription[lang.language]["adminReg"]}</Text>
       <View style={styles.buttonContainer}>
-        <ScrollView>
+        <ScrollView contentContainerStyle={{width:"95%"}}>
 
         <KeyboardAvoidingView behavior="padding">
         <View
@@ -336,7 +336,6 @@ const Admin = ({ navigation }) => {
             }}
             text={transcription[lang.language]["registerNow"]}
           />
-          <Text>{transcription[lang.language]["back"]}</Text>
         </View>
 </ScrollView>
       </View>
@@ -348,7 +347,8 @@ export default Admin;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width:"100%",
+    height:"100%",
     backgroundColor: "#d0e8db",
   },
   circle: {
@@ -422,9 +422,12 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     // top: hp("5%"),
+    position:"absolute",
+    width:"100%",
+    bottom:0,
     paddingTop: 30,
     // height: "100%",
-    height: "65%",
+    height: "77%",
     position:"absolute",
     bottom: 0,
     width: "100%",
@@ -436,8 +439,9 @@ const styles = StyleSheet.create({
     elevation: 20,
   },
   submit: {
-    width: wp("80%"),
-    justifyContent: "center",
+    // justifyContent: "center",
+    width:"80%",
+    alignSelf:"center",
     marginTop: hp("3"),
   },
   icon:{

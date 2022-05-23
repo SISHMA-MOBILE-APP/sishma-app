@@ -155,8 +155,8 @@ const Farmer = ({ navigation }) => {
     }
   };
   return (
-        <ScrollView contentContainerStyle={{flexGrow: 1, minHeight: "100%"}}>
-      {/* <View style={styles.container}> */}
+        // <ScrollView contentContainerStyle={{flexGrow: 1, minHeight: "100%"}}>
+      <View style={styles.container}>
     
 
       <LinearGradient
@@ -197,6 +197,7 @@ const Farmer = ({ navigation }) => {
       <Text style={styles.greet}>{transcription[lang.language]["farmerReg"]}</Text>
 
       <View style={styles.buttonContainer}>
+      <ScrollView>
         <KeyboardAvoidingView behavior="padding">
           <View style={{ flexDirection: "row", justifyContent: "space-around", marginBottom: 20, }}>
             <View style={{ width: "45%", height: 5, borderRadius: 2.5, backgroundColor: page === 0 ? "green" : "rgba(0, 255, 0, 0.5)" }} />
@@ -305,7 +306,7 @@ const Farmer = ({ navigation }) => {
 
           {/* Address Section  */}
           {page === 1 &&
-            <ScrollView>
+          <>
               <View
                 style={{
                   flexDirection: "row",
@@ -342,14 +343,14 @@ const Farmer = ({ navigation }) => {
                   justifyContent: "space-around",
                   alignItems: "center",
                 }}
-              >
+                >
                 <Validation
                   value={data.Pin}
                   placeholderText={transcription[lang.language]["pin"]}
                   onChangeText={(val) => textInputPin(val)}
                   onEndEditing={(e) => handleValidPin(e.nativeEvent.text)}
                   maxLength={6}
-                />
+                  />
                 <Image style={styles.icon} source={require('../../utils/icons/pin.png')} />
                 {data.check_textInputPin ? (
                   <Animatable.View animation="bounceIn">
@@ -358,7 +359,7 @@ const Farmer = ({ navigation }) => {
                       name="check-circle"
                       color="green"
                       size={25}
-                    />
+                      />
                   </Animatable.View>
                 ) : null}
               </View>
@@ -369,7 +370,7 @@ const Farmer = ({ navigation }) => {
                   </Text>
                 </Animatable.View>
               ) : null}
-            </ScrollView>
+          </>
           }
         </KeyboardAvoidingView>
 
@@ -404,10 +405,11 @@ const Farmer = ({ navigation }) => {
              </TouchableOpacity> : null
           }
         </View>
+        </ScrollView>
       </View>
 
-      {/* </View> */}
-            </ScrollView>
+      </View>
+            // </ScrollView>
   );
 };
 
@@ -499,15 +501,14 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
     padding: "5%",
-    height: hp(70),
-    paddingBottom: "20%",
+    height: hp(78),
     alignItems: "center",
     elevation: 20,
     opacity: 1,
   },
   submit: {
-    marginTop: hp("4"),
-    width: wp("80%"),
+    marginTop: hp("2"),
+    width: wp("87%"),
     justifyContent: "center",
     // alignItems:'center',
   },
