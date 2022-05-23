@@ -171,19 +171,12 @@ const styles = StyleSheet.create({
     marginLeft: "10%",
   },
   buttonContainer: {
-<<<<<<< HEAD
     // top: 380,
     position: "absolute",
     bottom: 0,
     width:"100%",
     paddingTop: 30,
     // height: "100%",
-=======
-    top: 380,
-    
-    paddingTop:20,
-    height: "100%",
->>>>>>> ff9c408d1a5fdbc483118619156cd78627f22731
     backgroundColor: "white",
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,

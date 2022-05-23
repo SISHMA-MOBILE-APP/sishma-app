@@ -155,8 +155,8 @@ const Farmer = ({ navigation }) => {
     }
   };
   return (
-        // <ScrollView contentContainerStyle={{flexGrow: 1, minHeight: "100%"}}>
-      <View style={styles.container}>
+        <ScrollView contentContainerStyle={{flexGrow: 1, minHeight: "100%"}}>
+      {/* <View style={styles.container}> */}
     
 
       <LinearGradient
@@ -198,7 +198,7 @@ const Farmer = ({ navigation }) => {
 
       <View style={styles.buttonContainer}>
       <ScrollView>
-        <KeyboardAvoidingView behavior="padding">
+        <KeyboardAvoidingView behavior="position">
           <View style={{ flexDirection: "row", justifyContent: "space-around", marginBottom: 20, }}>
             <View style={{ width: "45%", height: 5, borderRadius: 2.5, backgroundColor: page === 0 ? "green" : "rgba(0, 255, 0, 0.5)" }} />
             <View style={{ width: "45%", height: 5, borderRadius: 2.5, backgroundColor: page === 1 ? "green" : "grey" }} />
@@ -408,8 +408,8 @@ const Farmer = ({ navigation }) => {
         </ScrollView>
       </View>
 
-      </View>
-            // </ScrollView>
+      {/* </View> */}
+      </ScrollView>
   );
 };
 
@@ -418,7 +418,7 @@ export default Farmer;
 const styles = StyleSheet.create({
   container: {
     width:"100%",
-    height: "100%",
+    height:"100%",
     backgroundColor: "#d0e8db",
   },
   circle: {
