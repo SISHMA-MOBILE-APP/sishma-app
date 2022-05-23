@@ -6,13 +6,10 @@ import {
   Dimensions,
   ScrollView,
   KeyboardAvoidingView,
-  Alert,
   TouchableOpacity
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState, useContext } from "react";
-import { AntDesign } from "@expo/vector-icons";
-import Octicons from 'react-native-vector-icons/Octicons';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import colors from "../../utils/colors";
 import RouteButton from "../../components/CustomButton";
@@ -308,7 +305,7 @@ const Farmer = ({ navigation }) => {
 
           {/* Address Section  */}
           {page === 1 &&
-            <View>
+            <ScrollView>
               <View
                 style={{
                   flexDirection: "row",
@@ -325,30 +322,14 @@ const Farmer = ({ navigation }) => {
               />
               <Icon name="home"  style={{left:-20}} size={25} color="#6e6e6e" />
               </View>
-              {/* <InputText
-                value={data.State}
-                placeholderText="State"
-                onChangeText={textInputState}
-              /> */}
               <DropdownComponent
                 placeholderText={transcription[lang.language]["state"]}
                 data={[{label: "Tamil Nadu", value: "Tamil Nadu"}]}
               />
-              {/* <InputText
-                value={data.Village}
-                placeholderText="Village "
-                onChangeText={textInputVillage}
-              /> */}
               <DropdownComponent
                 placeholderText={transcription[lang.language]["district"]}
                 data = {[{label: "Selum", value: "Selum"}]}
               />
-              {/* <InputText
-                value={data.District}
-                placeholderText="District"
-                onChange
-                Text={textInputDistrict}
-              /> */}
              
               <DropdownComponent
                 placeholderText={transcription[lang.language]["village"]}
@@ -388,7 +369,7 @@ const Farmer = ({ navigation }) => {
                   </Text>
                 </Animatable.View>
               ) : null}
-            </View>
+            </ScrollView>
           }
         </KeyboardAvoidingView>
 
@@ -509,7 +490,10 @@ const styles = StyleSheet.create({
     marginLeft: "10%",
   },
   buttonContainer: {
-    top: hp(30),
+    // top: hp(30),
+    position:"absolute",
+    bottom: 0,
+    width: "100%",
     paddingTop: 30,
     backgroundColor: "#d0e8db",
     borderTopRightRadius: 30,

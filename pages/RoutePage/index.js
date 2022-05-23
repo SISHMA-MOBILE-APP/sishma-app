@@ -97,6 +97,7 @@ export default function Welcome({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: "100%",
     backgroundColor: "#d0e8db",
   },
   circle: {
@@ -167,9 +168,12 @@ const styles = StyleSheet.create({
     marginLeft: "10%",
   },
   buttonContainer: {
-    top: 380,
+    // top: 380,
+    position: "absolute",
+    bottom: 0,
+    width:"100%",
     paddingTop: 30,
-    height: "100%",
+    // height: "100%",
     backgroundColor: "white",
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
