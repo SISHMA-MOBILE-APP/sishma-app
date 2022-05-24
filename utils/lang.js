@@ -42,7 +42,7 @@ const transcription ={
 
         /* Soil test details */
         pH: "pH",
-        soilMoisture: "Soil Moisture Content",
+        soilMoisture: "Soil Moisture ",
         nitrogen: "Nitrogen",
         phosphorus: "Phosphorus",
         potassium: "Potassium",

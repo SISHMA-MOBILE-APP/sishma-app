@@ -10,8 +10,9 @@ import {
     TouchableOpacity,
     SafeAreaView,ScrollView, KeyboardAvoidingView 
   } from "react-native";
+  import NumericInput from 'react-native-numeric-input'
   import { LinearGradient } from "expo-linear-gradient";
-  import React, {useContext} from "react";
+  import React, {useContext,useState} from "react";
   import { AntDesign } from "@expo/vector-icons";
   import colors from "../../utils/colors";
   import RouteButton from "../../components/CustomButton";
@@ -21,11 +22,27 @@ import {
   // Language Provider
   import { Language } from "../../providers/languageProvider";
   import { transcription } from "../../utils/lang";   
+import SoilText from "../../components/CustomTextField/SoilText";
   let count = 0
   const Officer = ({navigation}) => {
     const [page, setPage] = React.useState(0);
     const [signInOptions, setSignOptions] = React.useState(false);
     const lang = useContext(Language);
+    const [data, setData] = useState(
+      { Ph:0,
+        Moisture:0,
+        Nitrogen:0,
+        Phosphorus:0,
+        Potassium:0,
+        Sulphur:0,
+        Iron:0,
+        Boron:0,
+        Copper:0,
+        Manganese:0,
+        Zinc:0
+      });
+
+    
     return (
       <ScrollView  style={styles.container} contentContainerStyle={{flex: 1, minHeight: hp(100)}}>
        <LinearGradient
@@ -120,31 +137,76 @@ import {
            <View style={{ flexDirection: "row",marginBottom: hp(1), marginTop: hp(2)}}>
            <Image style={styles.icon} source={require('../../utils/icons/pH.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["pH"]}</Text>
-           <InputText style={{}}/> 
+           <SoilText value={data.Ph} 
+             onChange={(val) => { setData({
+              ...data,
+              Ph: val,
+              
+            })}}
+            
+            valueType="real"
+            maxValue={14}
+            onLimitReached={(isMax,msg) => isMax?console.log("hello"):console.log(data)}/> 
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(2)}}>
            <Image style={styles.icon} source={require('../../utils/icons/soilMoisture.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["soilMoisture"]}</Text>
-           <InputText style={{}}/> 
+           <SoilText value={data.Moisture} 
+             onChange={(val) => { setData({
+              ...data,
+              Moisture: val,
+              
+            })}}
+            
+            valueType="real"
+            maxValue={14}
+            onLimitReached={(isMax,msg) => isMax?console.log("hello"):console.log(data)}/> 
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(2)}}>
            <Image style={styles.icon} source={require('../../utils/icons/nitrogen.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["nitrogen"]} </Text>
-           <InputText style={{}}/> 
+           <SoilText value={data.Nitrogen} 
+             onChange={(val) => { setData({
+              ...data,
+              Nitrogen: val,
+              
+            })}}
+            
+            valueType="real"
+            maxValue={14}
+            onLimitReached={(isMax,msg) => isMax?console.log("hello"):console.log(data)}/>
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(2)}}>
            <Image style={styles.icon} source={require('../../utils/icons/phosphorus.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["phosphorus"]}</Text>
-           <InputText style={{}}/> 
+           <SoilText value={data.Phosphorus} 
+             onChange={(val) => { setData({
+              ...data,
+              Phosphorus: val,
+              
+            })}}
+            
+            valueType="real"
+           
+            onLimitReached={(isMax,msg) => isMax?console.log("hello"):console.log(data)}/>
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(2)}}>
            <Image style={styles.icon} source={require('../../utils/icons/potassium.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["potassium"]}</Text>
-           <InputText style={{}}/> 
+           <SoilText value={data.Potassium} 
+             onChange={(val) => { setData({
+              ...data,
+              Potassium: val,
+              
+            })}}
+            
+            valueType="real"
+            maxValue={14}
+            onLimitReached={(isMax,msg) => isMax?console.log("hello"):console.log(data)}/> 
            </View>
 
           </ScrollView>
@@ -154,37 +216,104 @@ import {
            <View style={{ flexDirection: "row",marginBottom: hp(1), marginTop: hp(2)}}>
            <Image style={styles.icon} source={require('../../utils/icons/sulphur.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["sulphur"]}</Text>
-           <InputText style={{}}/> 
+           {/* <NumericInput 
+            value={data} 
+            onChange={(val) => {
+      
+              setData(val)
+            }}
+
+            onLimitReached={(isMax,msg) => isMax?console.log(msg):console.log(data)}
+             
+            maxValue={14}
+            
+            valueType='real'
+            rounded 
+            textColor='black' 
+            iconStyle={{ color: 'white' }} 
+            rightButtonBackgroundColor='black' 
+            leftButtonBackgroundColor='black'/> */}
+           <SoilText value={data.Sulphur} 
+             onChange={(val) => { setData({
+              ...data,
+              Sulphur: val,
+              
+            })}}
+            
+            valueType="real"
+            maxValue={14}
+            onLimitReached={(isMax,msg) => isMax?console.log("hello"):console.log(data)}/> 
+           {/* <InputText style={{}}/>  */}
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
            <Image style={styles.icon} source={require('../../utils/icons/iron.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["iron"]}</Text>
-           <InputText style={{}}/> 
+           <SoilText value={data.Iron} 
+             onChange={(val) => { setData({
+              ...data,
+              Iron: val,
+              
+            })}}
+            valueType="real"
+            maxValue={14}
+            onLimitReached={(isMax,msg) => isMax==false?console.log("hello"):console.log(data)}/> 
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
            <Image style={styles.icon} source={require('../../utils/icons/boron.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["boron"]}</Text>
-           <InputText style={{}}/> 
+           <SoilText value={data.Boron} 
+             onChange={(val) => { setData({
+              ...data,
+              Boron: val,
+              
+            })}}
+            valueType="real"
+            maxValue={14}
+            onLimitReached={(isMax,msg) => isMax==false?console.log("hello"):console.log(data)}/> 
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
            <Image style={styles.icon} source={require('../../utils/icons/copper.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["copper"]}</Text>
-           <InputText style={{}}/> 
+           <SoilText value={data.Copper} 
+             onChange={(val) => { setData({
+              ...data,
+              Copper: val,
+              
+            })}}
+            valueType="real"
+            maxValue={14}
+            onLimitReached={(isMax,msg) => isMax==false?console.log("hello"):console.log(data)}/> 
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
            <Image style={styles.icon} source={require('../../utils/icons/manganese.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["manganese"]}</Text>
-           <InputText style={{}}/> 
+           <SoilText value={data.Manganese} 
+            onChange={(val) => { setData({
+              ...data,
+              Manganese: val,
+              
+            })}}
+            valueType="real"
+            maxValue={14}
+            onLimitReached={(isMax,msg) => isMax==false?console.log("hello"):console.log(data)}/>
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
            <Image style={styles.icon} source={require('../../utils/icons/zinc.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["zinc"]}</Text>
-           <InputText style={{}}/> 
+           <SoilText value={data.Zinc} 
+            onChange={(val) => { setData({
+              ...data,
+              Zinc: val,
+              
+            })}}
+            valueType="real"
+            maxValue={14}
+            onLimitReached={(isMax,msg) => isMax==false?console.log("hello"):console.log(data)}/> 
            </View>
            
           </ScrollView>
@@ -223,8 +352,7 @@ import {
         </View>
       </ScrollView>
     )
-  }
-  
+        }
   export default Officer
   
   const styles = StyleSheet.create({
@@ -338,6 +466,22 @@ import {
       fontSize: 18,
       paddingLeft:"5%",
       paddingRight:"5%",
+      minWidth:hp('20%')
     },
+    inputView: {
+      width: "100%",
+      height: hp('8%'),
+      flexDirection: "row",
+      alignSelf: "center",
+      elevation:0,
+      borderRadius: 5,
+      borderBottomWidth:1,
+      borderBottomColor:'rgba(54, 69, 79, 0.5)' ,
+     
+      alignItems: "center",
+      marginBottom: 6,
+      backgroundColor:"transparent",
+      padding:hp('1%')
+    }
   });
   

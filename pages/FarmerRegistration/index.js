@@ -230,6 +230,7 @@ const Farmer = ({ navigation }) => {
                 }}
               >
                 <Validation
+                 
                   placeholderText={transcription[lang.language]["aadhaarnum"]}
                   value={data.Aadhar}
                   style={{marginBottom: hp(3)}}

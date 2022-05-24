@@ -26,6 +26,7 @@
     "react-native-google-recaptcha-v2": "^1.1.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-modal": "^13.0.1",
+    "react-native-numeric-input": "^1.9.1",
     "react-native-reanimated": "~2.3.1",
     "react-native-responsive-screen": "^1.4.2",
     "react-native-safe-area-context": "3.3.2",
