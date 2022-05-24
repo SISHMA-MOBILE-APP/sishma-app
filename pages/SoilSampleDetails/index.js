@@ -231,6 +231,7 @@ import {
     container: {
       flex: 1,
       backgroundColor: "#d0e8db",
+      width:"100%",
     },
     circle: {
       position: "absolute",
@@ -312,7 +313,7 @@ import {
       paddingBottom: "28%",
       height: hp(70),
       alignItems: "center",
-      elevation: 20,
+   // elevation: 20,
       opacity: 1,
     },
     submit:{
