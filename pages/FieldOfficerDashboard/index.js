@@ -298,7 +298,8 @@ const Officer = ({ navigation }) => {
               style={{ width: "106%" }}
               onPress={() => {
                 //setPage(1);
-                navigation.navigate('FieldOfficerRecommendation')
+              //navigation.navigate('FieldOfficerRecommendation')
+                navigation.navigate('FieldOfficerSuggestion')
               }}
               text={transcription[lang.language]["registerNow"]}
             />}

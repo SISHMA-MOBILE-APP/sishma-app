@@ -11,6 +11,7 @@ import LanguageProvider from "./providers/languageProvider";
 import Hello from "./pages/Hello";
 import SoilSampleDetails from "./pages/SoilSampleDetails";
 import FieldOfficerRecommendation from "./pages/FieldOfficerRecommendation";
+import FieldOfficerSuggestion from "./pages/FieldOfficerSuggestion";
 import FarmerDashboard from "./pages/FarmerDashboard";
 import Loading from "./pages/Loading";
 import LanguagePicker from "./pages/LanguagePicker";
@@ -36,6 +37,7 @@ export default function App() {
           <Stack.Screen name="Hello" component={Hello} />
           <Stack.Screen name="SoilSampleDetails" component={SoilSampleDetails} />
           <Stack.Screen name="FieldOfficerRecommendation" component={FieldOfficerRecommendation} />
+          <Stack.Screen name="FieldOfficerSuggestion" component={FieldOfficerSuggestion} />
           <Stack.Screen name="FarmerDashboard" component={FarmerDashboard} />
           <Stack.Screen name="Loading" component={Loading} />
           <Stack.Screen name="LanguagePicker" component={LanguagePicker} />
