@@ -301,12 +301,13 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 40,
     position: "absolute",
     opacity: 0.8,
-    top: hp("60"),
-    height: hp(40),
+    bottom: hp("0"),
+    height: hp(44),
     width: wp("100%"),
     elevation: 80,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "white",
+    paddingBottom:10
   },
 });
