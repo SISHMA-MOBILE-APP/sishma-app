@@ -1,3 +1,4 @@
+//View only
 import React, {useContext} from 'react';
 import { View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 import Card from '../../components/Card';
