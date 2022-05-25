@@ -39,8 +39,10 @@ const LanguagePicker = (props) => {
                         <Text style={{ fontSize: 17, marginTop: 15, color: "#3d3d3d", fontWeight: "bold", }}>தமிழ்</Text>
                     </ItemCard>
                 </View>
-                <Text style={{alignSelf:"center", fontSize: 13, color: "#AEAEAE", position: "absolute", bottom: 10}}>
+                <Text style={{alignSelf:"center", fontSize: 13, color: "#AEAEAE", position: "absolute", bottom: 40}}>
               <Image source={require("../../assets/sishma.png")} style={{width: 12, height: 12, borderRadius: 6}} />  SISHMA 2022</Text>
+                <Text style={{alignSelf:"center", fontSize: 13, color: "#AEAEAE", position: "absolute", bottom: 24}}>sponsored by Department of Science and Technology</Text>
+                <Text style={{alignSelf:"center", fontSize: 13, color: "#AEAEAE", position: "absolute", bottom: 8}}>[Device Development Programme], Govt. Of India.</Text>
             </View>
         </LinearGradient>
     )

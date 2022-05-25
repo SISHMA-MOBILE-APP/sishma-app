@@ -195,16 +195,35 @@ export default function Login({ navigation }) {
             languageCode='en'
             onMessage={this.onMessage}
         /> */}
+        <View style={{}}>
         <TouchableOpacity  onPress={() => {
               //setPage(1);
-              navigation.navigate('RoutePage')
+              //navigation.navigate('RoutePage')
             }}>
           <Text
             style={{
-              marginTop: hp(2),
-              textAlign:"center",
+              // marginTop: hp(0),
+              textAlign:"left",
+               padding:"2%",
+              // paddingLeft:"8%",
             }}
-          >{transcription[lang.language]["notReg"]}
+          >{transcription[lang.language]["forgotPassword"]}
+          </Text>
+        </TouchableOpacity>
+        </View>
+        <TouchableOpacity  onPress={() => {
+              //setPage(1);
+             navigation.navigate('RoutePage')
+            }}>
+          <Text
+            style={{
+              // marginTop: hp(2),
+              textAlign:"center",
+              // padding:"2%",
+              // paddingRight:"10%",
+            }}
+          >
+           {transcription[lang.language]["notReg"]}
           </Text>
         </TouchableOpacity>
       </View>
@@ -302,7 +321,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     opacity: 0.8,
     bottom: hp("0"),
-    height: hp(44),
+    height: hp(50),
     width: wp("100%"),
     elevation: 80,
     alignItems: "center",
