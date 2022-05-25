@@ -49,7 +49,7 @@ const Admin = ({ navigation }) => {
       isValidAadhar: false,
       check_textInputAadhar: false,
       check_textInputPin: false,
-      count:true,
+      count:false,
     },
   ]);
   const textInputName = (val) => {
@@ -68,7 +68,7 @@ const Admin = ({ navigation }) => {
     setData({ ...data, SubDistrict: val });
   };
   const textInputAadhar = (val) => {
-    if (val.trim().length == 10) {
+    if (val.trim().length == 12) {
       setData({
         ...data,
         Aadhar: val,
@@ -117,7 +117,7 @@ const Admin = ({ navigation }) => {
   } */
   }
   const handleValidAadhar = (val) => {
-    if (val.trim().length == 10) {
+    if (val.trim().length == 12) {
       setData({
         ...data,
         isValidAadhar: true,
@@ -293,7 +293,7 @@ const Admin = ({ navigation }) => {
               placeholderText={transcription[lang.language]["aadhaarnum"]}
               onChangeText={(val) => textInputAadhar(val)}
               onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
-              maxLength={10}
+              maxLength={12}
               style={{marginBottom: hp(3)}}
             />
              <Icon name="address-card"  style={{left:-20, bottom: 10,}} size={25} color="#6e6e6e" />
@@ -313,7 +313,7 @@ const Admin = ({ navigation }) => {
            (
             <Animatable.View animation="fadeInLeft" duration={500}>
               <Text style={{ color: "red" }}>
-                Aadhar must be 10 characters long.
+                Aadhar must be 12 characters long.
               </Text>
             </Animatable.View>
           ):(null)}

@@ -10,6 +10,7 @@ import {
     TouchableOpacity,
     SafeAreaView,ScrollView, KeyboardAvoidingView 
   } from "react-native";
+ 
   import NumericInput from 'react-native-numeric-input'
   import { LinearGradient } from "expo-linear-gradient";
   import React, {useContext,useState} from "react";
@@ -23,23 +24,25 @@ import {
   import { Language } from "../../providers/languageProvider";
   import { transcription } from "../../utils/lang";   
 import SoilText from "../../components/CustomTextField/SoilText";
+
   let count = 0
   const Officer = ({navigation}) => {
     const [page, setPage] = React.useState(0);
     const [signInOptions, setSignOptions] = React.useState(false);
     const lang = useContext(Language);
+   
     const [data, setData] = useState(
-      { Ph:0,
-        Moisture:0,
-        Nitrogen:0,
-        Phosphorus:0,
-        Potassium:0,
-        Sulphur:0,
-        Iron:0,
-        Boron:0,
-        Copper:0,
-        Manganese:0,
-        Zinc:0
+      { Ph:0.00,
+        Moisture:0.00,
+        Nitrogen:0.00,
+        Phosphorus:0.00,
+        Potassium:0.00,
+        Sulphur:0.00,
+        Iron:0.00,
+        Boron:0.00,
+        Copper:0.00,
+        Manganese:0.00,
+        Zinc:0.00
       });
 
     
@@ -96,37 +99,39 @@ import SoilText from "../../components/CustomTextField/SoilText";
            <View style={{ flexDirection: "row",marginBottom: hp(1), marginTop: hp(2)}}>
            <Image style={styles.icon} source={require('../../utils/icons/soil.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["soilSampleNum"]}</Text>
-           <InputText style={{}} />
+           <InputText keyboardType="number-pad" style={{}} />
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
            <Image style={styles.icon} source={require('../../utils/icons/date.png')}/>
            <Text style={styles.iconName}>{transcription[lang.language]["date"]} </Text>
-           <InputText style={{}}/> 
+           <InputText style={{}}/>
+          
+    
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
            <Image style={styles.icon} source={require('../../utils/icons/surveyNum.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["surveyNum"]}</Text>
-           <InputText style={{}}/> 
+           <InputText style={{}} keyboardType="number-pad"/> 
             </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
            <Image style={styles.icon} source={require('../../utils/icons/farmSize.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["farmSize"]}</Text>
-           <InputText style={{}}/> 
+           <InputText style={{}} keyboardType="number-pad"/> 
             </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
            <Image style={styles.icon} source={require('../../utils/icons/gps.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["gps"]}</Text>
-           <InputText style={{}}/> 
+           <InputText style={{}}keyboardType="number-pad"/> 
            </View>
 
            <View style={{ flexDirection: "row",marginBottom: hp(1)}}>
            <Image style={styles.icon} source={require('../../utils/icons/crops.png')} />
            <Text style={styles.iconName}>{transcription[lang.language]["crop"]}</Text>
-           <InputText style={{}}/> 
+           <InputText style={{}}keyboardType="number-pad"/> 
            </View>
 
            </ScrollView>
@@ -160,7 +165,7 @@ import SoilText from "../../components/CustomTextField/SoilText";
             })}}
             
             valueType="real"
-            maxValue={14}
+          
             onLimitReached={(isMax,msg) => isMax?console.log("hello"):console.log(data)}/> 
            </View>
 
@@ -175,7 +180,7 @@ import SoilText from "../../components/CustomTextField/SoilText";
             })}}
             
             valueType="real"
-            maxValue={14}
+           
             onLimitReached={(isMax,msg) => isMax?console.log("hello"):console.log(data)}/>
            </View>
 
@@ -205,7 +210,7 @@ import SoilText from "../../components/CustomTextField/SoilText";
             })}}
             
             valueType="real"
-            maxValue={14}
+            
             onLimitReached={(isMax,msg) => isMax?console.log("hello"):console.log(data)}/> 
            </View>
 
@@ -241,7 +246,7 @@ import SoilText from "../../components/CustomTextField/SoilText";
             })}}
             
             valueType="real"
-            maxValue={14}
+            
             onLimitReached={(isMax,msg) => isMax?console.log("hello"):console.log(data)}/> 
            {/* <InputText style={{}}/>  */}
            </View>
@@ -256,7 +261,7 @@ import SoilText from "../../components/CustomTextField/SoilText";
               
             })}}
             valueType="real"
-            maxValue={14}
+            
             onLimitReached={(isMax,msg) => isMax==false?console.log("hello"):console.log(data)}/> 
            </View>
 
@@ -270,7 +275,7 @@ import SoilText from "../../components/CustomTextField/SoilText";
               
             })}}
             valueType="real"
-            maxValue={14}
+            
             onLimitReached={(isMax,msg) => isMax==false?console.log("hello"):console.log(data)}/> 
            </View>
 
@@ -284,7 +289,7 @@ import SoilText from "../../components/CustomTextField/SoilText";
               
             })}}
             valueType="real"
-            maxValue={14}
+            
             onLimitReached={(isMax,msg) => isMax==false?console.log("hello"):console.log(data)}/> 
            </View>
 
@@ -298,7 +303,7 @@ import SoilText from "../../components/CustomTextField/SoilText";
               
             })}}
             valueType="real"
-            maxValue={14}
+            
             onLimitReached={(isMax,msg) => isMax==false?console.log("hello"):console.log(data)}/>
            </View>
 
@@ -312,7 +317,7 @@ import SoilText from "../../components/CustomTextField/SoilText";
               
             })}}
             valueType="real"
-            maxValue={14}
+           
             onLimitReached={(isMax,msg) => isMax==false?console.log("hello"):console.log(data)}/> 
            </View>
            

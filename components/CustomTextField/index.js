@@ -5,7 +5,8 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 export default function InputText(props) {
   return (
     <View style={[styles.inputView, props.style]}>
-      <TextInput 
+      <TextInput
+        
         value= {props.value}
         style={styles.inputText}
         placeholder={props.placeholderText}
@@ -13,6 +14,7 @@ export default function InputText(props) {
         secureTextEntry={props.visibility}
         onChangeText={props.onChangeText}
         multiline={props.multiline}
+        keyboardType={props.keyboardType}
       />
     </View>
   );
