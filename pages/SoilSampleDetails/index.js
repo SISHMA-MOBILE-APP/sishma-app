@@ -437,17 +437,19 @@ import SoilText from "../../components/CustomTextField/SoilText";
       marginLeft: "10%",
     },
     buttonContainer: {
-      top: hp(30),
+      bottom: hp(0),
       paddingTop: 30,
       backgroundColor: "#d0e8db",
       borderTopRightRadius: 30,
       borderTopLeftRadius: 30,
       padding: "5%",
-      paddingBottom: "28%",
-      height: hp(70),
+      paddingBottom: "30%",
+      height: hp(75),
       alignItems: "center",
-   // elevation: 20,
+      elevation: 20,
       opacity: 1,
+      position:"absolute",
+      width:"100%"
     },
     submit:{
       marginTop: hp("4"),
@@ -482,7 +484,6 @@ import SoilText from "../../components/CustomTextField/SoilText";
       borderRadius: 5,
       borderBottomWidth:1,
       borderBottomColor:'rgba(54, 69, 79, 0.5)' ,
-     
       alignItems: "center",
       marginBottom: 6,
       backgroundColor:"transparent",
