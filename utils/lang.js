@@ -69,6 +69,7 @@ const transcription ={
         password:"Password",
         submit:"Submit",
         notReg:"Not yet registered? Register Now!",
+        forgotPassword:"Forgot Password?",
 
         /* Route Page */
         farmerRegistration:"Farmer Registration",
@@ -152,6 +153,7 @@ const transcription ={
         password:"पासवर्ड",
         submit:"अभी जमा करे",
         notReg:"अभी तक पंजीकृत नहीं किया गया? अभी पंजीकरण करें!",
+        forgotPassword:"पासवर्ड भूल गए?",
 
         /* Route Page */
         farmerRegistration:"किसान पंजीकरण",
@@ -236,6 +238,7 @@ const transcription ={
         password:"கடவுச்சொல்",
         submit:"சமர்ப்பிக்கவும்",
         notReg:"இன்னும் பதிவு செய்யவில்லையா?\nஇப்போது பதிவு செய்யுங்கள்!",
+        forgotPassword:"கடவுச்சொல்லை மறந்துவிட்டீர்களா?",
 
         /* Route Page */
         farmerRegistration:"விவசாயி பதிவு",
