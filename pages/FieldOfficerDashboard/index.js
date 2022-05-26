@@ -199,6 +199,15 @@ const Officer = ({ navigation }) => {
       />
 
       <Text style={styles.greet}>{transcription[lang.language]["officerReg"]}</Text>
+
+      <View style={{position:"absolute",top:hp("4"),right:0}}>
+        <TouchableOpacity onPress={()=>{
+          navigation.navigate('LanguagePicker')
+          }}>
+          <Text style={{ alignSelf:"flex-end",textAlign: "center", padding:"3%", color: "white", fontSize: 15, }}>Change Language</Text>
+        </TouchableOpacity>
+      </View>
+
       <View style={styles.buttonContainer}>
         <ScrollView contentContainerStyle={{ width: "95%" }}>
           {/* <KeyboardAvoidingView behavior="padding"> */}

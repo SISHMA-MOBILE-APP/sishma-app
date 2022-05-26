@@ -195,7 +195,13 @@ const Farmer = ({ navigation }) => {
       />
 
       <Text style={styles.greet}>{transcription[lang.language]["farmerReg"]}</Text>
-
+      <View style={{position:"absolute",top:hp("4"),right:0}}>
+        <TouchableOpacity onPress={()=>{
+          navigation.navigate('LanguagePicker')
+          }}>
+          <Text style={{ alignSelf:"flex-end",textAlign: "center", padding:"3%", color: "white", fontSize: 15, }}>Change Language</Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.buttonContainer}>
       <ScrollView>
         <KeyboardAvoidingView behavior="position">
@@ -431,7 +437,7 @@ const styles = StyleSheet.create({
   greet: {
     textAlign: "center",
     position: "absolute",
-    top: hp("7%"),
+    top: hp("10%"),
     alignSelf: "center",
     letterSpacing: 4,
     color: "white",
@@ -502,7 +508,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
     padding: "5%",
-    height: hp(77),
+    height: hp(70),
     alignItems: "center",
     elevation: 20,
     opacity: 1,
