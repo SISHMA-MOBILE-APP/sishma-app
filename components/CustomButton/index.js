@@ -11,7 +11,8 @@ export default function Button(props) {
         colors={["#41a16d", "#107c42"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
-      >
+      > 
+        {props.image}
         <Text style={styles.inputText}>{props.text}</Text>
         {props.icon}
       </LinearGradient>

@@ -73,26 +73,30 @@ export default function Welcome({navigation}) {
       <Text style={styles.greet}>{transcription[lang.language]["sishma"]}</Text>
 
       <View style={{position:"absolute",top:hp("4"),right:0}}>
-        <TouchableOpacity onPress={()=>{
+      <TouchableOpacity onPress={()=>{
           navigation.navigate('LanguagePicker')
-          }}>
-          <Text style={{ alignSelf:"flex-end",textAlign: "center", padding:"3%", color: "white", fontSize: 15, }}>Change Language</Text>
+          }} style={styles.changeLanguage}>
+          <Image source={require("../../assets/translation.png")} style={{width: 20, height: 20, marginRight: 5}} />
+          <Text style={{ fontWeight: "bold", color: "#2b2b2b", fontSize: 14, }}>Language</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.buttonContainer}>
         
         <RouteButton onPress={() => navigation.navigate('FarmerReg')}
+          image={<Image source={require("../../assets/farmer2.png")} style={{width: 40, height:40, marginLeft: 10}}/>}
           text={transcription[lang.language]["farmerRegistration"]}
           style={{borderWidth: 5, height: 70, marginBottom: 10}}
           icon={<AntDesign name="right" size={30} color="white" />}
         />
         <RouteButton  onPress={() => navigation.navigate('AdminReg')}
+        image={<Image source={require("../../assets/admin.png")} style={{width: 40, height:40, marginLeft: 10}}/>}
           text={transcription[lang.language]["adminRegistration"]}
           style={{borderWidth: 5, height: 70, marginBottom: 10}}
           icon={<AntDesign name="right" size={30} color="white" />}
         />
         <RouteButton onPress={() => navigation.navigate('OfficerReg')}
+        image={<Image source={require("../../assets/work.png")} style={{width: 40, height:40, marginLeft: 10}}/>}
           text={transcription[lang.language]["officerRegistration"]}
           style={{borderWidth: 5, height: 70, marginBottom: 10}}
           icon={<AntDesign name="right" size={30} color="white" />}
@@ -195,5 +199,14 @@ const styles = StyleSheet.create({
     padding: "8%",
     alignItems: "center",
     elevation: 20,
+  },
+  changeLanguage:{
+    backgroundColor:"white",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 15,
+    elevation: 10,
+    flexDirection: "row",
+    right: 10
   }
 });

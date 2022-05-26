@@ -201,10 +201,11 @@ const Officer = ({ navigation }) => {
       <Text style={styles.greet}>{transcription[lang.language]["officerReg"]}</Text>
 
       <View style={{position:"absolute",top:hp("4"),right:0}}>
-        <TouchableOpacity onPress={()=>{
+      <TouchableOpacity onPress={()=>{
           navigation.navigate('LanguagePicker')
-          }}>
-          <Text style={{ alignSelf:"flex-end",textAlign: "center", padding:"3%", color: "white", fontSize: 15, }}>Change Language</Text>
+          }} style={styles.changeLanguage}>
+          <Image source={require("../../assets/translation.png")} style={{width: 20, height: 20, marginRight: 5}} />
+          <Text style={{ fontWeight: "bold", color: "#2b2b2b", fontSize: 14, }}>Language</Text>
         </TouchableOpacity>
       </View>
 
@@ -593,4 +594,13 @@ const styles = StyleSheet.create({
     left: -20,
     bottom: 5
   },
+  changeLanguage:{
+    backgroundColor:"white",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 15,
+    elevation: 10,
+    flexDirection: "row",
+    right: 10
+  }
 });
