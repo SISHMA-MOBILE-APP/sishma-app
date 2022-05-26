@@ -461,7 +461,22 @@ const Officer = ({ navigation }) => {
             />}
 
 
-            {page === 1 ? (
+            {
+            page === 0 ? 
+            <TouchableOpacity onPress={() => navigation.pop()}>
+                <Text
+                  style={{
+                    alignSelf: "center",
+                    width: wp(50),
+                    textAlign: "center",
+                    marginBottom: hp(1),
+                    marginTop: hp(1),
+                  }}
+                >
+                  {"Back to Route Page"}
+                </Text>
+              </TouchableOpacity>:
+            page === 1 ? (
               <TouchableOpacity onPress={() => setPage(0)}>
                 <Text
                   style={{

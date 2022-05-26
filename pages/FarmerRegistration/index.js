@@ -404,7 +404,12 @@ const Farmer = ({ navigation }) => {
             }}
             text={page===0? transcription[lang.language]["next"] : transcription[lang.language]["registerNow"]}
             />
-          {
+          { page === 0 ? 
+            <TouchableOpacity
+            onPress={()=>navigation.pop()}>
+
+           <Text style={{ alignSelf: "center",width: wp(50),textAlign: "center", }}>{"Back to Route Page"}</Text>
+            </TouchableOpacity> : 
             page === 1 ?
             <TouchableOpacity
              onPress={()=>setPage(0)}>
