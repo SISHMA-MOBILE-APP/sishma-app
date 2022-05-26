@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-evenly",
         alignItems: "center",
-        marginTop: "10%"
+        marginTop: "6%"
     },
 })
 

@@ -125,6 +125,15 @@ export default function Login({ navigation }) {
 
       <Image source={require("../../assets/sishma-white.png")} style={[styles.logo, {width: 140, height: 140, borderRadius: 70}]} />
       <Text style={styles.greet}>{transcription[lang.language]["login"]}</Text>
+
+      <View style={{position:"absolute",top:hp("4"),right:0}}>
+        <TouchableOpacity onPress={()=>{
+          navigation.navigate('LanguagePicker')
+          }}>
+          <Text style={{ alignSelf:"flex-end",textAlign: "center", padding:"3%", color: "white", fontSize: 15, }}>Change Language</Text>
+        </TouchableOpacity>
+      </View>
+
       <View style={styles.loginContainer}>
         <View style={{ width: wp("75%") }}>
           <View
@@ -195,7 +204,7 @@ export default function Login({ navigation }) {
             languageCode='en'
             onMessage={this.onMessage}
         /> */}
-        <View style={{}}>
+
         <TouchableOpacity  onPress={() => {
               //setPage(1);
               //navigation.navigate('RoutePage')
@@ -203,14 +212,14 @@ export default function Login({ navigation }) {
           <Text
             style={{
               // marginTop: hp(0),
-              textAlign:"left",
+              // textAlign:"left",
                padding:"2%",
               // paddingLeft:"8%",
             }}
           >{transcription[lang.language]["forgotPassword"]}
           </Text>
         </TouchableOpacity>
-        </View>
+        
         <TouchableOpacity  onPress={() => {
               //setPage(1);
              navigation.navigate('RoutePage')
@@ -219,13 +228,20 @@ export default function Login({ navigation }) {
             style={{
               // marginTop: hp(2),
               textAlign:"center",
-              // padding:"2%",
+               padding:"2%",
               // paddingRight:"10%",
             }}
           >
            {transcription[lang.language]["notReg"]}
           </Text>
         </TouchableOpacity>
+        {/* <View style={{position:"absolute",top:hp("4"),right:0}}>
+        <TouchableOpacity onPress={()=>{
+          navigation.navigate('LanguagePicker')
+          }}>
+          <Text style={{ alignSelf:"flex-end",textAlign: "center", padding:"3%", color: "white", fontSize: 15, }}>Change Language</Text>
+        </TouchableOpacity>
+      </View> */}
       </View>
     </View>
   );

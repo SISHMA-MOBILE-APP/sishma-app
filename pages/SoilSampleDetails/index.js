@@ -86,6 +86,13 @@ import SoilText from "../../components/CustomTextField/SoilText";
   <View>
         </View>
         <Text style={styles.greet}> {transcription[lang.language]["soilSampDetails"]}</Text>
+        <View style={{position:"absolute",top:hp("4"),right:0}}>
+        <TouchableOpacity onPress={()=>{
+          navigation.navigate('LanguagePicker')
+          }}>
+          <Text style={{ alignSelf:"flex-end",textAlign: "center", padding:"3%", color: "white", fontSize: 15, }}>Change Language</Text>
+        </TouchableOpacity>
+      </View>
         <View style={styles.buttonContainer}>
         <KeyboardAvoidingView behavior="padding" >
           <View style={{ flexDirection: "row", justifyContent: "space-around", marginBottom: 20, }}>

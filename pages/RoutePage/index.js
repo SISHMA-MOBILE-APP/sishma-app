@@ -16,7 +16,10 @@ import InputText from "../../components/CustomTextField";
 // Language Provider
 import { Language } from "../../providers/languageProvider";
 import { transcription } from "../../utils/lang";
-
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 export default function Welcome({navigation}) {
   const lang = useContext(Language);
   const [signInOptions, setSignOptions] = React.useState(false);
@@ -68,6 +71,15 @@ export default function Welcome({navigation}) {
         </View>
       </View> */}
       <Text style={styles.greet}>{transcription[lang.language]["sishma"]}</Text>
+
+      <View style={{position:"absolute",top:hp("4"),right:0}}>
+        <TouchableOpacity onPress={()=>{
+          navigation.navigate('LanguagePicker')
+          }}>
+          <Text style={{ alignSelf:"flex-end",textAlign: "center", padding:"3%", color: "white", fontSize: 15, }}>Change Language</Text>
+        </TouchableOpacity>
+      </View>
+
       <View style={styles.buttonContainer}>
         
         <RouteButton onPress={() => navigation.navigate('FarmerReg')}
