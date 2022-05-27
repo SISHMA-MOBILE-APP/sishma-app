@@ -15,6 +15,8 @@ import FieldOfficerSuggestion from "./pages/FieldOfficerSuggestion";
 import FarmerDashboard from "./pages/FarmerDashboard";
 import Loading from "./pages/Loading";
 import LanguagePicker from "./pages/LanguagePicker";
+import Contact from "./pages/ContactUs/Index";
+import List from "./pages/FarmerList/Index";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -41,6 +43,9 @@ export default function App() {
           <Stack.Screen name="FarmerDashboard" component={FarmerDashboard} />
           <Stack.Screen name="Loading" component={Loading} />
           <Stack.Screen name="LanguagePicker" component={LanguagePicker} />
+          <Stack.Screen name="Contact" component={Contact} />
+          <Stack.Screen name="List" component={List} />
+         
         </Stack.Navigator>
       </NavigationContainer>
     </LanguageProvider>
