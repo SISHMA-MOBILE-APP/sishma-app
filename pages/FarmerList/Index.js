@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, Button, Modal, ImageBackground } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Button, Modal, ImageBackground,StatusBar,Image } from 'react-native'
 import React, { useState } from 'react'
 
 import {
@@ -32,20 +32,28 @@ const List = () => {
     { id: 12, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
     { id: 13, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
   ]
-  const image = { uri: "https://reactjs.org/logo-og.png" };
+  const image = [
+    {
+      imageUrl: require("../../assets/sishma.png")
+    }]
+    const [disabled,setDisabled]=useState(false)
   const item = ({ item }) => {
 
     return (
+      
+      <View style={{ flexDirection: 'row'}}>
 
-      <View style={{ flexDirection: 'row' }}>
-
-        <View style={{ width: wp("10%"), height: hp("20%"), alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: hp('2%'), fontWeight: 'bold' }}>{item.id}</Text></View>
-
+        <View style={{ width: wp("12%"), height: hp("12.5%"), alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: hp('2%'), fontWeight: 'bold' }}>{item.id}</Text></View>
+        <View style={{width:wp('0.5%'),backgroundColor:'black'}} />
+       
         <View style={{ width: wp("30%"), alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: hp('2%'), fontWeight: 'bold' }}>{item.name}</Text></View>
-        <View style={{ width: wp('20%'), alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: hp('2%'), fontWeight: 'bold' }}>{item.kitNo}</Text></View>
-        <TouchableOpacity onPress={() => item.id > 0 ? setModalVisible(true) : console.log('Nope')} style={{ width: wp('15%'), alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: hp('2%'), fontWeight: 'bold' }} >{item.j}</Text></TouchableOpacity>
-        <TouchableOpacity onPress={() => item.id > 0 ? setModalVisible1(true) : console.log('Nope')} style={{ width: wp('25%'), alignItems: 'center', justifyContent: 'center' }}>{item.id > 0 ? <Text style={{ fontSize: hp('2%'), fontWeight: 'bold' }}>Respond</Text> : <Text style={{ fontSize: hp('2%'), fontWeight: 'bold' }}>Suggest</Text>}</TouchableOpacity>
-
+        <View style={{width:wp('0.5%'),backgroundColor:'black'}} />
+        <View style={{ width: wp('19.5%'), alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: hp('2%'), fontWeight: 'bold' }}>{item.kitNo}</Text></View>
+        <View style={{width:wp('0.5%'),backgroundColor:'black'}} />
+        <TouchableOpacity  onPress={() => item.id > 0 ? setModalVisible(true):console.log('Nope')} style={{ width: wp('14.5%'), alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: hp('2%'), fontWeight: 'bold',color:'black' }} >{item.j}</Text></TouchableOpacity>
+        <View style={{width:wp('0.5%'),backgroundColor:'black'}} />
+        <TouchableOpacity onPress={() => item.id > 0 ? setModalVisible1(true) : console.log('Nope')} style={{ width: wp('22%'), alignItems: 'center', justifyContent: 'center' }}>{item.id > 0 ? <Text style={{ fontSize: hp('2%'), fontWeight: 'bold',color:'black'}}>Respond</Text> : <Text style={{ fontSize: hp('2%'), fontWeight: 'bold' }}>Suggest</Text>}</TouchableOpacity>
+        
 
 
       </View>
@@ -54,23 +62,23 @@ const List = () => {
   }
 
   return (
-    <ScrollView contentContainerStyle={{}} style={{ backgroundColor: '#0bab64' }} horizontal={true} >
+    <>
+    <ScrollView  style={[{ backgroundColor: 'white',padding:0,margin:0 },styles.AndroidSafeArea]} horizontal={true} >
 
-
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: '20%', backgroundColor: '#107c42' }}>
-        <LinearGradient
-          start={{ x: 0.0, y: 0.25 }}
-          end={{ x: 0.5, y: 1.0 }}
-          locations={[0, 0.5, 0.6]}
-          colors={['#80ff72', '#0bab64', '#3bb78f']}
-
-        >
-
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#107c42' }}>
+       
+          <LinearGradient 
+        colors={["green", "white",'green']}
+       >
+          
+          <ImageBackground source={require("../../assets/sishma-white.png")} style={{width:wp('100%'),height:hp('100%'),flex:1,justifyContent: "center",alignItems:'center',opacity:.075}} resizeMode="contain"/>
+         
           <FlatList data={data}
             renderItem={item}
             keyExtractor={(item, index) => index.toString()}
           />
-        </LinearGradient>
+         
+       </LinearGradient>
       </View>
 
       <Modal
@@ -88,11 +96,18 @@ const List = () => {
         <Button title="Confirm" onPress={() => setModalVisible1(false)}></Button>
         <FieldOfficerSuggestion />
       </Modal>
-
+     
     </ScrollView>
+    </>
   )
 }
 
 export default List
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({ AndroidSafeArea: {
+  paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
+}, image: {
+  flex: 1,
+  justifyContent: "center"
+},
+})
