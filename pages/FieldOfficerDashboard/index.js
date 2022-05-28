@@ -278,22 +278,6 @@ const Officer = ({ navigation }) => {
                 placeholderText={transcription[lang.language]["village"]}
                 data={selum}
               />
-                {/* <InputText
-                  style={{ marginBottom: hp(3) }}
-                  placeholderText={transcription[lang.language]["village"]}
-                />
-                <InputText
-                  style={{ marginBottom: hp(3) }}
-                  placeholderText={transcription[lang.language]["state"]}
-                />
-                <InputText
-                  style={{ marginBottom: hp(3) }}
-                  placeholderText={transcription[lang.language]["district"]}
-                /> */}
-                {/* <InputText
-                  style={{ marginBottom: hp(0) }}
-                  placeholderText={transcription[lang.language]["pin"]}
-                /> */}
                 <View
                 style={{
                   flexDirection: "row",
