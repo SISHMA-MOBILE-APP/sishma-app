@@ -28,7 +28,7 @@ export default function App() {
           screenOptions={{
             headerShown: false,
           }}
-          initialRouteName="LanguagePicker"
+          initialRouteName="List"
         >
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="RoutePage" component={Routepage} />
