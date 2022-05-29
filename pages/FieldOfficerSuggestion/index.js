@@ -8,6 +8,8 @@ import { Language } from "../../providers/languageProvider";
 import { transcription } from "../../utils/lang";
 import InputText from "../../components/CustomTextField";
 
+import ReportGeneration from '../../providers/reportGeneration';
+
 export default function FieldOfficerSuggestion(props){
     const lang = useContext(Language);
     return(
@@ -115,6 +117,10 @@ export default function FieldOfficerSuggestion(props){
                 <Text style={styles.suggest}>Suggest Combination:</Text>
                 <TextInput style={styles.inputText}>25%</TextInput>
             </Card>
+
+        {/* report generation */}
+        <ReportGeneration/>
+
         </ScrollView>
         </View>
     );
