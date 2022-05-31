@@ -1,4 +1,4 @@
-//FO can edit
+//FO can edit: He can view and edit then send it to farmer dash
 import React, {useContext} from 'react';
 import { View, Text, TextInput, StyleSheet, Image, ScrollView} from 'react-native';
 import Card from '../../components/Card';
