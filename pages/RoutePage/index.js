@@ -96,17 +96,23 @@ export default function Welcome({navigation}) {
           icon={<AntDesign name="right" size={30} color="white" />}
         />
         <RouteButton onPress={() => navigation.navigate('OfficerReg')}
-        image={<Image source={require("../../assets/work.png")} style={{width: 40, height:40, marginLeft: 10}}/>}
+        image={<Image source={require("../../assets/officer.png")} style={{width: 40, height:40, marginLeft: 10}}/>}
           text={transcription[lang.language]["officerRegistration"]}
           style={{borderWidth: 5, height: 70, marginBottom: 10}}
           icon={<AntDesign name="right" size={30} color="white" />}
         />
-        <RouteButton onPress={() => navigation.navigate('SoilSampleDetails')}
-          text={transcription[lang.language]["soilSampDetails"]}
+        <RouteButton onPress={() => navigation.navigate('FarmerDashboard')}
+        image={<Image source={require("../../assets/farmer.png")} style={{width: 40, height:40, marginLeft: 10}}/>}
+          text={transcription[lang.language]["farmerDash"]}
           style={{borderWidth: 5, height: 70, marginBottom: 10}}
           icon={<AntDesign name="right" size={30} color="white" />}
         />
-        
+        <RouteButton onPress={() => navigation.navigate('List')}
+        image={<Image source={require("../../assets/search.png")} style={{width: 40, height:40, marginLeft: 10}}/>}
+          text={transcription[lang.language]["officerDash"]}
+          style={{borderWidth: 5, height: 70, marginBottom: 10}}
+          icon={<AntDesign name="right" size={30} color="white" />}
+        />
         {/* <InputText placeholderText="Full name"/> */}
       </View>
     </View>

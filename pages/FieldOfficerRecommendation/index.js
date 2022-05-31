@@ -1,4 +1,4 @@
-//View only
+//View only for farmer: He can view the recommendations given by FO
 import React, {useContext} from 'react';
 import { View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 import Card from '../../components/Card';
