@@ -12,6 +12,7 @@ const transcription ={
         otp: "OTP",
 
         /* Farmer Dashboard */
+        farmerDash: "Farmer Dashboard",
         regDash: "Registration dashboard",
         name: "Name",
         residenAddress: "Residential address",
@@ -58,6 +59,7 @@ const transcription ={
         soilTestDetails:"Soil Test Details",
 
         officerReg:"Officer\nRegistration",
+        officerDash: "Officer Dashboard",
         organisationDetails:"Organisation Details",
         personalDetails:"Personal Details",
         addressDetails:"Address Details",
@@ -96,6 +98,7 @@ const transcription ={
         otp: "ओटीपी",
 
         /* Farmer Dashboard */
+        farmerDash: "किसान डैशबोर्ड",
         regDash: "पंजीकरण डैशबोर्ड",
         name: "नाम",
         residenAddress: "आवासीय पता",
@@ -142,6 +145,7 @@ const transcription ={
         soilTestDetails:"मृदा परीक्षण विवरण",
 
         officerReg:"अधिकारी\nपंजीकरण",
+        officerDash: "अधिकारी डैशबोर्ड",
         organisationDetails:"संगठन विवरण",
         personalDetails:"निजी विवरण",
         addressDetails:"पता विवरण",
@@ -181,6 +185,7 @@ const transcription ={
         otp: "ஒரு முறை கடவுச்சொல்",
 
         /* Farmer Dashboard */
+        farmerDash: "விவசாயிகள் முகப்புப்பெட்டி",
         regDash: "பதிவு முகப்புப்பெட்டி",
         name: "பெயர்",
         residenAddress: "வீட்டு முகவரி",
@@ -227,6 +232,7 @@ const transcription ={
         soilTestDetails:"மண் பரிசோதனை விவரங்கள்",
 
         officerReg:"அதிகாரி\nபதிவு",
+        officerDash: "அதிகாரி முகப்புப்பெட்டி",
         organisationDetails:"அமைப்பின் விவரங்கள்",
         personalDetails:"சொந்த விவரங்கள்",
         addressDetails:"முகவரி விவரங்கள்",
