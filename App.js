@@ -28,7 +28,11 @@ export default function App() {
           screenOptions={{
             headerShown: false,
           }}
+<<<<<<< HEAD
           initialRouteName="FarmerDashboard"
+=======
+          initialRouteName="LanguagePicker"
+>>>>>>> 999dafef0f2b5621bea2fa1ae4e21a8cff9686cb
         >
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="RoutePage" component={Routepage} />

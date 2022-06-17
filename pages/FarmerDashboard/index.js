@@ -19,7 +19,7 @@ const images = [
   },
 ]
 
-const FarmerDashboard = () => {
+const FarmerDashboard = ({navigation}) => {
   const [index, setIndex] = React.useState(0);
   const carousel = React.useRef(null);
   const grow = React.useRef(new Animated.Value(0)).current;
@@ -96,17 +96,20 @@ const FarmerDashboard = () => {
         tappableDots={true}
       />
         <View style={styles.cardcontainer}>
-          <ItemCard>
-            <Animated.Image source={require("../../assets/add-file.png")} style={{ width: 55, height: 55, borderRadius: 6, marginRight: "2%", opacity: grow  }} />
+          <ItemCard onClick={()=>{navigation.navigate('SoilSampleDetails')}}>
+            <Animated.Image source={require("../../assets/add-file.png")} style={{ width: 55, height: 55, borderRadius: 6, marginRight: "2%", opacity: grow }}/>
             <Text style={{ fontSize: 17, marginTop: 15, color: "#3d3d3d", fontWeight: "bold", }}>Get Soil Details</Text>
           </ItemCard>
-          <ItemCard>
+          <ItemCard onClick={()=>{navigation.navigate('FieldOfficerRecommendation')}}>
             <Animated.Image source={require("../../assets/results.png")} style={{ width: 55, height: 55, borderRadius: 6, marginRight: "2%", opacity: grow  }} />
             <Text style={{ fontSize: 17, marginTop: 15, color: "#3d3d3d", fontWeight: "bold", }}>Results</Text>
           <Text style={{position:"absolute", fontSize: 10, fontWeight:"bold", right: "5%",borderRadius:10, backgroundColor:"green", color:"white", paddingHorizontal: 5, top: "4%"}}>No Notification</Text>
           </ItemCard>
         </View>
-        <ItemCard style={{ width: "90%", height: 60, alignSelf: "center", marginTop: "5%", flexDirection: "row" }}>
+        <ItemCard style={{ width: "86%", height: 60, alignSelf: "center", marginTop: "5%", flexDirection: "row" }} onClick={() => {
+              //setPage(1);
+             navigation.navigate('Contact')
+            }}>
           <Animated.Image source={require("../../assets/call.png")} style={{ width: 35, height: 35, borderRadius: 6, marginRight: "2%", opacity: grow }} />
           <Text style={{ fontSize: 17, color: "#3d3d3d", fontWeight: "bold", }}>Queries? Contact Us</Text>
         </ItemCard>
