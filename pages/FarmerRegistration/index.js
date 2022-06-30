@@ -6,11 +6,11 @@ import {
   Dimensions,
   ScrollView,
   KeyboardAvoidingView,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState, useContext } from "react";
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon from "react-native-vector-icons/FontAwesome5";
 import colors from "../../utils/colors";
 import RouteButton from "../../components/CustomButton";
 import InputText from "../../components/CustomTextField";
@@ -19,7 +19,7 @@ import DropdownComponent from "../../components/Dropdown/dropdown";
 // Language Provider
 import { Language } from "../../providers/languageProvider";
 import { transcription } from "../../utils/lang";
-import villageData, { selum } from '../../utils/villages';
+import villageData, { selum } from "../../utils/villages";
 
 import {
   widthPercentageToDP as wp,
@@ -32,25 +32,26 @@ import Feather from "react-native-vector-icons/Feather";
 const Farmer = ({ navigation }) => {
   const lang = useContext(Language);
   const [page, setPage] = useState(0);
-  const [data, setData] = useState(
-    {
-      Aadhar: "",
-      Mobile: "",
-      Pin: "",
-      Name: "",
-      Address: "",
-      Village: "",
-      District: "",
-      State: "",
-      Kit: "",
-      isValidPin: false,
-      isValidMobile: false,
-      isValidAadhar: false,
-      check_textInputAadhar: false,
-      check_textInputMobile: false,
-      check_textInputPin: false,
-      count: true,
-    });
+  const [data, setData] = useState({
+    Aadhar: "",
+    Mobile: "",
+    Pin: "",
+    Name: "",
+    Address: "",
+    Village: "",
+    District: "",
+    State: "",
+    Kit: "",
+    isValidPin: false,
+    isValidMobile: false,
+    isValidAadhar: false,
+    isValidKit: false,
+    check_textInputAadhar: false,
+    check_textInputMobile: false,
+    check_textInputPin: false,
+    check_textInputKit: false,
+    count: true,
+  });
   const textInputName = (val) => {
     setData({ ...data, Name: val });
   };
@@ -115,6 +116,36 @@ const Farmer = ({ navigation }) => {
       });
     }
   };
+
+  const textInputKit = (val) => {
+    if (val.trim().length == 5) {
+      setData({
+        ...data,
+        Kit: val,
+        check_textInputKit: true,
+        isValidKit: true,
+      });
+    } else {
+      setData({
+        ...data,
+        Kit: val,
+        check_textInputKit: false,
+      });
+    }
+  };
+  const handleValidKit = (val) => {
+    if (val.trim().length == 5) {
+      setData({
+        ...data,
+        isValidKit: true,
+      });
+    } else {
+      setData({
+        ...data,
+        isValidKit: false,
+      });
+    }
+  };
   const handleValidAadhar = (val) => {
     if (val.trim().length == 10) {
       setData({
@@ -155,9 +186,8 @@ const Farmer = ({ navigation }) => {
     }
   };
   return (
-        <ScrollView contentContainerStyle={{flexGrow: 1, minHeight: "100%"}}>
+    <ScrollView contentContainerStyle={{ flexGrow: 1, minHeight: "100%" }}>
       {/* <View style={styles.container}> */}
-    
 
       <LinearGradient
         style={[
@@ -194,235 +224,341 @@ const Farmer = ({ navigation }) => {
         end={{ x: 0.75, y: 0.8 }}
       />
 
-      <Text style={styles.greet}>{transcription[lang.language]["farmerReg"]}</Text>
-      <View style={{position:"absolute",top:hp("4"),right:0}}>
-      <TouchableOpacity onPress={()=>{
-          navigation.navigate('LanguagePicker')
-          }} style={styles.changeLanguage}>
-          <Image source={require("../../assets/translation.png")} style={{width: 20, height: 20, marginRight: 5}} />
-          <Text style={{ fontWeight: "bold", color: "#2b2b2b", fontSize: 14, }}>Language</Text>
+      <Text style={styles.greet}>
+        {transcription[lang.language]["farmerReg"]}
+      </Text>
+      <View style={{ position: "absolute", top: hp("4"), right: 0 }}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("LanguagePicker");
+          }}
+          style={styles.changeLanguage}
+        >
+          <Image
+            source={require("../../assets/translation.png")}
+            style={{ width: 20, height: 20, marginRight: 5 }}
+          />
+          <Text style={{ fontWeight: "bold", color: "#2b2b2b", fontSize: 14 }}>
+            Language
+          </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.buttonContainer}>
-      <ScrollView>
-        <KeyboardAvoidingView behavior="position">
-          <View style={{ flexDirection: "row", justifyContent: "space-around", marginBottom: 20, }}>
-            <View style={{ width: "45%", height: 5, borderRadius: 2.5, backgroundColor: page === 0 ? "green" : "rgba(0, 255, 0, 0.5)" }} />
-            <View style={{ width: "45%", height: 5, borderRadius: 2.5, backgroundColor: page === 1 ? "green" : "grey" }} />
-          </View>
-          <Text style={styles.pagetitle}>{page === 0 ? transcription[lang.language]["personalDetails"] : transcription[lang.language]["addressDetails"]}</Text>
-          {page == 0 &&
-            <View>
-             <View
+        <ScrollView>
+          <KeyboardAvoidingView behavior="position">
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-around",
+                marginBottom: 20,
+              }}
+            >
+              <View
                 style={{
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                  marginLeft:5
+                  width: "45%",
+                  height: 5,
+                  borderRadius: 2.5,
+                  backgroundColor:
+                    page === 0 ? "green" : "rgba(0, 255, 0, 0.5)",
                 }}
-              >
-              <InputText
-                value={data.Name}
-                style={{marginBottom: hp(3), marginTop: hp(3)}}
-                placeholderText={transcription[lang.language]["name"]}
-                onChangeText={textInputName}
               />
-              <Icon name="user-plus"  style={{left:-20}} size={20} color="#6e6e6e" />
-              </View>
               <View
                 style={{
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  alignItems: "center",
+                  width: "45%",
+                  height: 5,
+                  borderRadius: 2.5,
+                  backgroundColor: page === 1 ? "green" : "grey",
                 }}
-              >
-                <Validation
-                 
-                  placeholderText={transcription[lang.language]["aadhaarnum"]}
-                  value={data.Aadhar}
-                  style={{marginBottom: hp(3)}}
-                  onChangeText={(val) => textInputAadhar(val)}
-                  onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
-                  maxLength={10}
-                />
-                <Icon name="address-card"  style={{left:-20, bottom : 15}} size={25} color="#6e6e6e" />
-                {data.check_textInputAadhar ? (
-                  <Animatable.View animation="bounceIn">
-                    <Feather
-                      style={{ right: wp("15%"), bottom : 15 }}
-                      name="check-circle"
-                      color="green"
-                      size={20}
-                    />
-                  </Animatable.View>
-                ) : null}
-              </View>
-              {data.isValidAadhar == false && data.count == false ? (
-                <Animatable.View animation="fadeInLeft" duration={500}>
-                  <Text style={{ color: "red" }}>
-                    Aadhar must be 10 characters long.
-                  </Text>
-                </Animatable.View>
-              ) : null}
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                }}
-              >
-                <Validation
-                  placeholderText={transcription[lang.language]["mobileNum"]}
-                  value={data.Mobile}
-                  style={{marginBottom: hp(3)}}
-                  onChangeText={textInputMobile}
-                  onEndEditing={(e) => handleValidMobile(e.nativeEvent.text)}
-                  maxLength={10}
-                />
-                <Icon name="phone"  style={{left:-20, bottom: 15}} size={25} color="#6e6e6e" />
-                {data.check_textInputMobile ? (
-                  <Animatable.View animation="bounceIn">
-                    <Feather
-                      style={{ right: wp("15%"), bottom : 15 }}
-                      name="check-circle"
-                      color="green"
-                      size={20}
-                    />
-                  </Animatable.View>
-                ) : null}
-              </View>
-              {data.isValidMobile == false && data.count == false ? (
-                <Animatable.View animation="fadeInLeft" duration={500}>
-                  <Text style={{ color: "red" }}>
-                    Mobile must be 10 characters long.
-                  </Text>
-                </Animatable.View>
-              ) : null}
-               <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                }}
-              >
-              <InputText value={data.Kit} onChangeText={(e)=>setData({...data, Kit:e })} placeholderText={transcription[lang.language]["sishmaKitNo"]} />
-              <Icon name="sort-numeric-down"  style={{left:-20, bottom : 15}} size={25} color="#6e6e6e" />
-              </View>
+              />
             </View>
-          }
-
-
-          {/* Address Section  */}
-          {page === 1 &&
-          <>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                }}
-              >
-              <InputText
-                value={data.Address}
-                placeholderText={transcription[lang.language]["residenAddress"]}
-                multiline={true}
-                onChangeText={textInputAddress}
-                style={{ marginBottom: hp(3), marginTop: hp(3) }}
-              />
-              <Icon name="home"  style={{left:-20}} size={25} color="#6e6e6e" />
-              </View>
-              <DropdownComponent
-                placeholderText={transcription[lang.language]["state"]}
-                data={[{label: "Tamil Nadu", value: "Tamil Nadu"}]}
-              />
-              <DropdownComponent
-                placeholderText={transcription[lang.language]["district"]}
-                data = {[{label: "Selum", value: "Selum"}]}
-              />
-             
-              <DropdownComponent
-                placeholderText={transcription[lang.language]["village"]}
-                data={selum}
-              />
-              
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                }}
+            <Text style={styles.pagetitle}>
+              {page === 0
+                ? transcription[lang.language]["personalDetails"]
+                : transcription[lang.language]["addressDetails"]}
+            </Text>
+            {page == 0 && (
+              <View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                    alignItems: "center",
+                    marginLeft: 5,
+                  }}
                 >
-                <Validation
-                  value={data.Pin}
-                  placeholderText={transcription[lang.language]["pin"]}
-                  onChangeText={(val) => textInputPin(val)}
-                  onEndEditing={(e) => handleValidPin(e.nativeEvent.text)}
-                  maxLength={6}
+                  <InputText
+                    value={data.Name}
+                    style={{ marginBottom: hp(3), marginTop: hp(3) }}
+                    placeholderText={transcription[lang.language]["name"]}
+                    onChangeText={textInputName}
                   />
-                <Image style={styles.icon} source={require('../../utils/icons/pin.png')} />
-                {data.check_textInputPin ? (
-                  <Animatable.View animation="bounceIn">
-                    <Feather
-                      style={{ right: wp("15%") }}
-                      name="check-circle"
-                      color="green"
-                      size={25}
+                  <Icon
+                    name="user-plus"
+                    style={{ left: -20 }}
+                    size={20}
+                    color="#6e6e6e"
+                  />
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                    alignItems: "center",
+                  }}
+                >
+                  <Validation
+                    placeholderText={transcription[lang.language]["aadhaarnum"]}
+                    value={data.Aadhar}
+                    style={{ marginBottom: hp(3) }}
+                    onChangeText={(val) => textInputAadhar(val)}
+                    onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
+                    maxLength={10}
+                  />
+                  <Icon
+                    name="address-card"
+                    style={{ left: -20, bottom: 15 }}
+                    size={25}
+                    color="#6e6e6e"
+                  />
+                  {data.check_textInputAadhar ? (
+                    <Animatable.View animation="bounceIn">
+                      <Feather
+                        style={{ right: wp("15%"), bottom: 15 }}
+                        name="check-circle"
+                        color="green"
+                        size={20}
                       />
+                    </Animatable.View>
+                  ) : null}
+                </View>
+                {data.isValidAadhar == false && data.count == false ? (
+                  <Animatable.View animation="fadeInLeft" duration={500}>
+                    <Text style={{ color: "red" }}>
+                      Aadhar must be 10 characters long.
+                    </Text>
+                  </Animatable.View>
+                ) : null}
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                    alignItems: "center",
+                  }}
+                >
+                  <Validation
+                    placeholderText={transcription[lang.language]["mobileNum"]}
+                    value={data.Mobile}
+                    style={{ marginBottom: hp(3) }}
+                    onChangeText={textInputMobile}
+                    onEndEditing={(e) => handleValidMobile(e.nativeEvent.text)}
+                    maxLength={10}
+                  />
+                  <Icon
+                    name="phone"
+                    style={{ left: -20, bottom: 15 }}
+                    size={25}
+                    color="#6e6e6e"
+                  />
+                  {data.check_textInputMobile ? (
+                    <Animatable.View animation="bounceIn">
+                      <Feather
+                        style={{ right: wp("15%"), bottom: 15 }}
+                        name="check-circle"
+                        color="green"
+                        size={20}
+                      />
+                    </Animatable.View>
+                  ) : null}
+                </View>
+                {data.isValidMobile == false && data.count == false ? (
+                  <Animatable.View animation="fadeInLeft" duration={500}>
+                    <Text style={{ color: "red" }}>
+                      Mobile must be 10 characters long.
+                    </Text>
+                  </Animatable.View>
+                ) : null}
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                    alignItems: "center",
+                  }}
+                >
+                  <Validation
+                    value={data.Kit}
+                    style={{ marginBottom: hp(3) }}
+                    onEndEditing={(e) => handleValidKit(e.nativeEvent.text)}
+                    maxLength={5}
+                    onChangeText={textInputKit}
+                    placeholderText={
+                      transcription[lang.language]["sishmaKitNo"]
+                    }
+                  />
+                  <Icon
+                    name="sort-numeric-down"
+                    style={{ left: -20, bottom: 15 }}
+                    size={25}
+                    color="#6e6e6e"
+                  />
+                  {data.check_textInputKit ? (
+                    <Animatable.View animation="bounceIn">
+                      <Feather
+                        style={{ right: wp("15%"), bottom: 15 }}
+                        name="check-circle"
+                        color="green"
+                        size={20}
+                      />
+                    </Animatable.View>
+                  ) : null}
+                </View>
+                {data.isValidKit == false && data.count == false ? (
+                  <Animatable.View animation="fadeInLeft" duration={500}>
+                    <Text style={{ color: "red" }}>
+                      Sishma Kit Number must be 5 numbers long.
+                    </Text>
                   </Animatable.View>
                 ) : null}
               </View>
-              {data.isValidPin == false && data.count == false ? (
-                <Animatable.View animation="fadeInLeft" duration={500}>
-                  <Text style={{ color: "red" }}>
-                    Pincode must be 6 characters long.
-                  </Text>
-                </Animatable.View>
-              ) : null}
-          </>
-          }
-        </KeyboardAvoidingView>
+              //</View>
+            )}
 
-        <View style={styles.submit}>
-          <RouteButton
-            onPress={() => {
-              {
-                data.isValidAadhar && data.isValidMobile && data.isValidPin
-                ? navigation.navigate("Login") &&
-                setData({
-                  ...data,
-                  count: true,
-                })
-                : setData({
-                  ...data,
-                  count: false,
-                });
-                console.log(page);
-                if(page == 0 && data.isValidAadhar && data.isValidMobile){
-                  setPage(1);
+            {/* Address Section  */}
+            {page === 1 && (
+              <>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                    alignItems: "center",
+                  }}
+                >
+                  <InputText
+                    value={data.Address}
+                    placeholderText={
+                      transcription[lang.language]["residenAddress"]
+                    }
+                    multiline={true}
+                    onChangeText={textInputAddress}
+                    style={{ marginBottom: hp(3), marginTop: hp(3) }}
+                  />
+                  <Icon
+                    name="home"
+                    style={{ left: -20 }}
+                    size={25}
+                    color="#6e6e6e"
+                  />
+                </View>
+                <DropdownComponent
+                  placeholderText={transcription[lang.language]["state"]}
+                  data={[{ label: "Tamil Nadu", value: "Tamil Nadu" }]}
+                />
+                <DropdownComponent
+                  placeholderText={transcription[lang.language]["district"]}
+                  data={[{ label: "Selum", value: "Selum" }]}
+                />
+
+                <DropdownComponent
+                  placeholderText={transcription[lang.language]["village"]}
+                  data={selum}
+                />
+
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                    alignItems: "center",
+                  }}
+                >
+                  <Validation
+                    value={data.Pin}
+                    placeholderText={transcription[lang.language]["pin"]}
+                    onChangeText={(val) => textInputPin(val)}
+                    onEndEditing={(e) => handleValidPin(e.nativeEvent.text)}
+                    maxLength={6}
+                  />
+                  <Image
+                    style={styles.icon}
+                    source={require("../../utils/icons/pin.png")}
+                  />
+                  {data.check_textInputPin ? (
+                    <Animatable.View animation="bounceIn">
+                      <Feather
+                        style={{ right: wp("15%") }}
+                        name="check-circle"
+                        color="green"
+                        size={25}
+                      />
+                    </Animatable.View>
+                  ) : null}
+                </View>
+                {data.isValidPin == false && data.count == false ? (
+                  <Animatable.View animation="fadeInLeft" duration={500}>
+                    <Text style={{ color: "red" }}>
+                      Pincode must be 6 characters long.
+                    </Text>
+                  </Animatable.View>
+                ) : null}
+              </>
+            )}
+          </KeyboardAvoidingView>
+
+          <View style={styles.submit}>
+            <RouteButton
+              onPress={() => {
+                {
+                  data.isValidAadhar && data.isValidMobile && data.isValidPin &&data.isValidKit
+                    ? navigation.navigate("Login") &&
+                      setData({
+                        ...data,
+                        count: true,
+                      })
+                    : setData({
+                        ...data,
+                        count: false,
+                      });
+                  console.log(page);
+                  if (page == 0 && data.isValidAadhar && data.isValidMobile &&data.isValidKit) {
+                    setPage(1);
+                  }
                 }
+              }}
+              text={
+                page === 0
+                  ? transcription[lang.language]["next"]
+                  : transcription[lang.language]["registerNow"]
               }
-            }}
-            text={page===0? transcription[lang.language]["next"] : transcription[lang.language]["registerNow"]}
             />
-          { page === 0 ? 
-            <TouchableOpacity
-            onPress={()=>navigation.pop()}>
-
-           <Text style={{ alignSelf: "center",width: wp(50),textAlign: "center", }}>{"Back to Route Page"}</Text>
-            </TouchableOpacity> : 
-            page === 1 ?
-            <TouchableOpacity
-             onPress={()=>setPage(0)}>
-
-            <Text style={{ alignSelf: "center",width: wp(50),textAlign: "center", }}>{transcription[lang.language]["back"]}</Text>
-             </TouchableOpacity> : null
-          }
-        </View>
+            {page === 0 ? (
+              <TouchableOpacity onPress={() => navigation.pop()}>
+                <Text
+                  style={{
+                    alignSelf: "center",
+                    width: wp(50),
+                    textAlign: "center",
+                  }}
+                >
+                  {"Back to Route Page"}
+                </Text>
+              </TouchableOpacity>
+            ) : page === 1 ? (
+              <TouchableOpacity onPress={() => setPage(0)}>
+                <Text
+                  style={{
+                    alignSelf: "center",
+                    width: wp(50),
+                    textAlign: "center",
+                  }}
+                >
+                  {transcription[lang.language]["back"]}
+                </Text>
+              </TouchableOpacity>
+            ) : null}
+          </View>
         </ScrollView>
       </View>
 
       {/* </View> */}
-      </ScrollView>
+    </ScrollView>
   );
 };
 
@@ -430,8 +566,8 @@ export default Farmer;
 
 const styles = StyleSheet.create({
   container: {
-    width:"100%",
-    height:"100%",
+    width: "100%",
+    height: "100%",
     backgroundColor: "#d0e8db",
   },
   circle: {
@@ -506,7 +642,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     // top: hp(30),
-    position:"absolute",
+    position: "absolute",
     bottom: 0,
     width: "100%",
     paddingTop: 30,
@@ -528,21 +664,21 @@ const styles = StyleSheet.create({
   pagetitle: {
     alignSelf: "center",
     color: "#444",
-    fontSize: 25
+    fontSize: 25,
   },
-  icon:{
-    width:30,
-    height:30,
-    left:-20,
-    bottom:5
+  icon: {
+    width: 30,
+    height: 30,
+    left: -20,
+    bottom: 5,
   },
-  changeLanguage:{
-    backgroundColor:"white",
+  changeLanguage: {
+    backgroundColor: "white",
     paddingVertical: 5,
     paddingHorizontal: 10,
     borderRadius: 15,
     elevation: 10,
     flexDirection: "row",
-    right: 10
-  }
-})
+    right: 10,
+  },
+});
