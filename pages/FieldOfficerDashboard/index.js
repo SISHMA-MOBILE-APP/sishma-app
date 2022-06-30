@@ -1,605 +1,284 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Modal,
-  Image,
-  Dimensions,
-  TouchableOpacity,
-  SafeAreaView,
-  ScrollView,
-  KeyboardAvoidingView,
-} from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import villageData, { selum } from '../../utils/villages';
-
-import DropdownComponent from "../../components/Dropdown/dropdown";
-import { LinearGradient } from "expo-linear-gradient";
-import React, { useContext, useState } from "react";
-import { AntDesign } from "@expo/vector-icons";
-import colors from "../../utils/colors";
-import RouteButton from "../../components/CustomButton";
-import InputText from "../../components/CustomTextField";
-import Feather from "react-native-vector-icons/Feather";
+import { StyleSheet, Text, View, FlatList, Button, Modal, StatusBar, Image, Dimensions } from 'react-native'
+import React, { useState } from 'react'
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import Validation from "../../components/CustomTextField/Validation";
-import * as Animatable from "react-native-animatable";
+import { Ionicons } from '@expo/vector-icons'
+import { TouchableOpacity } from 'react-native';
+import FieldOfficerSuggestion from '../FieldOfficerSuggestion';
+import { LinearGradient } from "expo-linear-gradient";
+import { PieChart, BarChart } from 'react-native-chart-kit'
 
-// Language Provider
-import { Language } from "../../providers/languageProvider";
-import { transcription } from "../../utils/lang";
-import Login from "../../components/LoginOrRegister/Login";
 
-const Officer = ({ navigation }) => {
-  const [page, setPage] = React.useState(0);
-  const [signInOptions, setSignOptions] = React.useState(false);
-  const lang = useContext(Language);
-  const [data, setData] = useState(
-    {
-      Aadhar: "",
-      Mobile: "",
-      Pin: "",
-      Name: "",
-      Address: "",
-      Village: "",
-      District: "",
-      State: "",
-      Kit: "",
-      isValidPin: false,
-      isValidMobile: false,
-      isValidAadhar: false,
-      check_textInputAadhar: false,
-      check_textInputMobile: false,
-      check_textInputPin: false,
-      count: true,
-    });
-  const textInputName = (val) => {
-    setData({ ...data, Name: val });
-  };
-  const textInputAddress = (val) => {
-    setData({ ...data, Address: val });
-  };
-  const textInputVillage = (val) => {
-    setData({ ...data, Village: val });
-  };
-  const textInputDistrict = (val) => {
-    setData({ ...data, District: val });
-  };
-  const textInputState = (val) => {
-    setData({ ...data, State: val });
-  };
 
-  const textInputAadhar = (val) => {
-    if (val.trim().length == 12) {
-      setData({
-        ...data,
-        Aadhar: val,
-        check_textInputAadhar: true,
-      });
-    } else {
-      setData({
-        ...data,
-        Aadhar: val,
-        check_textInputAadhar: false,
-        isValidAadhar: true,
-      });
-    }
+const FieldOfficerDashboard = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible1, setModalVisible1] = useState(false);
+  const data = [
+    { id: 1, name: 'Sukesh Kumar', kitNo: 555555, j: 'View', k: 'View' },
+    { id: 2, name: 'Hareesh Ketu', kitNo: 552555, j: 'View', k: 'View' },
+    { id: 3, name: 'Raman Nivasan', kitNo: 553555, j: 'View', k: 'View' },
+    { id: 4, name: 'Sukesh Kumar Sahoo', kitNo: 585555, j: 'View', k: 'View' },
+    { id: 5, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
+    { id: 6, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
+    { id: 7, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
+    { id: 8, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
+    { id: 9, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
+    { id: 10, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
+    { id: 11, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
+    { id: 12, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
+    { id: 13, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
+  ]
+  const npmdata = [
+    { name: 'Nitrogen', population: 76.5, color: '#128a49', legendFontColor: '#6d6d6d', legendFontSize: 11 },
+    { name: 'Phosphorus', population: 12.5, color: '#3BACB6', legendFontColor: '#6d6d6d', legendFontSize: 11 },
+    { name: 'Potassium', population: 12.7, color: '#D8E9A8', legendFontColor: '#6d6d6d', legendFontSize: 11 },
+  ]
+  const nutrients = {
+    labels: ["Fe", "Mg", "Ca", "I",],
+    datasets: [
+      {
+        data: [20, 45, 28, 80,]
+      }
+    ]
   };
-  const textInputPin = (val) => {
-    if (val.trim().length == 6) {
-      setData({
-        ...data,
-        Pin: val,
-        check_textInputPin: true,
-        isValidPin: true,
-      });
-    } else {
-      setData({
-        ...data,
-        Pin: val,
-        check_textInputPin: false,
-      });
-    }
-  };
-  const textInputMobile = (val) => {
-    if (val.trim().length == 10) {
-      setData({
-        ...data,
-        Mobile: val,
-        check_textInputMobile: true,
-        isValidMobile: true,
-      });
-    } else {
-      setData({
-        ...data,
-        Mobile: val,
-        check_textInputMobile: false,
-      });
-    }
-  };
-  const handleValidAadhar = (val) => {
-    if (val.trim().length == 12) {
-      setData({
-        ...data,
-        isValidAadhar: true,
-      });
-    } else {
-      setData({
-        ...data,
-        isValidAadhar: false,
-      });
-    }
-  };
-  const handleValidMobile = (val) => {
-    if (val.trim().length == 10) {
-      setData({
-        ...data,
-        isValidMobile: true,
-      });
-    } else {
-      setData({
-        ...data,
-        isValidMobile: false,
-      });
-    }
-  };
-  const handleValidPin = (val) => {
-    if (val.trim().length == 6) {
-      setData({
-        ...data,
-        isValidPin: true,
-      });
-    } else {
-      setData({
-        ...data,
-        isValidPin: false,
-      });
-    }
-  };
-  return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1, minHeight: "100%" }}>
-      <LinearGradient
-        style={[
-          styles.circle,
-          { transform: [{ rotate: "0deg" }], top: -140, left: -160 },
-        ]}
-        colors={["#094525", colors.greenTint80]}
-        start={{ x: 0.25, y: 0.75 }}
-        end={{ x: 1, y: 1 }}
-      />
-      <LinearGradient
-        style={[
-          styles.circle,
-          { transform: [{ rotate: "103deg" }], top: -145, left: 30 },
-        ]}
-        colors={["#1ddf76", "#128a49"]}
-      />
-      <LinearGradient
-        style={[
-          styles.circle,
-          { transform: [{ rotate: "6.5deg" }], top: -60, left: -95 },
-        ]}
-        colors={["rgba(30,182,103,0.49)", "rgba(6,105,44, 0.8)"]}
-        start={{ x: 0.25, y: 0.25 }}
-        end={{ x: 1, y: 1 }}
-      />
-      <LinearGradient
-        style={[
-          styles.circle,
-          { transform: [{ rotate: "123deg" }], top: -240, left: -40 },
-        ]}
-        colors={["#128a49", "#1ddf76"]}
-        start={{ x: 0.75, y: 0.25 }}
-        end={{ x: 0.75, y: 0.8 }}
-      />
+  const chartConfig = {
+    backgroundGradientFrom: 'white',
+    backgroundGradientTo: 'white',
+    color: (opacity = 1) => `green`,
 
-      <Text style={styles.greet}>{transcription[lang.language]["officerReg"]}</Text>
+  }
+  const item = ({ item, index }) => {
 
-      <View style={{position:"absolute",top:hp("4"),right:0}}>
-      <TouchableOpacity onPress={()=>{
-          navigation.navigate('LanguagePicker')
-          }} style={styles.changeLanguage}>
-          <Image source={require("../../assets/translation.png")} style={{width: 20, height: 20, marginRight: 5}} />
-          <Text style={{ fontWeight: "bold", color: "#2b2b2b", fontSize: 14, }}>Language</Text>
+    return (
+
+      <View style={styles.item}>
+
+        <View style={{ width: wp("11%"), alignItems: 'center', justifyContent: 'center' }}>
+          <Text style={{ fontSize: hp('2%'), fontWeight: 'bold' }}>{index}</Text>
+        </View>
+
+        <View style={{ width: wp("30%"), alignItems: 'center', justifyContent: 'center' }}>
+          <Text style={{ fontSize: hp('2%') }}>{item.name}</Text>
+        </View>
+        <View style={{ width: wp('18'), alignItems: 'center', justifyContent: 'center' }}>
+          <Text style={{ fontSize: hp('2%') }}>{item.kitNo}</Text>
+        </View>
+        <TouchableOpacity onPress={() => item.id > 0 ? setModalVisible(true) : console.log('Nope')} style={styles.details}>
+          <Text style={{ fontSize: hp('2%'), color: 'black', fontWeight: "bold", textAlign: "center" }} >{item.j}</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => item.id > 0 ? setModalVisible1(true) : console.log('Nope')} style={styles.respond}>
+          <Text style={{ fontSize: hp('2%'), color: 'white', fontWeight: "bold" }}>Respond</Text>
+        </TouchableOpacity>
+
       </View>
 
-      <View style={styles.buttonContainer}>
-        <ScrollView contentContainerStyle={{ width: "95%" }}>
-          {/* <KeyboardAvoidingView behavior="padding"> */}
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-around",
-                marginBottom: 20,
-              }}
-            >
-              <View
-                style={{
-                  width: "45%",
-                  height: 5,
-                  borderRadius: 2.5,
-                  backgroundColor: page === 0 ? "green" : "rgba(0, 255, 0, 0.5)",
-                }}
-              />
-              <View
-                style={{
-                  width: "45%",
-                  height: 5,
-                  borderRadius: 2.5,
-                  backgroundColor: page === 1 ? "green" : "grey",
-                }}
-              />
-            </View>
-            <Text style={styles.pagetitle}>
-              {page === 0 ? transcription[lang.language]["organisationDetails"] : transcription[lang.language]["personalDetails"]}
-            </Text>
-            {page == 0 && (
-              <View>
-                <InputText
-                  style={{ marginBottom: hp(3), marginTop: hp(3) }}
-                  placeholderText={transcription[lang.language]["deptName"]}
-                  />
-                {/* <InputText
-                  style={{ marginBottom: hp(3) }}
-                  placeholderText={transcription[lang.language]["officeAddress"]}
-                /> */}
-                <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                }}
-              >
-              <InputText
-                value={data.Address}
-                placeholderText={transcription[lang.language]["officeAddress"]}
-                multiline={true}
-                onChangeText={textInputAddress}
-                style={{ marginBottom: hp(3), marginTop: hp(3) }}
-              />
-              <Icon name="building"  style={{left:-20}} size={25} color="#6e6e6e" />
-              </View>
-              <DropdownComponent
-                placeholderText={transcription[lang.language]["state"]}
-                data={[{label: "Tamil Nadu", value: "Tamil Nadu"}]}
-              />
-              <DropdownComponent
-                placeholderText={transcription[lang.language]["district"]}
-                data = {[{label: "Selum", value: "Selum"}]}
-              />
-             
-              <DropdownComponent
-                placeholderText={transcription[lang.language]["village"]}
-                data={selum}
-              />
-                <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                }}
-                >
-                <Validation
-                  value={data.Pin}
-                  placeholderText={transcription[lang.language]["pin"]}
-                  onChangeText={(val) => textInputPin(val)}
-                  onEndEditing={(e) => handleValidPin(e.nativeEvent.text)}
-                  maxLength={6}
-                  />
-                <Image style={styles.icon} source={require('../../utils/icons/pin.png')} />
-                {data.check_textInputPin ? (
-                  <Animatable.View animation="bounceIn">
-                    <Feather
-                      style={{ right: wp("15%") }}
-                      name="check-circle"
-                      color="green"
-                      size={25}
-                      />
-                  </Animatable.View>
-                ) : null}
-              </View>
-              {data.isValidPin == false && data.count == false ? (
-                <Animatable.View animation="fadeInLeft" duration={500}>
-                  <Text style={{ color: "red" }}>
-                    Pincode must be 6 characters long.
-                  </Text>
-                </Animatable.View>
-              ) : null}
-              </View>
-            )}
-            {page == 1 && (
-              <View>
-                 <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                  marginLeft:5
-                }}
-              >
-              <InputText
-                value={data.Name}
-                style={{marginBottom: hp(3), marginTop: hp(3)}}
-                placeholderText={transcription[lang.language]["name"]}
-                onChangeText={textInputName}
-              />
-              <Icon name="user-plus"  style={{left:-20}} size={20} color="#6e6e6e" />
-              </View>
-                <InputText
-                  style={{ marginBottom: hp(3) }}
-                  placeholderText={transcription[lang.language]["empCode"]}
-                  multiline={true}
-                />
-                <InputText
-                  style={{ marginBottom: hp(3) }}
-                  placeholderText={transcription[lang.language]["designation"]}
-                />
-                {/* <InputText
-                  style={{ marginBottom: hp(3) }}
-                  placeholderText={transcription[lang.language]["aadhaarnum"]}
-                /> */}
-                 <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                }}
-              >
-                <Validation
-                 
-                  placeholderText={transcription[lang.language]["aadhaarnum"]}
-                  value={data.Aadhar}
-                  style={{marginBottom: hp(3)}}
-                  onChangeText={(val) => textInputAadhar(val)}
-                  onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
-                  maxLength={12}
-                />
-                <Icon name="address-card"  style={{left:-20, bottom : 15}} size={25} color="#6e6e6e" />
-                {data.check_textInputAadhar ? (
-                  <Animatable.View animation="bounceIn">
-                    <Feather
-                      style={{ right: wp("15%"), bottom : 15 }}
-                      name="check-circle"
-                      color="green"
-                      size={20}
-                    />
-                  </Animatable.View>
-                ) : null}
-              </View>
-              {data.isValidAadhar == false && data.count == false ? (
-                <Animatable.View animation="fadeInLeft" duration={500}>
-                  <Text style={{ color: "red" }}>
-                    Aadhar must be 12 characters long.
-                  </Text>
-                </Animatable.View>
-              ) : null}
-                <InputText
-                  style={{ marginBottom: hp(3) }}
-                  placeholderText={transcription[lang.language]["email"]}
-                />
-                <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                }}
-              >
-                <Validation
-                  placeholderText={transcription[lang.language]["mobileNum"]}
-                  value={data.Mobile}
-                  style={{marginBottom: hp(3)}}
-                  onChangeText={textInputMobile}
-                  onEndEditing={(e) => handleValidMobile(e.nativeEvent.text)}
-                  maxLength={10}
-                />
-                <Icon name="phone"  style={{left:-20, bottom: 15}} size={25} color="#6e6e6e" />
-                {data.check_textInputMobile ? (
-                  <Animatable.View animation="bounceIn">
-                    <Feather
-                      style={{ right: wp("15%"), bottom : 15 }}
-                      name="check-circle"
-                      color="green"
-                      size={20}
-                    />
-                  </Animatable.View>
-                ) : null}
-              </View>
-              {data.isValidMobile == false && data.count == false ? (
-                <Animatable.View animation="fadeInLeft" duration={500}>
-                  <Text style={{ color: "red" }}>
-                    Mobile must be 10 characters long.
-                  </Text>
-                </Animatable.View>
-              ) : null}
-              </View>
+    )
+  }
 
-            )}
-          {/* </KeyboardAvoidingView> */}
-          <View style={styles.submit}>
-            {page === 0 ? (
-              <RouteButton
-                onPress={() => {data.isValidPin?setPage(1)&&setData({
-                  ...data,
-                  count: true,
-                }): setData({ ...data, count: false,});
-                  // navigation.navigate('Login')
-                }}
-                text={transcription[lang.language]["next"]}
-              />
-            ) : <RouteButton
-              style={{ width: "106%" }}
-              onPress={() => {data.isValidAadhar&&data.isValidMobile?navigation.navigate('FieldOfficerSuggestion')&&setData({
-                ...data,
-                count: true,
-              }): setData({ ...data, count: false,});
-                // navigation.navigate('Login')
-              
-              }}
-              text={transcription[lang.language]["registerNow"]}
-            />}
-
-
-            {
-            page === 0 ? 
-            <TouchableOpacity onPress={() => navigation.pop()}>
-                <Text
-                  style={{
-                    alignSelf: "center",
-                    width: wp(50),
-                    textAlign: "center",
-                    marginBottom: hp(1),
-                    marginTop: hp(1),
-                  }}
-                >
-                  {"Back to Route Page"}
-                </Text>
-              </TouchableOpacity>:
-            page === 1 ? (
-              <TouchableOpacity onPress={() => setPage(0)}>
-                <Text
-                  style={{
-                    alignSelf: "center",
-                    width: wp(50),
-                    textAlign: "center",
-                    marginBottom: hp(1),
-                    marginTop: hp(1),
-                  }}
-                >
-                  {transcription[lang.language]["back"]}
-                </Text>
-              </TouchableOpacity>
-            ) : null}
+  return (
+    <LinearGradient colors={['#128a49', "#128a49", "white", "white"]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.container}>
+      <LinearGradient style={styles.heading} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={["#128a49", "#0e6e3a"]}>
+        <Text style={styles.title}>Dashboard</Text>
+      </LinearGradient>
+      <View style={styles.body}>
+        <View style={styles.farmerdetails} >
+          <Image source={require("../../assets/officer.png")} style={{ width: 90, height: 90 }} />
+          <View style={{ paddingLeft: "3%", }}>
+            <Text style={styles.name}>FO Name</Text>
+            <Text style={styles.area}>Village, District, State</Text>
+            <Text style={styles.area}>Mobile: +91 9876543120</Text>
+            <Text style={{ fontSize: 15, color: "#3d3d3d", fontWeight: "bold" }}>Number of requests: 12345</Text>
           </View>
-        </ScrollView>
-      </View>
-    </ScrollView>
-  );
-};
+        </View>
+        <View style={[styles.item, { backgroundColor: "#2a965b", marginBottom: 0, marginTop: 10 }]}>
 
-export default Officer;
+          <View style={{ width: wp("11.5%"), alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontSize: hp('2%'), fontWeight: 'bold', color: "white" }}>S.No.</Text>
+          </View>
+
+          <View style={{ width: wp("30%"), alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontSize: hp('2%'), fontWeight: "bold", color: "white" }}>Farmer Name</Text>
+          </View>
+          <View style={{ width: wp('18%'), alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontSize: hp('2%'), fontWeight: "bold", color: "white" }}>Kit No.</Text>
+          </View>
+          <View style={{ width: wp('14.5'), alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontSize: hp('2%'), fontWeight: "bold", color: "white" }}>Details</Text>
+          </View>
+          <View style={{ width: wp('19.5%'), alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontSize: hp('2%'), fontWeight: "bold", color: "white" }}>Respond</Text>
+          </View>
+
+        </View>
+        <FlatList data={data}
+          renderItem={item}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      </View>
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}>
+        <View style={styles.soildetials}>
+          <View style={{ marginTop: 15, marginLeft: '5%', paddingBottom: 10, marginRight: "5%", borderBottomWidth: 2, borderColor: "#d0e8db" }}>
+            <Text style={[styles.name, { fontSize: 18, fontWeight: "bold", color: "#4d4d4d" }]}>FO Name</Text>
+            <Text style={styles.area}>Village, District, State</Text>
+            <Text style={styles.area}>Mobile: +91 9876543120</Text>
+            <Text style={{ fontSize: 15, color: "#3d3d3d" }}>SISHMA Kit No.: 12345</Text>
+          </View>
+          <PieChart
+            data={npmdata}
+            width={Dimensions.get("screen").width * 3.4 / 4}
+            height={180}
+            paddingLeft={10}
+            chartConfig={chartConfig}
+            accessor={"population"}
+            backgroundColor={"transparent"}
+            center={[0, 0]}
+            absolute
+          />
+
+          <BarChart
+            style={{ backgroundColor: "white", paddingLeft: 15 }}
+            data={nutrients}
+            width={Dimensions.get("screen").width * 3 / 4}
+            height={180}
+            chartConfig={chartConfig}
+            // verticalLabelRotation={30}
+          />
+          <Text style={styles.modalval}>PH: 10.6</Text>
+          <Text style={styles.modalval}>Soil Moisture: 35%</Text>
+          <TouchableOpacity style={[styles.modalval,{paddingLeft: 0, elevation: 1, backgroundColor: "#128a49", alignItems:"center", paddingVertical: 10}]}>
+            <Text style={{color:"white", fontWeight:"bold", fontSize:15}}>Respond</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => setModalVisible(false)}
+            style={{
+              position: "absolute", right: 15, top: 15, borderRadius: 20, borderWidth: 0.7,
+              borderColor: "green", alignItems: "center", justifyContent: "center", backgroundColor: "#e7f3ed"
+            }}
+          >
+            <Ionicons name="close" style={{ fontSize: 30 }} color="black" />
+          </TouchableOpacity>
+        </View>
+      </Modal>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible1}>
+        <Button title="Confirm" onPress={() => setModalVisible1(false)}></Button>
+        <FieldOfficerSuggestion />
+      </Modal>
+      <StatusBar />
+    </LinearGradient>
+  )
+}
+
+export default FieldOfficerDashboard
 
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height:"100%",
-    backgroundColor: "#d0e8db",
+    flex: 1,
+    backgroundColor: "#128a49",
   },
-  circle: {
-    position: "absolute",
-    width: 469,
-    height: 469,
-    borderRadius: 469 / 2,
-  },
-  greet: {
-    position: "absolute",
-    top: hp(10),
-    alignSelf: "center",
-    letterSpacing: 7,
-    color: "white",
-    fontSize: hp("5%"),
-    textAlign: "center",
-  },
-  dots: {
-    width: 23.82,
-    height: 23.82,
-    borderRadius: 23.82 / 2,
-    backgroundColor: "white",
-  },
-  logo: {
-    position: "absolute",
-    top: 114,
-    left: Dimensions.get("screen").width / 2 - 27,
-    borderWidth: 1.17,
-    borderColor: "white",
-    padding: 4,
-    borderRadius: 15,
-    transform: [{ rotate: "45deg" }, { scale: 1.7 }],
-  },
-  centeredView: {
+  heading: {
     width: "100%",
-    height: "100%",
-    backgroundColor: "rgba(0,0,0,0.5)",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  modalView: {
-    width: "80%",
-    height: 200,
-    backgroundColor: "white",
-    borderRadius: 20,
-  },
-  textStyle: {
-    width: "100%",
-    textAlign: "center",
-    fontSize: hp("3%"),
-    marginTop: 10,
-  },
-  button: {
-    width: "94%",
     height: 70,
-    flexDirection: "row",
-    alignSelf: "center",
-    borderWidth: 5,
-    elevation: 1,
-    borderRadius: 35,
-    borderColor: "#a0d0b6",
     justifyContent: "center",
-    backgroundColor: "#e7f3ed",
-    alignItems: "center",
-    marginBottom: 6,
+    borderBottomRightRadius: 40,
   },
-  routetext: {
-    fontSize: hp("4%"),
-    alignSelf: "center",
-    color: "white",
-    marginLeft: "10%",
-  },
-  buttonContainer: {
-    position: "absolute",
-    bottom: 0,
-    paddingTop: 30,
+  body: {
     width: "100%",
-    backgroundColor: "#d0e8db",
-    borderTopRightRadius: 30,
-    borderTopLeftRadius: 30,
-    padding: "5%",
-    height: hp(70),
-    alignItems: "center",
-    elevation: 20,
-    opacity: 1,
+    flex: 1,
+    backgroundColor: "white",
+    borderTopLeftRadius: 65
   },
-  submit: {
-    marginTop: "10%",
-    width: "70%",
-    alignSelf: "center"
-    // justifyContent: "center",
-    // width: "80%"
-    // alignItems:'center',
+  title: {
+    marginLeft: "4%",
+    color: "#d0e8db",
+    fontSize: 35,
+    fontWeight: "bold",
   },
-  pagetitle: {
-    alignSelf: "center",
-    color: "#444",
-    fontSize: 25,
-  },
-  icon: {
-    width: 30,
-    height: 30,
-    left: -20,
-    bottom: 5
-  },
-  changeLanguage:{
-    backgroundColor:"white",
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 15,
-    elevation: 10,
+  item: {
     flexDirection: "row",
-    right: 10
+    backgroundColor: "#e7f3ed",
+    borderRadius: 5,
+    marginTop: 2.5,
+    marginBottom: 2.5,
+    height: 60,
+    width: "93%",
+    alignSelf: 'center'
+  },
+  farmerdetails: {
+    flexDirection: "row",
+    backgroundColor: "#e7f3ed",
+    paddingLeft: "5%",
+    paddingRight: "3%",
+    marginTop: "3%",
+    paddingTop: "3%",
+    paddingBottom: "3%",
+    borderTopLeftRadius: 100,
+    borderBottomLeftRadius: 100,
+    marginLeft: "3%",
+    borderWidth: 1,
+    borderColor: "green"
+  },
+  name: {
+    fontSize: 20,
+    fontWeight: "bold"
+  },
+  area: {
+    fontSize: 13,
+    color: "#7f7f7f"
+  },
+  details: {
+    width: wp('14.5%'),
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: "#41a16d",
+    elevation: 5,
+    backgroundColor: "#e7f3ed",
+    // backgroundColor: "#41a16d",
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+  },
+  respond: {
+    width: wp('19.5%'),
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 5,
+    backgroundColor: "#41a16d",
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+  },
+  soildetials: {
+    width: '85%',
+    height: "90%",
+    backgroundColor: "white",
+    alignSelf: "center",
+    top: "5%",
+    borderRadius: 10,
+    // borderWidth: 1,
+    elevation: 300,
+    // borderColor: "green"
+  },
+  modalval:{
+    marginLeft: 15,
+    marginTop: 10,
+    marginRight: 15,
+    paddingVertical:5,
+    backgroundColor:"#d0e8db",
+    paddingLeft: 10,
+    borderRadius: 10,
+    fontSize: 18,
+    borderColor: "#89c5a4",
+    borderWidth: 1,
+    color:"#666"
   }
-});
+})
