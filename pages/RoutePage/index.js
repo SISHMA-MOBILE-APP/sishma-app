@@ -20,6 +20,9 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+
+import ItemCard from "../../components/ItemCard";
+
 export default function Welcome({navigation}) {
   const lang = useContext(Language);
   const [signInOptions, setSignOptions] = React.useState(false);
@@ -59,7 +62,10 @@ export default function Welcome({navigation}) {
         start={{ x: 0.75, y: 0.25 }}
         end={{ x: 0.75, y: 0.8 }}
       />
-      <Image source={require("../../assets/sishma-white.png")} style={[styles.logo, {width: 140, height: 140, borderRadius: 70}]} />
+      <Image
+        source={require("../../assets/sishma-white.png")}
+        style={[styles.logo, { width: 140, height: 140, borderRadius: 70 }]}
+      />
       {/* <View style={styles.logo}>
         <View style={{ flexDirection: "row" }}>
           <View style={[styles.dots, { marginRight: 5, marginBottom: 5 }]} />
@@ -72,47 +78,133 @@ export default function Welcome({navigation}) {
       </View> */}
       <Text style={styles.greet}>{transcription[lang.language]["sishma"]}</Text>
 
-      <View style={{position:"absolute",top:hp("4"),right:0}}>
-      <TouchableOpacity onPress={()=>{
-          navigation.navigate('LanguagePicker')
-          }} style={styles.changeLanguage}>
-          <Image source={require("../../assets/translation.png")} style={{width: 20, height: 20, marginRight: 5}} />
-          <Text style={{ fontWeight: "bold", color: "#2b2b2b", fontSize: 14, }}>Language</Text>
+      <View style={{ position: "absolute", top: hp("4"), right: 0 }}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("LanguagePicker");
+          }}
+          style={styles.changeLanguage}
+        >
+          <Image
+            source={require("../../assets/translation.png")}
+            style={{ width: 20, height: 20, marginRight: 5 }}
+          />
+          <Text style={{ fontWeight: "bold", color: "#2b2b2b", fontSize: 14 }}>
+            Language
+          </Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.buttonContainer}>
-        
-        <RouteButton onPress={() => navigation.navigate('FarmerReg')}
-          image={<Image source={require("../../assets/farmer2.png")} style={{width: 40, height:40, marginLeft: 10}}/>}
+        <RouteButton
+          onPress={() => navigation.navigate("FarmerReg")}
+          image={
+            <Image
+              source={require("../../assets/farmer2.png")}
+              style={{ width: 40, height: 40, marginLeft: 10 }}
+            />
+          }
           text={transcription[lang.language]["farmerRegistration"]}
-          style={{borderWidth: 5, height: 70, marginBottom: 10}}
+          style={{ borderWidth: 5, height: 70, marginBottom: 10 }}
           icon={<AntDesign name="right" size={30} color="white" />}
         />
-        <RouteButton  onPress={() => navigation.navigate('AdminReg')}
-        image={<Image source={require("../../assets/admin.png")} style={{width: 40, height:40, marginLeft: 10}}/>}
+        <RouteButton
+          onPress={() => navigation.navigate("AdminReg")}
+          image={
+            <Image
+              source={require("../../assets/admin.png")}
+              style={{ width: 40, height: 40, marginLeft: 10 }}
+            />
+          }
           text={transcription[lang.language]["adminRegistration"]}
-          style={{borderWidth: 5, height: 70, marginBottom: 10}}
+          style={{ borderWidth: 5, height: 70, marginBottom: 10 }}
           icon={<AntDesign name="right" size={30} color="white" />}
         />
-        <RouteButton onPress={() => navigation.navigate('OfficerReg')}
-        image={<Image source={require("../../assets/officer.png")} style={{width: 40, height:40, marginLeft: 10}}/>}
+        <RouteButton
+          onPress={() => navigation.navigate("OfficerReg")}
+          image={
+            <Image
+              source={require("../../assets/officer.png")}
+              style={{ width: 40, height: 40, marginLeft: 10 }}
+            />
+          }
           text={transcription[lang.language]["officerRegistration"]}
-          style={{borderWidth: 5, height: 70, marginBottom: 10}}
+          style={{ borderWidth: 5, height: 70, marginBottom: 10 }}
           icon={<AntDesign name="right" size={30} color="white" />}
         />
-        <RouteButton onPress={() => navigation.navigate('FarmerDashboard')}
-        image={<Image source={require("../../assets/farmer.png")} style={{width: 40, height:40, marginLeft: 10}}/>}
-          text={transcription[lang.language]["farmerDash"]}
-          style={{borderWidth: 5, height: 70, marginBottom: 10}}
-          icon={<AntDesign name="right" size={30} color="white" />}
-        />
-        <RouteButton onPress={() => navigation.navigate('List')}
-        image={<Image source={require("../../assets/search.png")} style={{width: 40, height:40, marginLeft: 10}}/>}
-          text={transcription[lang.language]["officerDash"]}
-          style={{borderWidth: 5, height: 70, marginBottom: 10}}
-          icon={<AntDesign name="right" size={30} color="white" />}
-        />
+        <View
+          style={{
+            width: "90%",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+        >
+          
+          {/* Admin Dashboard */}
+          <ItemCard onClick={() => navigation.navigate("AdminDashboard")}>
+            <Image
+              source={require("../../assets/admin1.png")}
+              style={{
+                width: 55,
+                height: 55,
+                borderRadius: 6,
+              }}
+            />
+            <Text
+              style={{
+                fontSize: 17,
+                marginTop: 15,
+                color: "#3d3d3d",
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              {transcription[lang.language]["adminDash"]}
+            </Text>
+          </ItemCard>
+
+          {/* Officer Dashboard */}
+          <ItemCard onClick={() => navigation.navigate("OfficerDashBoard")}>
+            <Image
+              source={require("../../assets/search.png")}
+              style={{ width: 40, height: 40, marginLeft: 10 }}
+            />
+            <Text
+              style={{
+                fontSize: 17,
+                marginTop: 15,
+                color: "#3d3d3d",
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              {transcription[lang.language]["officerDash"]}
+            </Text>
+          </ItemCard>
+
+          {/* Farmer Dashboard */}
+          <ItemCard onClick={() => navigation.navigate("FarmerDashboard")}>
+            <Image
+              source={require("../../assets/farmer.png")}
+              style={{
+                width: 55,
+                height: 55,
+                borderRadius: 6,
+              }}
+            />
+            <Text
+              style={{
+                fontSize: 17,
+                marginTop: 15,
+                color: "#3d3d3d",
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              {transcription[lang.language]["farmerDash"]}
+            </Text>
+          </ItemCard>
+        </View>
         {/* <InputText placeholderText="Full name"/> */}
       </View>
     </View>

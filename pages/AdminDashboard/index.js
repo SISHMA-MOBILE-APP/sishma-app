@@ -2,452 +2,453 @@ import {
   StyleSheet,
   Text,
   View,
+  FlatList,
+  Button,
+  Modal,
+  StatusBar,
   Image,
   Dimensions,
-  ScrollView,
-  KeyboardAvoidingView,
-  Alert,
 } from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import { LinearGradient } from "expo-linear-gradient";
-import React, { useContext, useState } from "react";
-import { AntDesign } from "@expo/vector-icons";
-import colors from "../../utils/colors";
-import RouteButton from "../../components/CustomButton";
-import InputText from "../../components/CustomTextField";
+import React, { useState } from "react";
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { NavigationContainer } from "@react-navigation/native";
-import * as Animatable from "react-native-animatable";
-import Feather from "react-native-vector-icons/Feather";
-import Validation from "../../components/CustomTextField/Validation";
+import { Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native";
+import FieldOfficerSuggestion from "../FieldOfficerSuggestion";
+import { LinearGradient } from "expo-linear-gradient";
+import { PieChart, BarChart } from "react-native-chart-kit";
 
-import DropdownComponent from "../../components/Dropdown/dropdown";
-
-// Language Provider
-import { Language } from "../../providers/languageProvider";
-import { transcription } from "../../utils/lang";
-import villageData, { selum } from '../../utils/villages';
-
-
-const Admin = ({ navigation }) => {
-  const [signInOptions, setSignOptions] = React.useState(false);
-  const lang = useContext(Language);
-  const [data, setData] = useState([
+const AdminDashboard = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible1, setModalVisible1] = useState(false);
+  const data = [
+    { id: 1, name: "Sukesh Kumar", kitNo: 555555, j: "View", k: "View" },
+    { id: 2, name: "Hareesh Ketu", kitNo: 552555, j: "View", k: "View" },
+    { id: 3, name: "Raman Nivasan", kitNo: 553555, j: "View", k: "View" },
+    { id: 4, name: "Sukesh Kumar Sahoo", kitNo: 585555, j: "View", k: "View" },
+    { id: 5, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
+    { id: 6, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
+    { id: 7, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
+    { id: 8, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
+    { id: 9, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
+    { id: 10, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
+    { id: 11, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
+    { id: 12, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
+    { id: 13, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
+  ];
+  const npmdata = [
     {
-      Aadhar: "",
-      Pin: "",
-      EmployeeCode:"",
-      Designation:"",
-      OfficialAddress:"",
-      District:"",
-      SubDistrict:"",
-      Village:"",
-      isValidPin: false,
-      isValidAadhar: false,
-      check_textInputAadhar: false,
-      check_textInputPin: false,
-      count:false,
+      name: "Nitrogen",
+      population: 76.5,
+      color: "#128a49",
+      legendFontColor: "#6d6d6d",
+      legendFontSize: 11,
     },
-  ]);
-  const textInputName = (val) => {
-    setData({ ...data, Name: val });
+    {
+      name: "Phosphorus",
+      population: 12.5,
+      color: "#3BACB6",
+      legendFontColor: "#6d6d6d",
+      legendFontSize: 11,
+    },
+    {
+      name: "Potassium",
+      population: 12.7,
+      color: "#D8E9A8",
+      legendFontColor: "#6d6d6d",
+      legendFontSize: 11,
+    },
+  ];
+  const nutrients = {
+    labels: ["Fe", "Mg", "Ca", "I"],
+    datasets: [
+      {
+        data: [20, 45, 28, 80],
+      },
+    ],
   };
-  const textInputAddress = (val) => {
-    setData({ ...data, Address: val });
+  const chartConfig = {
+    backgroundGradientFrom: "white",
+    backgroundGradientTo: "white",
+    color: (opacity = 1) => `green`,
   };
-  const textInputVillage = (val) => {
-    setData({ ...data, Village: val });
-  };
-  const textInputDistrict = (val) => {
-    setData({ ...data, District: val });
-  };
-  const textInputSubDistrict = (val) => {
-    setData({ ...data, SubDistrict: val });
-  };
-  const textInputAadhar = (val) => {
-    if (val.trim().length == 12) {
-      setData({
-        ...data,
-        Aadhar: val,
-        check_textInputAadhar: true,
-      });
-    } else {
-      setData({
-        ...data,
-        Aadhar: val,
-        check_textInputAadhar: false,
-      });
-    }
-  };
-  const textInputPin = (val) => {
-    if (val.trim().length == 6) {
-      setData({
-        ...data,
-        Pin: val,
-        check_textInputPin: true,
-      });
-    } else {
-      setData({
-        ...data,
-        Pin: val,
-        check_textInputPin: false,
-      });
-    }
-  };
-  {
-    /*const textInputMobile= (val) => {
-    if( val.trim().length == 10 ) {
-        setData({
-            ...data,
-            Mobile: val,
-            check_textInputMobile: true,
-          
-        });
-    } else {
-        setData({
-            ...data,
-            Mobile: val,
-            check_textInputPin: false,
-          
-        });
-    }
-  } */
-  }
-  const handleValidAadhar = (val) => {
-    if (val.trim().length == 12) {
-      setData({
-        ...data,
-        isValidAadhar: true,
-      });
-    } else {
-      setData({
-        ...data,
-        isValidAadhar: false,
-      });
-    }
-  };
-  {
-    /*} const handleValidMobile = (val) => {
-    if( val.trim().length == 10 ) {
-        setData({
-            ...data,
-            isValidMobile: true
-        });
-    } else {
-        setData({
-            ...data,
-            isValidMobile: false
-        });
-    }
-  } */
-  }
-  const handleValidPin = (val) => {
-    if (val.trim().length == 6) {
-      setData({
-        ...data,
-        isValidPin: true,
-      });
-    } else {
-      setData({
-        ...data,
-        isValidPin: false,
-      });
-    }
-  };
-  return (
-    <View style={styles.container}>
-      <LinearGradient
-        style={[
-          styles.circle,
-          { transform: [{ rotate: "0deg" }], top: -140, left: -160 },
-        ]}
-        colors={["#094525", colors.greenTint80]}
-        start={{ x: 0.25, y: 0.75 }}
-        end={{ x: 1, y: 1 }}
-      />
-      <LinearGradient
-        style={[
-          styles.circle,
-          { transform: [{ rotate: "103deg" }], top: -145, left: 30 },
-        ]}
-        colors={["#1ddf76", "#128a49"]}
-      />
-      <LinearGradient
-        style={[
-          styles.circle,
-          { transform: [{ rotate: "6.5deg" }], top: -60, left: -95 },
-        ]}
-        colors={["rgba(30,182,103,0.49)", "rgba(6,105,44, 0.8)"]}
-        start={{ x: 0.25, y: 0.25 }}
-        end={{ x: 1, y: 1 }}
-      />
-      <LinearGradient
-        style={[
-          styles.circle,
-          { transform: [{ rotate: "123deg" }], top: -240, left: -40 },
-        ]}
-        colors={["#128a49", "#1ddf76"]}
-        start={{ x: 0.75, y: 0.25 }}
-        end={{ x: 0.75, y: 0.8 }}
-      />
-      <Text style={styles.greet}>{transcription[lang.language]["adminReg"]}</Text>
-      <View style={styles.buttonContainer}>
-        <ScrollView contentContainerStyle={{width:"95%"}}>
-
-        <KeyboardAvoidingView behavior="padding">
+  const item = ({ item, index }) => {
+    return (
+      <View style={styles.item}>
         <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-around",
-              alignItems: "center",
-            }}
-          >
-          <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["name"]} onChangeText={(val) => textInputName(val)}/>
-          <Icon name="user-plus"  style={{left:-20, bottom: 10,}} size={25} color="#6e6e6e" /></View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-around",
-              alignItems: "center",
-            }}
-          >
-          <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["empCode"]}/>
-          <Icon name="sort-numeric-down"  style={{left:-20, bottom: 10,}} size={25} color="#6e6e6e" /></View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-around",
-              alignItems: "center",
-            }}
-          >
-          <InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["designation"]}/>
-          <Icon name="briefcase"  style={{left:-20, bottom: 10,}} size={25} color="#6e6e6e" /></View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-around",
-              alignItems: "center",
-            }}
-          ><InputText style={{marginBottom: hp(3)}} placeholderText={transcription[lang.language]["OffAddress"]} multiline={true}  onChangeText={(val) => textInputAddress(val)} />
-          <Icon name="building"  style={{left:-20, bottom: 10,}} size={25} color="#6e6e6e" /></View>
-            <View>
-              <DropdownComponent
-                placeholderText={transcription[lang.language]["state"]}
-                data={[{label: "Tamil Nadu", value: "Tamil Nadu"}]}
-              />
-             
-              <DropdownComponent
-                placeholderText={transcription[lang.language]["district"]}
-                data = {[{label: "Selum", value: "Selum"}]}
-              />
-             
-              <DropdownComponent
-                placeholderText={transcription[lang.language]["village"]}
-                data={selum}
-              />
-            </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-around",
-              alignItems: "center",
-            }}
-          >
-            <Validation
-              placeholderText={transcription[lang.language]["pin"]}
-              onChangeText={(val) => textInputPin(val)}
-              onEndEditing={(e) => handleValidPin(e.nativeEvent.text)}
-              maxLength={6}
-              style={{marginBottom: hp(3)}}
-            />
-            <Icon name="hashtag"  style={{left:-20, bottom: 10,}} size={25} color="#6e6e6e" />
-            {data.check_textInputPin ? (
-              <Animatable.View animation="bounceIn">
-                <Feather
-                  style={{ right: wp("10%") }}
-                  name="check-circle"
-                  color="green"
-                  size={20}
-                />
-              </Animatable.View>
-            ) : null}
-          </View>
-          {data.isValidPin==false && data.count==false?  (
-            <Animatable.View animation="fadeInLeft" duration={500}>
-              <Text style={{ color: "red" }}>
-                Pincode must be 6 characters long.
-              </Text>
-            </Animatable.View>
-          ):null}
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-around",
-              alignItems: "center",
-            }}
-          >
-            <Validation
-              placeholderText={transcription[lang.language]["aadhaarnum"]}
-              onChangeText={(val) => textInputAadhar(val)}
-              onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
-              maxLength={12}
-              style={{marginBottom: hp(3)}}
-            />
-             <Icon name="address-card"  style={{left:-20, bottom: 10,}} size={25} color="#6e6e6e" />
-            {data.check_textInputAadhar ? (
-              <Animatable.View animation="bounceIn">
-                <Feather
-                  style={{ right: wp("10%") }}
-                  name="check-circle"
-                  color="green"
-                  size={20}
-                />
-              </Animatable.View>
-            ) : null}
-          </View>
-          {data.isValidAadhar == false && data.count == false ? 
-          
-           (
-            <Animatable.View animation="fadeInLeft" duration={500}>
-              <Text style={{ color: "red" }}>
-                Aadhar must be 12 characters long.
-              </Text>
-            </Animatable.View>
-          ):(null)}
-        </KeyboardAvoidingView>
-        <View style={styles.submit}>
-        <RouteButton
-            onPress={() => {
-              {
-                data.isValidAadhar && data.isValidPin
-                  ? navigation.navigate("Login") &&
-                    setData({
-                      ...data,
-                      count: true,
-                    })
-                  :setData({
-                      ...data,
-                      count: false,
-                    });
-                  }
-            }}
-            text={transcription[lang.language]["registerNow"]}
-          />
+          style={{
+            width: wp("11%"),
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={{ fontSize: hp("2%"), fontWeight: "bold" }}>
+            {index}
+          </Text>
         </View>
-</ScrollView>
+
+        <View
+          style={{
+            width: wp("30%"),
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={{ fontSize: hp("2%") }}>{item.name}</Text>
+        </View>
+        <View
+          style={{
+            width: wp("18"),
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={{ fontSize: hp("2%") }}>{item.kitNo}</Text>
+        </View>
+        <TouchableOpacity
+          onPress={() =>
+            item.id > 0 ? setModalVisible(true) : console.log("Nope")
+          }
+          style={styles.details}
+        >
+          <Text
+            style={{
+              fontSize: hp("2%"),
+              color: "black",
+              fontWeight: "bold",
+              textAlign: "center",
+            }}
+          >
+            {item.j}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            item.id > 0 ? setModalVisible1(true) : console.log("Nope")
+          }
+          style={styles.respond}
+        >
+          <Text
+            style={{ fontSize: hp("2%"), color: "white", fontWeight: "bold" }}
+          >
+            Respond
+          </Text>
+        </TouchableOpacity>
       </View>
-    </View>
+    );
+  };
+
+  return (
+    <LinearGradient
+      colors={["#128a49", "#128a49", "white", "white"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+      style={styles.container}
+    >
+      <LinearGradient
+        style={styles.heading}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        colors={["#128a49", "#0e6e3a"]}
+      >
+        <Text style={styles.title}>Dashboard</Text>
+      </LinearGradient>
+      <View style={styles.body}>
+        <View style={styles.farmerdetails}>
+          <Image
+            source={require("../../assets/admin1.png")}
+            style={{ width: 100, height: 100 }}
+          />
+          <View style={{ paddingLeft: "3%" }}>
+            <Text style={styles.name}>Admin</Text>
+            <Text style={styles.area}>Village, District, State</Text>
+            <Text style={styles.area}>Mobile: +91 9876543120</Text>
+            <Text
+              style={{ fontSize: 15, color: "#3d3d3d", fontWeight: "bold" }}
+            >
+              Number of requests: 12345
+            </Text>
+          </View>
+        </View>
+        <View
+          style={[
+            styles.item,
+            { backgroundColor: "#2a965b", marginBottom: 0, marginTop: 10 },
+          ]}
+        >
+          <View
+            style={{
+              width: wp("11.5%"),
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{ fontSize: hp("2%"), fontWeight: "bold", color: "white" }}
+            >
+              S.No.
+            </Text>
+          </View>
+
+          <View
+            style={{
+              width: wp("30%"),
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{ fontSize: hp("2%"), fontWeight: "bold", color: "white" }}
+            >
+              Officer Name
+            </Text>
+          </View>
+          <View
+            style={{
+              width: wp("18%"),
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{ fontSize: hp("2%"), fontWeight: "bold", color: "white" }}
+            >
+              Id
+            </Text>
+          </View>
+          <View
+            style={{
+              width: wp("14.5"),
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{ fontSize: hp("2%"), fontWeight: "bold", color: "white" }}
+            >
+              Details
+            </Text>
+          </View>
+          <View
+            style={{
+              width: wp("19.5%"),
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{ fontSize: hp("2%"), fontWeight: "bold", color: "white" }}
+            >
+              Respond
+            </Text>
+          </View>
+        </View>
+        <FlatList
+          data={data}
+          renderItem={item}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      </View>
+
+      <Modal animationType="fade" transparent={true} visible={modalVisible}>
+        <View style={styles.soildetials}>
+          <View
+            style={{
+              marginTop: 15,
+              marginLeft: "5%",
+              paddingBottom: 10,
+              marginRight: "5%",
+              borderBottomWidth: 2,
+              borderColor: "#d0e8db",
+            }}
+          >
+            <Text
+              style={[
+                styles.name,
+                { fontSize: 18, fontWeight: "bold", color: "#4d4d4d" },
+              ]}
+            >
+              FO Name
+            </Text>
+            <Text style={styles.area}>Village, District, State</Text>
+            <Text style={styles.area}>Mobile: +91 9876543120</Text>
+            <Text style={{ fontSize: 15, color: "#3d3d3d" }}>
+              SISHMA Kit No.: 12345
+            </Text>
+          </View>
+          <PieChart
+            data={npmdata}
+            width={(Dimensions.get("screen").width * 3.4) / 4}
+            height={180}
+            paddingLeft={10}
+            chartConfig={chartConfig}
+            accessor={"population"}
+            backgroundColor={"transparent"}
+            center={[0, 0]}
+            absolute
+          />
+
+          <BarChart
+            style={{ backgroundColor: "white", paddingLeft: 15 }}
+            data={nutrients}
+            width={(Dimensions.get("screen").width * 3) / 4}
+            height={180}
+            chartConfig={chartConfig}
+            // verticalLabelRotation={30}
+          />
+          <Text style={styles.modalval}>PH: 10.6</Text>
+          <Text style={styles.modalval}>Soil Moisture: 35%</Text>
+          <TouchableOpacity
+            style={[
+              styles.modalval,
+              {
+                paddingLeft: 0,
+                elevation: 1,
+                backgroundColor: "#128a49",
+                alignItems: "center",
+                paddingVertical: 10,
+              },
+            ]}
+          >
+            <Text style={{ color: "white", fontWeight: "bold", fontSize: 15 }}>
+              Respond
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => setModalVisible(false)}
+            style={{
+              position: "absolute",
+              right: 15,
+              top: 15,
+              borderRadius: 20,
+              borderWidth: 0.7,
+              borderColor: "green",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "#e7f3ed",
+            }}
+          >
+            <Ionicons name="close" style={{ fontSize: 30 }} color="black" />
+          </TouchableOpacity>
+        </View>
+      </Modal>
+      <Modal animationType="fade" transparent={true} visible={modalVisible1}>
+        <Button
+          title="Confirm"
+          onPress={() => setModalVisible1(false)}
+        ></Button>
+        <FieldOfficerSuggestion />
+      </Modal>
+      <StatusBar />
+    </LinearGradient>
   );
 };
 
-export default Admin;
+export default AdminDashboard;
 
 const styles = StyleSheet.create({
   container: {
-    width:"100%",
-    height:"100%",
-    backgroundColor: "#d0e8db",
-  },
-  circle: {
-    position: "absolute",
-    width: 469,
-    height: 469,
-    borderRadius: 469 / 2,
-  },
-  greet: {
-    textAlign:"center",
-    top: 45,
-    alignSelf: "center",
-    letterSpacing: 4,
-    color: "white",
-    fontSize: hp("5%"),
-  },
-  dots: {
-    width: 23.82,
-    height: 23.82,
-    borderRadius: 23.82 / 2,
-    backgroundColor: "white",
-  },
-  logo: {
-    position: "absolute",
-    top: 114,
-    left: Dimensions.get("screen").width / 2 - 27,
-    borderWidth: 1.17,
-    borderColor: "white",
-    padding: 4,
-    borderRadius: 15,
-    transform: [{ rotate: "45deg" }, { scale: 1.7 }],
-  },
-  centeredView: {
     width: "100%",
-    height: "100%",
-    backgroundColor: "rgba(0,0,0,0.5)",
-    alignItems: "center",
-    justifyContent: "center",
+    flex: 1,
+    backgroundColor: "#128a49",
   },
-  modalView: {
-    width: "80%",
-    height: 200,
-    backgroundColor: "white",
-    borderRadius: 20,
-  },
-  textStyle: {
+  heading: {
     width: "100%",
-    textAlign: "center",
-    fontSize: hp("3%"),
-    marginTop: 10,
-  },
-  button: {
-    width: "94%",
     height: 70,
-    flexDirection: "row",
-    alignSelf: "center",
-    borderWidth: 5,
-    elevation: 1,
-    borderRadius: 35,
-    borderColor: "#a0d0b6",
     justifyContent: "center",
-    backgroundColor: "#e7f3ed",
-    alignItems: "center",
-    marginBottom: 6,
+    borderBottomRightRadius: 40,
   },
-  routetext: {
-    fontSize: hp("4%"),
-    alignSelf: "center",
-    color: "white",
-    marginLeft: "10%",
-  },
-  buttonContainer: {
-    // top: hp("5%"),
-    position:"absolute",
-    width:"100%",
-    bottom:0,
-    paddingTop: 30,
-    // height: "100%",
-    height: "77%",
-    position:"absolute",
-    bottom: 0,
+  body: {
     width: "100%",
-    backgroundColor: "#d0e8db",
-    borderTopRightRadius: 30,
-    borderTopLeftRadius: 30,
-    padding: "5%",
+    flex: 1,
+    backgroundColor: "white",
+    borderTopLeftRadius: 65,
+  },
+  title: {
+    marginLeft: "4%",
+    color: "#d0e8db",
+    fontSize: 35,
+    fontWeight: "bold",
+  },
+  item: {
+    flexDirection: "row",
+    backgroundColor: "#e7f3ed",
+    borderRadius: 5,
+    marginTop: 2.5,
+    marginBottom: 2.5,
+    height: 60,
+    width: "93%",
+    alignSelf: "center",
+  },
+  farmerdetails: {
+    flexDirection: "row",
+    backgroundColor: "#e7f3ed",
+    paddingLeft: "2%",
+    paddingRight: "3%",
+    marginTop: "3%",
+    paddingTop: "3%",
+    paddingBottom: "3%",
+    borderTopLeftRadius: 100,
+    borderBottomLeftRadius: 100,
+    marginLeft: "3%",
+    borderWidth: 1,
+    borderColor: "green",
+  },
+  name: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  area: {
+    fontSize: 13,
+    color: "#7f7f7f",
+  },
+  details: {
+    width: wp("14.5%"),
     alignItems: "center",
-    elevation: 20,
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "#41a16d",
+    elevation: 5,
+    backgroundColor: "#e7f3ed",
+    // backgroundColor: "#41a16d",
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
   },
-  submit: {
-    // justifyContent: "center",
-    width:"80%",
-    alignSelf:"center",
-    marginTop: hp("3"),
+  respond: {
+    width: wp("19.5%"),
+    alignItems: "center",
+    justifyContent: "center",
+    elevation: 5,
+    backgroundColor: "#41a16d",
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
   },
-  icon:{
-    width:30,
-    height:30,
-    left:-20,
-    bottom:10
+  soildetials: {
+    width: "85%",
+    height: "90%",
+    backgroundColor: "white",
+    alignSelf: "center",
+    top: "5%",
+    borderRadius: 10,
+    // borderWidth: 1,
+    elevation: 300,
+    // borderColor: "green"
+  },
+  modalval: {
+    marginLeft: 15,
+    marginTop: 10,
+    marginRight: 15,
+    paddingVertical: 5,
+    backgroundColor: "#d0e8db",
+    paddingLeft: 10,
+    borderRadius: 10,
+    fontSize: 18,
+    borderColor: "#89c5a4",
+    borderWidth: 1,
+    color: "#666",
   },
 });
