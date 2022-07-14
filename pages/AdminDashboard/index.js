@@ -346,6 +346,7 @@ const AdminDashboard = () => {
       </Modal>
       <Modal animationType="fade" transparent={true} visible={modalVisible1}>
         <Button
+          color="#128a49"
           title="Confirm"
           onPress={() => setModalVisible1(false)}
         ></Button>

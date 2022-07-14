@@ -31,8 +31,73 @@ import { Language } from "../../providers/languageProvider";
 import { transcription } from "../../utils/lang";
 import villageData, { selum } from '../../utils/villages';
 
+// Apollo Client
+import client from "../../providers/apiProvider";
+import { gql, useMutation } from "@apollo/client";
+import Loading from "../Loading";
+import { add } from "react-native-reanimated";
+
+const ADD_ADMIN = gql`
+  mutation AddAdmin(
+    $name: String!,
+    $empcode: String!,
+    $designation: String!,
+    $address: String!,
+    $state: String!,
+    $district: String!,
+    $village: String!,
+    $pin: String!,
+    $aadhar: String!
+    ){
+    addAdmin(
+        name: $name,
+        empcode: $empcode,
+        designation: $designation,
+        address: $address,
+        state: $state,
+        district: $district,
+        village: $village,
+        pin: $pin,
+        aadhar: $aadhar
+    ) {
+      id
+    }
+  }
+`;
+
+// const AddAdmin = (name,
+// empcode,
+// designation,
+// address,
+// state,
+// district,
+// village,
+// pin,
+// aadhar) => {
+//   return gql`
+//     mutation {
+//       addAdmin(
+//         name: ${name},
+//         empcode: ${empcode},
+//         designation: ${designation},
+//         address: ${address},
+//         state: ${state},
+//         district: ${district},
+//         village: ${village},
+//         pin: ${pin},
+//         aadhar: ${aadhar}
+//       ) {}
+//     }
+//   `;
+// }
 
 const Admin = ({ navigation }) => {
+
+  const [addAdmin, { adminData, loading, error }] = useMutation(ADD_ADMIN);
+
+  if (loading) return <Loading/>;
+  if (error) return <Text> {`Submission error! ${error.message}`} </Text>
+
   const [signInOptions, setSignOptions] = React.useState(false);
   const lang = useContext(Language);
   const [data, setData] = useState([
@@ -321,18 +386,19 @@ const Admin = ({ navigation }) => {
         <View style={styles.submit}>
         <RouteButton
             onPress={() => {
-              {
-                data.isValidAadhar && data.isValidPin
-                  ? navigation.navigate("Login") &&
-                    setData({
-                      ...data,
-                      count: true,
-                    })
-                  :setData({
-                      ...data,
-                      count: false,
-                    });
-                  }
+              addAdmin({
+                variables: {
+                  name: "Peter",
+                  empcode: "123456",
+                  designation: "Business",
+                  address: "221B Bleekers Street",
+                  state: "Bihar",
+                  district: "Karachi",
+                  village: "Dholakpur",
+                  pin: "600127",
+                  aadhar: "123456789012",
+                },
+              });
             }}
             text={transcription[lang.language]["registerNow"]}
           />
