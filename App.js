@@ -28,7 +28,7 @@ import Hello from "./pages/Hello";
 import SoilSampleDetails from "./pages/SoilSampleDetails";
 import Loading from "./pages/Loading";
 import LanguagePicker from "./pages/LanguagePicker";
-import Contact from "./pages/ContactUs";
+// import Contact from "./pages/ContactUs";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -64,7 +64,7 @@ export default function App() {
           <Stack.Screen name="FarmerDashboard" component={FarmerDashboard} />
           <Stack.Screen name="Loading" component={Loading} />
           <Stack.Screen name="LanguagePicker" component={LanguagePicker} />
-          <Stack.Screen name="Contact" component={Contact} />
+          {/* <Stack.Screen name="Contact" component={Contact} /> */}
           <Stack.Screen name="OfficerDashBoard" component={OfficerDashBoard} />
           <Stack.Screen name="AdminDashboard" component={AdminDashboard} />
         </Stack.Navigator>

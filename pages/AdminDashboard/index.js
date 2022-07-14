@@ -8,6 +8,7 @@ import {
   StatusBar,
   Image,
   Dimensions,
+  TouchableOpacity
 } from "react-native";
 import React, { useState } from "react";
 
@@ -16,7 +17,6 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { Ionicons } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native";
 import FieldOfficerSuggestion from "../FieldOfficerSuggestion";
 import { LinearGradient } from "expo-linear-gradient";
 import { PieChart, BarChart } from "react-native-chart-kit";
@@ -24,6 +24,7 @@ import { PieChart, BarChart } from "react-native-chart-kit";
 const AdminDashboard = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible1, setModalVisible1] = useState(false);
+  const [page, setPage] = useState(1);
   const data = [
     { id: 1, name: "Sukesh Kumar", kitNo: 555555, j: "View", k: "View" },
     { id: 2, name: "Hareesh Ketu", kitNo: 552555, j: "View", k: "View" },
@@ -173,6 +174,13 @@ const AdminDashboard = () => {
             </Text>
           </View>
         </View>
+
+        <View style={{flexDirection: "row", marginTop:10, width: "93%", alignSelf:"center", borderRadius: 10, backgroundColor:"#41a16d"}}>
+          <TouchableOpacity onPress={()=>setPage(1)} style={[styles.tabs, {backgroundColor: page === 1 ? "#128a49":"#41a16d"}]}><Text style={styles.tabstext}>Farmers</Text></TouchableOpacity>
+          <TouchableOpacity onPress={()=>setPage(2)} style={[styles.tabs, {backgroundColor: page === 2 ? "#128a49":"#41a16d"}]}><Text style={styles.tabstext}>Field Officers</Text></TouchableOpacity>
+          <TouchableOpacity onPress={()=>setPage(3)} style={[styles.tabs, {backgroundColor: page === 3 ? "#128a49":"#41a16d"}]}><Text style={styles.tabstext}>Registered Details</Text></TouchableOpacity>
+        </View>
+
         <View
           style={[
             styles.item,
@@ -451,4 +459,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     color: "#666",
   },
+  tabs:{
+    width: "33.33%",
+    paddingVertical: 8,
+    justifyContent:"center",
+    alignItems:"center",
+    backgroundColor:"#41a16d",
+    borderRadius: 10
+  },
+  tabstext:{
+    color:"white",
+    fontWeight:"bold",
+    textAlign:"center"
+  }
 });
