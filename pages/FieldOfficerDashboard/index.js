@@ -79,60 +79,146 @@ const FieldOfficerDashboard = () => {
   }
 
   return (
-    <LinearGradient colors={['#128a49', "#128a49", "white", "white"]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.container}>
-      <LinearGradient style={styles.heading} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={["#128a49", "#0e6e3a"]}>
+    <LinearGradient
+      colors={["#128a49", "#128a49", "white", "white"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+      style={styles.container}
+    >
+      <LinearGradient
+        style={styles.heading}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        colors={["#128a49", "#0e6e3a"]}
+      >
         <Text style={styles.title}>Dashboard</Text>
       </LinearGradient>
       <View style={styles.body}>
-        <View style={styles.farmerdetails} >
-          <Image source={require("../../assets/officer.png")} style={{ width: 90, height: 90 }} />
-          <View style={{ paddingLeft: "3%", }}>
+        <View style={styles.farmerdetails}>
+          <Image
+            source={require("../../assets/officer.png")}
+            style={{ width: 90, height: 90 }}
+          />
+          <View style={{ paddingLeft: "3%" }}>
             <Text style={styles.name}>FO Name</Text>
             <Text style={styles.area}>Village, District, State</Text>
             <Text style={styles.area}>Mobile: +91 9876543120</Text>
-            <Text style={{ fontSize: 15, color: "#3d3d3d", fontWeight: "bold" }}>Number of requests: 12345</Text>
+            <Text
+              style={{ fontSize: 15, color: "#3d3d3d", fontWeight: "bold" }}
+            >
+              Number of requests: 12345
+            </Text>
           </View>
         </View>
-        <View style={[styles.item, { backgroundColor: "#2a965b", marginBottom: 0, marginTop: 10 }]}>
-
-          <View style={{ width: wp("11.5%"), alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ fontSize: hp('2%'), fontWeight: 'bold', color: "white" }}>S.No.</Text>
+        <View
+          style={[
+            styles.item,
+            { backgroundColor: "#2a965b", marginBottom: 0, marginTop: 10 },
+          ]}
+        >
+          <View
+            style={{
+              width: wp("11.5%"),
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{ fontSize: hp("2%"), fontWeight: "bold", color: "white" }}
+            >
+              S.No.
+            </Text>
           </View>
 
-          <View style={{ width: wp("30%"), alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ fontSize: hp('2%'), fontWeight: "bold", color: "white" }}>Farmer Name</Text>
+          <View
+            style={{
+              width: wp("30%"),
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{ fontSize: hp("2%"), fontWeight: "bold", color: "white" }}
+            >
+              Farmer Name
+            </Text>
           </View>
-          <View style={{ width: wp('18%'), alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ fontSize: hp('2%'), fontWeight: "bold", color: "white" }}>Kit No.</Text>
+          <View
+            style={{
+              width: wp("18%"),
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{ fontSize: hp("2%"), fontWeight: "bold", color: "white" }}
+            >
+              Kit No.
+            </Text>
           </View>
-          <View style={{ width: wp('14.5'), alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ fontSize: hp('2%'), fontWeight: "bold", color: "white" }}>Details</Text>
+          <View
+            style={{
+              width: wp("14.5"),
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{ fontSize: hp("2%"), fontWeight: "bold", color: "white" }}
+            >
+              Details
+            </Text>
           </View>
-          <View style={{ width: wp('19.5%'), alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ fontSize: hp('2%'), fontWeight: "bold", color: "white" }}>Respond</Text>
+          <View
+            style={{
+              width: wp("19.5%"),
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{ fontSize: hp("2%"), fontWeight: "bold", color: "white" }}
+            >
+              Respond
+            </Text>
           </View>
-
         </View>
-        <FlatList data={data}
+        <FlatList
+          data={data}
           renderItem={item}
           keyExtractor={(item, index) => index.toString()}
         />
       </View>
 
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}>
+      <Modal animationType="fade" transparent={true} visible={modalVisible}>
         <View style={styles.soildetials}>
-          <View style={{ marginTop: 15, marginLeft: '5%', paddingBottom: 10, marginRight: "5%", borderBottomWidth: 2, borderColor: "#d0e8db" }}>
-            <Text style={[styles.name, { fontSize: 18, fontWeight: "bold", color: "#4d4d4d" }]}>FO Name</Text>
+          <View
+            style={{
+              marginTop: 15,
+              marginLeft: "5%",
+              paddingBottom: 10,
+              marginRight: "5%",
+              borderBottomWidth: 2,
+              borderColor: "#d0e8db",
+            }}
+          >
+            <Text
+              style={[
+                styles.name,
+                { fontSize: 18, fontWeight: "bold", color: "#4d4d4d" },
+              ]}
+            >
+              FO Name
+            </Text>
             <Text style={styles.area}>Village, District, State</Text>
             <Text style={styles.area}>Mobile: +91 9876543120</Text>
-            <Text style={{ fontSize: 15, color: "#3d3d3d" }}>SISHMA Kit No.: 12345</Text>
+            <Text style={{ fontSize: 15, color: "#3d3d3d" }}>
+              SISHMA Kit No.: 12345
+            </Text>
           </View>
           <PieChart
             data={npmdata}
-            width={Dimensions.get("screen").width * 3.4 / 4}
+            width={(Dimensions.get("screen").width * 3.4) / 4}
             height={180}
             paddingLeft={10}
             chartConfig={chartConfig}
@@ -145,37 +231,59 @@ const FieldOfficerDashboard = () => {
           <BarChart
             style={{ backgroundColor: "white", paddingLeft: 15 }}
             data={nutrients}
-            width={Dimensions.get("screen").width * 3 / 4}
+            width={(Dimensions.get("screen").width * 3) / 4}
             height={180}
             chartConfig={chartConfig}
             // verticalLabelRotation={30}
           />
           <Text style={styles.modalval}>PH: 10.6</Text>
           <Text style={styles.modalval}>Soil Moisture: 35%</Text>
-          <TouchableOpacity style={[styles.modalval,{paddingLeft: 0, elevation: 1, backgroundColor: "#128a49", alignItems:"center", paddingVertical: 10}]}>
-            <Text style={{color:"white", fontWeight:"bold", fontSize:15}}>Respond</Text>
+          <TouchableOpacity
+            style={[
+              styles.modalval,
+              {
+                paddingLeft: 0,
+                elevation: 1,
+                backgroundColor: "#128a49",
+                alignItems: "center",
+                paddingVertical: 10,
+              },
+            ]}
+          >
+            <Text style={{ color: "white", fontWeight: "bold", fontSize: 15 }}>
+              Respond
+            </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => setModalVisible(false)}
+          <TouchableOpacity
+            onPress={() => setModalVisible(false)}
             style={{
-              position: "absolute", right: 15, top: 15, borderRadius: 20, borderWidth: 0.7,
-              borderColor: "green", alignItems: "center", justifyContent: "center", backgroundColor: "#e7f3ed"
+              position: "absolute",
+              right: 15,
+              top: 15,
+              borderRadius: 20,
+              borderWidth: 0.7,
+              borderColor: "green",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "#e7f3ed",
             }}
           >
             <Ionicons name="close" style={{ fontSize: 30 }} color="black" />
           </TouchableOpacity>
         </View>
       </Modal>
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible1}>
-        <Button title="Confirm" onPress={() => setModalVisible1(false)}></Button>
+      <Modal animationType="fade" transparent={true} visible={modalVisible1}>
+        <Button
+          color="#128a49"
+          title="Confirm"
+          onPress={() => setModalVisible1(false)}
+        ></Button>
         <FieldOfficerSuggestion />
       </Modal>
       <StatusBar />
     </LinearGradient>
-  )
+  );
 }
 
 export default FieldOfficerDashboard
