@@ -27,8 +27,32 @@ import Routepage from "../../pages/RoutePage";
 import { Language } from "../../providers/languageProvider";
 import { transcription } from "../../utils/lang";
 import ConfirmGoogleCaptcha from "react-native-google-recaptcha-v2";
+import { FirebaseRecaptchaVerifier, FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
+
+import { initializeApp } from "firebase/app";
+import {getAuth, PhoneAuthProvider, signInWithCredential} from 'firebase/auth';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBBd2Q6yuZ1gBpOw33d-SkUB0zvZ9vWyUc",
+  authDomain: "sishma-c002d.firebaseapp.com",
+  projectId: "sishma-c002d",
+  storageBucket: "sishma-c002d.appspot.com",
+  messagingSenderId: "246497938994",
+  appId: "1:246497938994:web:535fd218a5cfd0a043762b",
+  measurementId: "G-TB15DW4XZY"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app)
 
 export default function Login({ navigation }) {
+
+  const recaptchaVerifier = React.useRef(null);
+  const [phoneData, setPhoneData] = useState();
+  const [verificationId, setVerificationId] = React.useState();
+  const [verificationCode, setVerificationCode] = React.useState();
+  const [step, setStep] = React.useState(1);
+
   const lang = useContext(Language);
   const [data, setData] = useState([
     {
@@ -70,7 +94,6 @@ export default function Login({ navigation }) {
 
   // Captcha Setup
   let captchaForm = null;
-  let siteKey = "hololo";
   onMessage = event => {
       if (event && event.nativeEvent.data) {
         if (['cancel', 'error', 'expired'].includes(event.nativeEvent.data)) {
@@ -88,6 +111,10 @@ export default function Login({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <FirebaseRecaptchaVerifierModal
+        ref={recaptchaVerifier}
+        firebaseConfig={firebaseConfig}
+      />
       <LinearGradient
         style={[
           styles.circle,
@@ -137,7 +164,7 @@ export default function Login({ navigation }) {
 
       <View style={styles.loginContainer}>
         <View style={{ width: wp("75%") }}>
-          <View
+          {step === 1 &&<View
             style={{
               flexDirection: "row",
               justifyContent: "space-around",
@@ -146,9 +173,9 @@ export default function Login({ navigation }) {
           >
             <Validation
               placeholderText={transcription[lang.language]["aadhaarnum"]}
-              onChangeText={(val) => textInputAadhar(val)}
+              onChangeText={(val) => setPhoneData(val)}
               onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
-              maxLength={12}
+              maxLength={14}
             />
             <Icon name="address-card"  style={{left:-20, bottom : 5}} size={25} color="#6e6e6e" />
             {data.check_textInputAadhar ? (
@@ -162,38 +189,57 @@ export default function Login({ navigation }) {
               </Animatable.View>
             ) : null}
           </View>
-          {data.isValidAadhar ? (
+          }
+          {step === 1 && data.isValidAadhar ? (
             true
-          ) : (
-            <Animatable.View animation="fadeInLeft" duration={500}>
+            ) : (
+              <Animatable.View animation="fadeInLeft" duration={500}>
               <Text style={{ color: "red" }}>
                 Aadhar must be 12 characters long.
               </Text>
             </Animatable.View>
-          )}
+          )
+            }
           <View style={{ paddingBottom: wp("2%") }} />
-          <View
+          {step === 2 &&<View
             style={{
               flexDirection: "row",
               justifyContent: "space-around",
               alignItems: "center",
             }}
           >
-          <InputText placeholderText={transcription[lang.language]["password"]} visibility={true} />
-          <Icon name="ellipsis-h"  style={{left:-20, bottom : 5}} size={25} color="#6e6e6e" />
+            <InputText onChangeText={(val)=>setVerificationCode(val)}  placeholderText={transcription[lang.language]["password"]} visibility={true} />
+            <Icon name="ellipsis-h"  style={{left:-20, bottom : 5}} size={25} color="#6e6e6e" />
           </View>
+          }
           <View style={{ padding: wp("5%") }} />
           <RouteButton
-            onPress={() => {
-              {
-                data.isValidAadhar
-                  ? navigation.navigate("Hello")
-                  : Alert.alert(
-                      "Error!",
-                      "Please recheck  and fill correctly!",
-                      [{ text: "Okay" }]
+            onPress={async () => {
+              if(step === 1){
+                try{
+                  const phoneProvider = new PhoneAuthProvider(auth);
+                  const verificationId = await phoneProvider.verifyPhoneNumber(
+                    phoneData,
+                    recaptchaVerifier.current
                     );
-              }
+                    console.log(phoneData)
+                    setVerificationId(verificationId);
+                    setStep(2);
+                    console.log("done")
+                  }catch(err){
+                    console.log(err)
+                  }
+                } else {
+                  try{
+                    console.log(verificationCode);
+                    const credential = PhoneAuthProvider.credential(verificationId, verificationCode)
+                    const result = await signInWithCredential(auth, credential);
+                    console.log(result.user.isAnonymous);
+                    console.log("Done");
+                  }catch(err){
+                    console.log(err)
+                  }
+                }
             }}
             text={transcription[lang.language]["submit"]}
           />
