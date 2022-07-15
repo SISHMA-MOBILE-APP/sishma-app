@@ -35,7 +35,53 @@ import { Language } from "../../providers/languageProvider";
 import { transcription } from "../../utils/lang";
 import Login from "../../components/LoginOrRegister/Login";
 
+// Apollo Client
+import client from "../../providers/apiProvider";
+import { gql, useMutation } from "@apollo/client";
+import Loading from "../Loading";
+import { add } from "react-native-reanimated";
+
+const ADD_FIELD_OFFICER = gql`
+  mutation AddFieldOfficer(
+    $departmanent: String!,
+    $address: String!,
+    $state: String!,
+    $district: String!,
+    $village: String!,
+    $pin: String!,
+    $name: String!,
+    $empcode: String!,
+    $designation: String!,
+    $aadhar: String!,
+    $email: String!,
+    $phone: String!
+  ) {
+    addFieldOfficer(
+      departmanent: $departmanent,
+      address: $address,
+      state: $state,
+      district: $district,
+      village: $village,
+      pin: $pin,
+      name: $name,
+      empcode: $empcode,
+      designation: $designation,
+      aadhar: $aadhar,
+      email: $email,
+      phone: $phone
+    ) {
+      id
+    }
+  }
+`;
+
 const Officer = ({ navigation }) => {
+
+  const [addFieldOfficer, { fieldOfficerData, loading, error }] = useMutation(ADD_FIELD_OFFICER);
+
+  if (loading) return <Loading />;
+  if (error) return <Text> {`Submission error! ${error.message}`} </Text>;
+
   const [page, setPage] = React.useState(0);
   const [signInOptions, setSignOptions] = React.useState(false);
   const lang = useContext(Language);
@@ -439,7 +485,24 @@ const Officer = ({ navigation }) => {
                 count: true,
               }): setData({ ...data, count: false,});
                 // navigation.navigate('Login')
-              
+
+                addFieldOfficer({
+                  variables: {
+                    departmanent: "SENSE",
+                    address: "221B bleekers street",
+                    state: "solid",
+                    district: "karachi",
+                    village: "dholakpur",
+                    pin: "123456",
+                    name: "Bruce Wayne",
+                    empcode: "69",
+                    designation: "",
+                    aadhar: "123456789012",
+                    email: "batman@vit.com",
+                    phone: "+91 6969696969",
+                  },
+                });
+
               }}
               text={transcription[lang.language]["registerNow"]}
             />}
