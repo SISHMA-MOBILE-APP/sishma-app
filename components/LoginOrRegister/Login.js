@@ -27,11 +27,12 @@ import Routepage from "../../pages/RoutePage";
 import { Language } from "../../providers/languageProvider";
 import { transcription } from "../../utils/lang";
 import ConfirmGoogleCaptcha from "react-native-google-recaptcha-v2";
-import { FirebaseRecaptchaVerifier, FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
+import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 
 import { initializeApp } from "firebase/app";
 import { getAuth, PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
 import { gql, useQuery } from "@apollo/client";
+import { User } from "../../providers/userProvider";
 
 
 const GET_FARMER=gql`
@@ -39,6 +40,11 @@ const GET_FARMER=gql`
             farmer(
               aadhar: $aadhar
             ){
+              name
+              village
+              district
+              state
+              kitno
               phone
             }
           }
@@ -85,6 +91,7 @@ export default function Login({ navigation }) {
   const [verificationCode, setVerificationCode] = React.useState();
   const [step, setStep] = React.useState(1);
   const [option, setOption] = React.useState(1);
+  const userContext = useContext(User);
 
   const {loading, error, queryData, refetch} = useQuery(queries[option-1], {variables:{aadhar:phoneData}});
 
@@ -269,13 +276,14 @@ export default function Login({ navigation }) {
                   refetch({aadhar: phoneData})
                   .then(async (val)=>{
                     if(val.data.farmer != null){
+                      userContext.setUserData(val.data.farmer);
                       const phoneProvider = new PhoneAuthProvider(auth);
                       const verificationId = await phoneProvider.verifyPhoneNumber(
                         val.data.farmer.phone,
                         recaptchaVerifier.current
                       );
-                      console.log(phoneData)
                       setVerificationId(verificationId);
+                      console.log(userContext.userData)
                       setStep(2);
                     }else {
                       //handle error case
@@ -291,7 +299,15 @@ export default function Login({ navigation }) {
                   console.log(verificationCode);
                   const credential = PhoneAuthProvider.credential(verificationId, verificationCode)
                   const result = await signInWithCredential(auth, credential);
-                  console.log(result.user.isAnonymous);
+                  if(!result.user.isAnonymous){
+                    if(option == 1){
+                      navigation.navigate("FarmerDashboard");
+                    }else if(option == 2){
+                      navigation.navigate("OfficerDashboard");
+                    }else if(option == 3){
+                      navigation.navigate("AdminDashboard");
+                    }
+                  }
                   console.log("Done");
                 } catch (err) {
                   console.log(err)

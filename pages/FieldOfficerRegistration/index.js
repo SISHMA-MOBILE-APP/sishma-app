@@ -39,7 +39,6 @@ import Login from "../../components/LoginOrRegister/Login";
 import client from "../../providers/apiProvider";
 import { gql, useMutation } from "@apollo/client";
 import Loading from "../Loading";
-import { add } from "react-native-reanimated";
 
 const ADD_FIELD_OFFICER = gql`
   mutation AddFieldOfficer(
