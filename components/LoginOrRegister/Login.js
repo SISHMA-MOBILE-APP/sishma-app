@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState, useContext } from "react";
-import Icon from 'react-native-vector-icons/FontAwesome5';  
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import colors from "../../utils/colors";
 import RouteButton from "../../components/CustomButton";
 import InputText from "../../components/CustomTextField";
@@ -30,7 +30,39 @@ import ConfirmGoogleCaptcha from "react-native-google-recaptcha-v2";
 import { FirebaseRecaptchaVerifier, FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 
 import { initializeApp } from "firebase/app";
-import {getAuth, PhoneAuthProvider, signInWithCredential} from 'firebase/auth';
+import { getAuth, PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
+import { gql, useQuery } from "@apollo/client";
+
+
+const GET_FARMER=gql`
+          query Farmer($aadhar: String!){
+            farmer(
+              aadhar: $aadhar
+            ){
+              phone
+            }
+          }
+          `;
+const GET_FIELD_OFFICER=gql`
+          query GetFieldOfficer($aadhar: String!){
+            fieldofficer(
+              aadhar: $aadhar
+            ){
+              phone
+            }
+          }
+          `;
+const GET_ADMIN=gql`
+          query GetAdmin($aadhar: String!){
+            admin(
+              aadhar: $aadhar
+            ){
+              phone
+            }
+          }
+          `;
+const queries = [GET_FARMER, GET_FIELD_OFFICER, GET_ADMIN];
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBBd2Q6yuZ1gBpOw33d-SkUB0zvZ9vWyUc",
@@ -52,6 +84,9 @@ export default function Login({ navigation }) {
   const [verificationId, setVerificationId] = React.useState();
   const [verificationCode, setVerificationCode] = React.useState();
   const [step, setStep] = React.useState(1);
+  const [option, setOption] = React.useState(1);
+
+  const {loading, error, queryData, refetch} = useQuery(queries[option-1], {variables:{aadhar:phoneData}});
 
   const lang = useContext(Language);
   const [data, setData] = useState([
@@ -95,17 +130,17 @@ export default function Login({ navigation }) {
   // Captcha Setup
   let captchaForm = null;
   onMessage = event => {
-      if (event && event.nativeEvent.data) {
-        if (['cancel', 'error', 'expired'].includes(event.nativeEvent.data)) {
-            captchaForm.hide();
-            return;
-        } else {
-            console.log('Verified code from Google', event.nativeEvent.data);
-            setTimeout(() => {
-                captchaForm.hide();
-                // do what ever you want here
-            }, 1500);
-        }
+    if (event && event.nativeEvent.data) {
+      if (['cancel', 'error', 'expired'].includes(event.nativeEvent.data)) {
+        captchaForm.hide();
+        return;
+      } else {
+        console.log('Verified code from Google', event.nativeEvent.data);
+        setTimeout(() => {
+          captchaForm.hide();
+          // do what ever you want here
+        }, 1500);
+      }
     }
   };
 
@@ -150,21 +185,21 @@ export default function Login({ navigation }) {
         end={{ x: 0.75, y: 0.8 }}
       />
 
-      <Image source={require("../../assets/sishma-white.png")} style={[styles.logo, {width: 140, height: 140, borderRadius: 70}]} />
+      <Image source={require("../../assets/sishma-white.png")} style={[styles.logo, { width: 140, height: 140, borderRadius: 70 }]} />
       <Text style={styles.greet}>{transcription[lang.language]["login"]}</Text>
 
-      <View style={{position:"absolute",top:hp("4"),right:0}}>
-      <TouchableOpacity onPress={()=>{
+      <View style={{ position: "absolute", top: hp("4"), right: 0 }}>
+        <TouchableOpacity onPress={() => {
           navigation.navigate('LanguagePicker')
-          }} style={styles.changeLanguage}>
-          <Image source={require("../../assets/translation.png")} style={{width: 20, height: 20, marginRight: 5}} />
+        }} style={styles.changeLanguage}>
+          <Image source={require("../../assets/translation.png")} style={{ width: 20, height: 20, marginRight: 5 }} />
           <Text style={{ fontWeight: "bold", color: "#2b2b2b", fontSize: 14, }}>Language</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.loginContainer}>
         <View style={{ width: wp("75%") }}>
-          {step === 1 &&<View
+          {step === 1 && <><View
             style={{
               flexDirection: "row",
               justifyContent: "space-around",
@@ -177,8 +212,8 @@ export default function Login({ navigation }) {
               onEndEditing={(e) => handleValidAadhar(e.nativeEvent.text)}
               maxLength={14}
             />
-            <Icon name="address-card"  style={{left:-20, bottom : 5}} size={25} color="#6e6e6e" />
-            {data.check_textInputAadhar ? (
+            <Icon name="address-card" style={{ left: -20, bottom: 5 }} size={25} color="#6e6e6e" />
+            {step === 1 &&  data.check_textInputAadhar ? (
               <Animatable.View animation="bounceIn">
                 <Feather
                   style={{ right: wp("15%") }}
@@ -189,57 +224,79 @@ export default function Login({ navigation }) {
               </Animatable.View>
             ) : null}
           </View>
+          </>
           }
-          {step === 1 && data.isValidAadhar ? (
-            true
-            ) : (
+          {data.isValidAadhar ? (
+            null
+          ) : (
+            <>
+            {step === 1 &&(
+
               <Animatable.View animation="fadeInLeft" duration={500}>
               <Text style={{ color: "red" }}>
                 Aadhar must be 12 characters long.
               </Text>
             </Animatable.View>
+              )}
+            {step === 1 && 
+          <View style={{flexDirection: "row", marginTop:10, width: "100%", alignSelf:"center", borderRadius: 10, backgroundColor:"#128a49", borderRadius: 20}}>
+          <TouchableOpacity onPress={()=>setOption(1)} style={[styles.tabs, {backgroundColor: option === 1 ? "#128a49":"#41a16d"}]}><Text style={styles.tabstext}>Farmers</Text></TouchableOpacity>
+          <TouchableOpacity onPress={()=>setOption(2)} style={[styles.tabs, {backgroundColor: option === 2 ? "#128a49":"#41a16d"}]}><Text style={styles.tabstext}>Field Officer</Text></TouchableOpacity>
+          <TouchableOpacity onPress={()=>setOption(3)} style={[styles.tabs, {backgroundColor: option === 3 ? "#128a49":"#41a16d"}]}><Text style={styles.tabstext}>Admin</Text></TouchableOpacity>
+        </View>
+          }
+            </>
           )
-            }
+          }
           <View style={{ paddingBottom: wp("2%") }} />
-          {step === 2 &&<View
+          {step === 2 && <View
             style={{
               flexDirection: "row",
               justifyContent: "space-around",
               alignItems: "center",
             }}
           >
-            <InputText onChangeText={(val)=>setVerificationCode(val)}  placeholderText={transcription[lang.language]["password"]} visibility={true} />
-            <Icon name="ellipsis-h"  style={{left:-20, bottom : 5}} size={25} color="#6e6e6e" />
+            <InputText onChangeText={(val) => setVerificationCode(val)} placeholderText={transcription[lang.language]["password"]} visibility={true} />
+            <Icon name="ellipsis-h" style={{ left: -20, bottom: 5 }} size={25} color="#6e6e6e" />
           </View>
           }
           <View style={{ padding: wp("5%") }} />
           <RouteButton
             onPress={async () => {
-              if(step === 1){
-                try{
-                  const phoneProvider = new PhoneAuthProvider(auth);
-                  const verificationId = await phoneProvider.verifyPhoneNumber(
-                    phoneData,
-                    recaptchaVerifier.current
-                    );
-                    console.log(phoneData)
-                    setVerificationId(verificationId);
-                    setStep(2);
-                    console.log("done")
-                  }catch(err){
-                    console.log(err)
-                  }
-                } else {
-                  try{
-                    console.log(verificationCode);
-                    const credential = PhoneAuthProvider.credential(verificationId, verificationCode)
-                    const result = await signInWithCredential(auth, credential);
-                    console.log(result.user.isAnonymous);
-                    console.log("Done");
-                  }catch(err){
-                    console.log(err)
-                  }
+              if (step === 1) {
+                try {
+                  console.log(phoneData)
+                  refetch({aadhar: phoneData})
+                  .then(async (val)=>{
+                    if(val.data.farmer != null){
+                      const phoneProvider = new PhoneAuthProvider(auth);
+                      const verificationId = await phoneProvider.verifyPhoneNumber(
+                        val.data.farmer.phone,
+                        recaptchaVerifier.current
+                      );
+                      console.log(phoneData)
+                      setVerificationId(verificationId);
+                      setStep(2);
+                    }else {
+                      //handle error case
+                    }
+                  })
+
+                  console.log("done")
+                } catch (err) {
+                  console.log(err)
                 }
+              } else {
+                try {
+                  console.log(verificationCode);
+                  const credential = PhoneAuthProvider.credential(verificationId, verificationCode)
+                  const result = await signInWithCredential(auth, credential);
+                  console.log(result.user.isAnonymous);
+                  console.log("Done");
+                } catch (err) {
+                  console.log(err)
+                }
+              }
             }}
             text={transcription[lang.language]["submit"]}
           />
@@ -252,34 +309,34 @@ export default function Login({ navigation }) {
             onMessage={this.onMessage}
         /> */}
 
-        <TouchableOpacity  onPress={() => {
-              //setPage(1);
-              //navigation.navigate('RoutePage')
-            }}>
+        <TouchableOpacity onPress={() => {
+          //setPage(1);
+          //navigation.navigate('RoutePage')
+        }}>
           <Text
             style={{
               // marginTop: hp(0),
               // textAlign:"left",
-               padding:"2%",
+              padding: "2%",
               // paddingLeft:"8%",
             }}
           >{transcription[lang.language]["forgotPassword"]}
           </Text>
         </TouchableOpacity>
-        
-        <TouchableOpacity  onPress={() => {
-              //setPage(1);
-             navigation.navigate('RoutePage')
-            }}>
+
+        <TouchableOpacity onPress={() => {
+          //setPage(1);
+          navigation.navigate('RoutePage')
+        }}>
           <Text
             style={{
               // marginTop: hp(2),
-              textAlign:"center",
-               padding:"2%",
+              textAlign: "center",
+              padding: "2%",
               // paddingRight:"10%",
             }}
           >
-           {transcription[lang.language]["notReg"]}
+            {transcription[lang.language]["notReg"]}
           </Text>
         </TouchableOpacity>
         {/* <View style={{position:"absolute",top:hp("4"),right:0}}>
@@ -390,15 +447,28 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "white",
-    paddingBottom:10
+    paddingBottom: 10
   },
-  changeLanguage:{
-    backgroundColor:"white",
+  changeLanguage: {
+    backgroundColor: "white",
     paddingVertical: 5,
     paddingHorizontal: 10,
     borderRadius: 15,
     elevation: 10,
     flexDirection: "row",
     right: 10
+  },
+  tabs:{
+    width: "33.33%",
+    paddingVertical: 10,
+    justifyContent:"center",
+    alignItems:"center",
+    backgroundColor:"#41a16d",
+    borderRadius: 20
+  },
+  tabstext:{
+    color:"white",
+    fontWeight:"bold",
+    textAlign:"center"
   }
 });

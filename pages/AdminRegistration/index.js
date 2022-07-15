@@ -35,7 +35,6 @@ import villageData, { selum } from '../../utils/villages';
 import client from "../../providers/apiProvider";
 import { gql, useMutation } from "@apollo/client";
 import Loading from "../Loading";
-import { add } from "react-native-reanimated";
 
 const ADD_ADMIN = gql`
   mutation AddAdmin(
