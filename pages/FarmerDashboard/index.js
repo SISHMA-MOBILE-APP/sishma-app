@@ -1,8 +1,9 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, Text, StyleSheet, StatusBar, Animated, Image, Dimensions, ImageBackground } from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import ItemCard from '../../components/ItemCard';
+import { User } from '../../providers/userProvider';
 
 const images = [
   {
@@ -24,6 +25,8 @@ const FarmerDashboard = ({navigation}) => {
   const carousel = React.useRef(null);
   const grow = React.useRef(new Animated.Value(0)).current;
   const slideLeft = React.useRef(new Animated.Value(200)).current;
+  const userContext = useContext(User);
+
   React.useEffect(()=>{
     Animated.timing(slideLeft,{
       toValue: 1,
@@ -45,10 +48,14 @@ const FarmerDashboard = ({navigation}) => {
         <Animated.View style={[styles.farmerdetails, {left: slideLeft }]} >
           <Image source={require("../../assets/farmer.png")} style={{ width: 100, height: 100 }} />
           <View style={{ paddingLeft: "3%", }}>
-            <Text style={styles.name}>Farmer Name</Text>
-            <Text style={styles.area}>Village, District, State</Text>
-            <Text style={styles.area}>Mobile: +91 9876543120</Text>
-            <Text style={{ fontSize: 15, color: "#3d3d3d", fontWeight: "bold" }}>Sishma Kit Number: 12345</Text>
+            <Text style={styles.name}>{userContext.userData.name}</Text>
+            <Text style={styles.area}>{
+              userContext.userData.village+ " " + 
+              userContext.userData.district+ " " +
+              userContext.userData.state
+            }</Text>
+            <Text style={styles.area}>Mobile: {userContext.userData.phone}</Text>
+            <Text style={{ fontSize: 15, color: "#3d3d3d", fontWeight: "bold" }}>Sishma Kit Number: {userContext.userData.kitno}</Text>
           </View>
         </Animated.View>
         <View style={{height:"32%"}}>
