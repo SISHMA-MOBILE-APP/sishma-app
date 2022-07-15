@@ -10,7 +10,7 @@ import {
   Dimensions,
   TouchableOpacity
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import {
   widthPercentageToDP as wp,
@@ -20,26 +20,60 @@ import { Ionicons } from "@expo/vector-icons";
 import FieldOfficerSuggestion from "../FieldOfficerSuggestion";
 import { LinearGradient } from "expo-linear-gradient";
 import { PieChart, BarChart } from "react-native-chart-kit";
+import { User } from "../../providers/userProvider";
+import { gql, useQuery } from "@apollo/client";
+
+const GET_ALL_FARMER = gql`
+query {
+  getAllFarmer{
+    name,
+    kitno
+    aadhar
+  }
+}
+`
 
 const AdminDashboard = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible1, setModalVisible1] = useState(false);
   const [page, setPage] = useState(1);
-  const data = [
-    { id: 1, name: "Sukesh Kumar", kitNo: 555555, j: "View", k: "View" },
-    { id: 2, name: "Hareesh Ketu", kitNo: 552555, j: "View", k: "View" },
-    { id: 3, name: "Raman Nivasan", kitNo: 553555, j: "View", k: "View" },
-    { id: 4, name: "Sukesh Kumar Sahoo", kitNo: 585555, j: "View", k: "View" },
-    { id: 5, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
-    { id: 6, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
-    { id: 7, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
-    { id: 8, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
-    { id: 9, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
-    { id: 10, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
-    { id: 11, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
-    { id: 12, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
-    { id: 13, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
-  ];
+  const [farmers, setFarmers] = useState([]);
+  const userContext = useContext(User);
+
+  const farmersFetch = useQuery(GET_ALL_FARMER);
+  const farmerdata = [];
+  useEffect(()=>{
+    farmersFetch.refetch()
+    .then(result=>{
+      if(result.data.getAllFarmer){
+        result.data.getAllFarmer.forEach(val=>{
+          farmerdata.push({
+            name: val.name,
+            kitno: val.kitno,
+            aadhar: val.aadhar
+          })
+        })
+        setFarmers(farmerdata);
+      }
+    })
+    .then(()=>console.log(farmerdata))
+  }, [])
+  // const data = []
+  // const data = [
+  //   { id: 1, name: "Sukesh Kumar", kitNo: 555555, j: "View", k: "View" },
+  //   { id: 2, name: "Hareesh Ketu", kitNo: 552555, j: "View", k: "View" },
+  //   { id: 3, name: "Raman Nivasan", kitNo: 553555, j: "View", k: "View" },
+  //   { id: 4, name: "Sukesh Kumar Sahoo", kitNo: 585555, j: "View", k: "View" },
+  //   { id: 5, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
+  //   { id: 6, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
+  //   { id: 7, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
+  //   { id: 8, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
+  //   { id: 9, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
+  //   { id: 10, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
+  //   { id: 11, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
+  //   { id: 12, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
+  //   { id: 13, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
+  // ];
   const npmdata = [
     {
       name: "Nitrogen",
@@ -107,7 +141,7 @@ const AdminDashboard = () => {
             justifyContent: "center",
           }}
         >
-          <Text style={{ fontSize: hp("2%") }}>{item.kitNo}</Text>
+          <Text style={{ fontSize: hp("2%") }}>{item.kitno}</Text>
         </View>
         <TouchableOpacity
           onPress={() =>
@@ -123,7 +157,7 @@ const AdminDashboard = () => {
               textAlign: "center",
             }}
           >
-            {item.j}
+            View
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -164,9 +198,13 @@ const AdminDashboard = () => {
             style={{ width: 100, height: 100 }}
           />
           <View style={{ paddingLeft: "3%" }}>
-            <Text style={styles.name}>Admin</Text>
-            <Text style={styles.area}>Village, District, State</Text>
-            <Text style={styles.area}>Mobile: +91 9876543120</Text>
+            <Text style={styles.name}>{userContext.userData.name}</Text>
+            <Text style={styles.area}>{
+              userContext.userData.village+" "+
+              userContext.userData.district+" "+
+              userContext.userData.state
+            }</Text>
+            <Text style={styles.area}>Mobile: {userContext.userData.phone}</Text>
             <Text
               style={{ fontSize: 15, color: "#3d3d3d", fontWeight: "bold" }}
             >
@@ -255,7 +293,7 @@ const AdminDashboard = () => {
           </View>
         </View>
         <FlatList
-          data={data}
+          data={farmers}
           renderItem={item}
           keyExtractor={(item, index) => index.toString()}
         />

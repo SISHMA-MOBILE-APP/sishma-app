@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, FlatList, Button, Modal, StatusBar, Image, Dimensions } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import {
   widthPercentageToDP as wp,
@@ -10,12 +10,16 @@ import { TouchableOpacity } from 'react-native';
 import FieldOfficerSuggestion from '../FieldOfficerSuggestion';
 import { LinearGradient } from "expo-linear-gradient";
 import { PieChart, BarChart } from 'react-native-chart-kit'
+import { User } from '../../providers/userProvider';
 
 
 
 const FieldOfficerDashboard = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible1, setModalVisible1] = useState(false);
+
+  const userContext = useContext(User);
+
   const data = [
     { id: 1, name: 'Sukesh Kumar', kitNo: 555555, j: 'View', k: 'View' },
     { id: 2, name: 'Hareesh Ketu', kitNo: 552555, j: 'View', k: 'View' },
