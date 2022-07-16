@@ -32,48 +32,196 @@ query {
   }
 }
 `
+const GET_ALL_OFFICERS = gql`
+query {
+  getAllFieldOfficer{
+    name,
+    phone
+    aadhar
+  }
+}
+`
 
 const AdminDashboard = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible1, setModalVisible1] = useState(false);
   const [page, setPage] = useState(1);
   const [farmers, setFarmers] = useState([]);
+  const [farmerEditVisible, setFarmerEditVisible] = useState(false)
+  const [officers, setOfficers] = useState([]);
+  const [surveys, setSurveys] = useState([]);
   const userContext = useContext(User);
 
   const farmersFetch = useQuery(GET_ALL_FARMER);
+  const officersFetch = useQuery(GET_ALL_OFFICERS);
   const farmerdata = [];
-  useEffect(()=>{
+  const fieldOfficerdata = [];
+
+
+  const itemFarmer = ({ item, index }) => {
+    return (
+      <View style={styles.item}>
+        <View
+          style={{
+            width: wp("11%"),
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={{ fontSize: hp("2%"), fontWeight: "bold" }}>
+            {index+1}
+          </Text>
+        </View>
+  
+        <View
+          style={{
+            width: wp("30%"),
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={{ fontSize: hp("2%") }}>{item.name}</Text>
+        </View>
+        <View
+          style={{
+            width: wp("18"),
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={{ fontSize: hp("2%") }}>{item.kitno}</Text>
+        </View>
+        <TouchableOpacity
+          onPress={() =>
+            item.id > 0 ? setModalVisible(true) : console.log("Nope")
+          }
+          style={[styles.details, {width:wp("17")}]}
+        >
+          <Text
+            style={{
+              fontSize: hp("2%"),
+              color: "black",
+              fontWeight: "bold",
+              textAlign: "center",
+            }}
+          >
+            View
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>setFarmerEditVisible(true)}
+          style={[styles.respond, {width: wp("17.5")}]}
+        >
+          <Text
+            style={{ fontSize: hp("2%"), color: "white", fontWeight: "bold" }}
+          >
+            Edit
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+  
+  const itemOfficer = ({ item, index }) => {
+    return (
+      <View style={styles.item}>
+        <View
+          style={{
+            width: wp("5%"),
+            marginLeft:10,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={{ fontSize: hp("2%"), fontWeight: "bold" }}>
+            {index+1}
+          </Text>
+        </View>
+  
+        <View
+          style={{
+            width: wp("30%"),
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={{ fontSize: hp("2%") }}>{item.name}</Text>
+        </View>
+        <View
+          style={{
+            width: wp("27"),
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={{ fontSize: hp("2%") }}>{item.phone}</Text>
+        </View>
+        <TouchableOpacity
+          onPress={() =>
+            item.id > 0 ? setModalVisible(true) : console.log("Nope")
+          }
+          style={styles.details}
+        >
+          <Text
+            style={{
+              fontSize: hp("2%"),
+              color: "black",
+              fontWeight: "bold",
+              textAlign: "center",
+            }}
+          >
+            View
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            item.id > 0 ? setModalVisible1(true) : console.log("Nope")
+          }
+          style={styles.respond}
+        >
+          <Text
+            style={{ fontSize: hp("2%"), color: "white", fontWeight: "bold" }}
+          >
+            Edit
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
+
+
+  useEffect(() => {
     farmersFetch.refetch()
-    .then(result=>{
-      if(result.data.getAllFarmer){
-        result.data.getAllFarmer.forEach(val=>{
-          farmerdata.push({
-            name: val.name,
-            kitno: val.kitno,
-            aadhar: val.aadhar
+      .then(result => {
+        if (result.data.getAllFarmer) {
+          result.data.getAllFarmer.forEach(val => {
+            farmerdata.push({
+              name: val.name,
+              kitno: val.kitno,
+              aadhar: val.aadhar
+            })
           })
-        })
-        setFarmers(farmerdata);
-      }
-    })
-    .then(()=>console.log(farmerdata))
+          setFarmers(farmerdata);
+        }
+      })
+      // .then(() => console.log(farmerdata))
+    officersFetch.refetch()
+      .then(result => {
+        if (result.data.getAllFieldOfficer) {
+          result.data.getAllFieldOfficer.forEach(val => {
+            fieldOfficerdata.push({
+              name: val.name,
+              phone: val.phone,
+              aadhar: val.aadhar
+            })
+          })
+          setOfficers(fieldOfficerdata);
+        }
+      })
+      .then(() => console.log(fieldOfficerdata))
+    
   }, [])
-  // const data = []
-  // const data = [
-  //   { id: 1, name: "Sukesh Kumar", kitNo: 555555, j: "View", k: "View" },
-  //   { id: 2, name: "Hareesh Ketu", kitNo: 552555, j: "View", k: "View" },
-  //   { id: 3, name: "Raman Nivasan", kitNo: 553555, j: "View", k: "View" },
-  //   { id: 4, name: "Sukesh Kumar Sahoo", kitNo: 585555, j: "View", k: "View" },
-  //   { id: 5, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
-  //   { id: 6, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
-  //   { id: 7, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
-  //   { id: 8, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
-  //   { id: 9, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
-  //   { id: 10, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
-  //   { id: 11, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
-  //   { id: 12, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
-  //   { id: 13, name: "Sukesh Kumar", kitNo: 555755, j: "View", k: "View" },
-  // ];
   const npmdata = [
     {
       name: "Nitrogen",
@@ -110,71 +258,6 @@ const AdminDashboard = () => {
     backgroundGradientTo: "white",
     color: (opacity = 1) => `green`,
   };
-  const item = ({ item, index }) => {
-    return (
-      <View style={styles.item}>
-        <View
-          style={{
-            width: wp("11%"),
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Text style={{ fontSize: hp("2%"), fontWeight: "bold" }}>
-            {index}
-          </Text>
-        </View>
-
-        <View
-          style={{
-            width: wp("30%"),
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Text style={{ fontSize: hp("2%") }}>{item.name}</Text>
-        </View>
-        <View
-          style={{
-            width: wp("18"),
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Text style={{ fontSize: hp("2%") }}>{item.kitno}</Text>
-        </View>
-        <TouchableOpacity
-          onPress={() =>
-            item.id > 0 ? setModalVisible(true) : console.log("Nope")
-          }
-          style={styles.details}
-        >
-          <Text
-            style={{
-              fontSize: hp("2%"),
-              color: "black",
-              fontWeight: "bold",
-              textAlign: "center",
-            }}
-          >
-            View
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() =>
-            item.id > 0 ? setModalVisible1(true) : console.log("Nope")
-          }
-          style={styles.respond}
-        >
-          <Text
-            style={{ fontSize: hp("2%"), color: "white", fontWeight: "bold" }}
-          >
-            Respond
-          </Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
 
   return (
     <LinearGradient
@@ -200,8 +283,8 @@ const AdminDashboard = () => {
           <View style={{ paddingLeft: "3%" }}>
             <Text style={styles.name}>{userContext.userData.name}</Text>
             <Text style={styles.area}>{
-              userContext.userData.village+" "+
-              userContext.userData.district+" "+
+              userContext.userData.village + " " +
+              userContext.userData.district + " " +
               userContext.userData.state
             }</Text>
             <Text style={styles.area}>Mobile: {userContext.userData.phone}</Text>
@@ -213,10 +296,10 @@ const AdminDashboard = () => {
           </View>
         </View>
 
-        <View style={{flexDirection: "row", marginTop:10, width: "93%", alignSelf:"center", borderRadius: 10, backgroundColor:"#41a16d"}}>
-          <TouchableOpacity onPress={()=>setPage(1)} style={[styles.tabs, {backgroundColor: page === 1 ? "#128a49":"#41a16d"}]}><Text style={styles.tabstext}>Farmers</Text></TouchableOpacity>
-          <TouchableOpacity onPress={()=>setPage(2)} style={[styles.tabs, {backgroundColor: page === 2 ? "#128a49":"#41a16d"}]}><Text style={styles.tabstext}>Field Officers</Text></TouchableOpacity>
-          <TouchableOpacity onPress={()=>setPage(3)} style={[styles.tabs, {backgroundColor: page === 3 ? "#128a49":"#41a16d"}]}><Text style={styles.tabstext}>Registered Details</Text></TouchableOpacity>
+        <View style={{ flexDirection: "row", marginTop: 10, width: "93%", alignSelf: "center", borderRadius: 10, backgroundColor: "#41a16d" }}>
+          <TouchableOpacity onPress={() => setPage(1)} style={[styles.tabs, { backgroundColor: page === 1 ? "#128a49" : "#41a16d" }]}><Text style={styles.tabstext}>Farmers</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => setPage(2)} style={[styles.tabs, { backgroundColor: page === 2 ? "#128a49" : "#41a16d" }]}><Text style={styles.tabstext}>Field Officers</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => setPage(3)} style={[styles.tabs, { backgroundColor: page === 3 ? "#128a49" : "#41a16d" }]}><Text style={styles.tabstext}>Registered Details</Text></TouchableOpacity>
         </View>
 
         <View
@@ -249,7 +332,7 @@ const AdminDashboard = () => {
             <Text
               style={{ fontSize: hp("2%"), fontWeight: "bold", color: "white" }}
             >
-              Officer Name
+              {page === 1 ? "Farmer Name" : page === 2 ? "Officer Name" : "Survey No." }
             </Text>
           </View>
           <View
@@ -262,7 +345,7 @@ const AdminDashboard = () => {
             <Text
               style={{ fontSize: hp("2%"), fontWeight: "bold", color: "white" }}
             >
-              Id
+              {page===2 ? "Phone" : "Kit No"}
             </Text>
           </View>
           <View
@@ -292,12 +375,76 @@ const AdminDashboard = () => {
             </Text>
           </View>
         </View>
-        <FlatList
-          data={farmers}
-          renderItem={item}
-          keyExtractor={(item, index) => index.toString()}
-        />
+        {
+          page === 1 &&
+          <FlatList
+            data={farmers}
+            renderItem={itemFarmer}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        }
+        {
+          page === 2 &&
+          <FlatList
+            data={officers}
+            renderItem={itemOfficer}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        }
+        {
+          page === 3 &&
+          <FlatList
+            data={farmers}
+            renderItem={itemFarmer}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        }
       </View>
+
+
+      {/* EDIT FARMER DETAILS  */}
+      <Modal animationType="fade" transparent={true} visible={farmerEditVisible}>
+        <View style={styles.soildetials}>
+          <View
+            style={{
+              marginTop: 15,
+              marginLeft: "5%",
+              paddingBottom: 10,
+              marginRight: "5%",
+              borderBottomWidth: 2,
+              borderColor: "#d0e8db",
+            }}
+          >
+            <Text
+              style={[
+                styles.name,
+                { fontSize: 18, fontWeight: "bold", color: "#4d4d4d" },
+              ]}
+            >
+              Farmer Name
+            </Text>
+          </View>
+
+          <TouchableOpacity
+            onPress={() => setFarmerEditVisible(false)}
+            style={{
+              position: "absolute",
+              right: 15,
+              top: 15,
+              borderRadius: 20,
+              borderWidth: 0.7,
+              borderColor: "green",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "#e7f3ed",
+            }}
+          >
+            <Ionicons name="close" style={{ fontSize: 30 }} color="black" />
+          </TouchableOpacity>
+        </View>
+      </Modal>
+
+       {/* GET SURVEY DETIALS IN A MODAL  */}
 
       <Modal animationType="fade" transparent={true} visible={modalVisible}>
         <View style={styles.soildetials}>
@@ -343,7 +490,7 @@ const AdminDashboard = () => {
             width={(Dimensions.get("screen").width * 3) / 4}
             height={180}
             chartConfig={chartConfig}
-            // verticalLabelRotation={30}
+          // verticalLabelRotation={30}
           />
           <Text style={styles.modalval}>PH: 10.6</Text>
           <Text style={styles.modalval}>Soil Moisture: 35%</Text>
@@ -454,7 +601,7 @@ const styles = StyleSheet.create({
     color: "#7f7f7f",
   },
   details: {
-    width: wp("14.5%"),
+    width: wp("13%"),
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 1,
@@ -466,7 +613,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
   },
   respond: {
-    width: wp("19.5%"),
+    width: wp("15"),
     alignItems: "center",
     justifyContent: "center",
     elevation: 5,
@@ -498,17 +645,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     color: "#666",
   },
-  tabs:{
+  tabs: {
     width: "33.33%",
     paddingVertical: 8,
-    justifyContent:"center",
-    alignItems:"center",
-    backgroundColor:"#41a16d",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#41a16d",
     borderRadius: 10
   },
-  tabstext:{
-    color:"white",
-    fontWeight:"bold",
-    textAlign:"center"
+  tabstext: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
   }
 });
