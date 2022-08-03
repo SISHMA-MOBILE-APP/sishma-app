@@ -47,6 +47,7 @@ const ADD_ADMIN = gql`
     $village: String!,
     $pin: String!,
     $aadhar: String!
+    $phone: String!
     ){
     addAdmin(
         name: $name,
@@ -57,46 +58,19 @@ const ADD_ADMIN = gql`
         district: $district,
         village: $village,
         pin: $pin,
-        aadhar: $aadhar
+        aadhar: $aadhar,
+        phone: $phone
     ) {
       id
     }
   }
 `;
 
-// const AddAdmin = (name,
-// empcode,
-// designation,
-// address,
-// state,
-// district,
-// village,
-// pin,
-// aadhar) => {
-//   return gql`
-//     mutation {
-//       addAdmin(
-//         name: ${name},
-//         empcode: ${empcode},
-//         designation: ${designation},
-//         address: ${address},
-//         state: ${state},
-//         district: ${district},
-//         village: ${village},
-//         pin: ${pin},
-//         aadhar: ${aadhar}
-//       ) {}
-//     }
-//   `;
-// }
-
 const Admin = ({ navigation }) => {
 
   const [addAdmin, { adminData, loading, error }] = useMutation(ADD_ADMIN);
 
-  if (loading) return <Loading/>;
-  if (error) return <Text> {`Submission error! ${error.message}`} </Text>
-
+  
   const [signInOptions, setSignOptions] = React.useState(false);
   const lang = useContext(Language);
   const [data, setData] = useState([
@@ -163,50 +137,50 @@ const Admin = ({ navigation }) => {
   };
   {
     /*const textInputMobile= (val) => {
-    if( val.trim().length == 10 ) {
+      if( val.trim().length == 10 ) {
         setData({
-            ...data,
-            Mobile: val,
-            check_textInputMobile: true,
+          ...data,
+          Mobile: val,
+          check_textInputMobile: true,
           
         });
-    } else {
+      } else {
         setData({
             ...data,
             Mobile: val,
             check_textInputPin: false,
           
+          });
+        }
+      } */
+    }
+    const handleValidAadhar = (val) => {
+      if (val.trim().length == 12) {
+        setData({
+          ...data,
+          isValidAadhar: true,
         });
-    }
-  } */
-  }
-  const handleValidAadhar = (val) => {
-    if (val.trim().length == 12) {
-      setData({
-        ...data,
-        isValidAadhar: true,
-      });
-    } else {
-      setData({
-        ...data,
-        isValidAadhar: false,
-      });
-    }
-  };
-  {
-    /*} const handleValidMobile = (val) => {
+      } else {
+        setData({
+          ...data,
+          isValidAadhar: false,
+        });
+      }
+    };
+    {
+      /*} const handleValidMobile = (val) => {
     if( val.trim().length == 10 ) {
-        setData({
-            ...data,
-            isValidMobile: true
+      setData({
+        ...data,
+        isValidMobile: true
         });
-    } else {
+      } else {
         setData({
-            ...data,
-            isValidMobile: false
+          ...data,
+          isValidMobile: false
         });
-    }
-  } */
+      }
+    } */
   }
   const handleValidPin = (val) => {
     if (val.trim().length == 6) {
@@ -221,6 +195,8 @@ const Admin = ({ navigation }) => {
       });
     }
   };
+  if (loading) return <Loading/>;
+  if (error) return <Text> {`Submission error! ${error.message}`} </Text>
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -384,8 +360,8 @@ const Admin = ({ navigation }) => {
         </KeyboardAvoidingView>
         <View style={styles.submit}>
         <RouteButton
-            onPress={() => {
-              addAdmin({
+            onPress={async() => {
+              const result = await addAdmin({
                 variables: {
                   name: "Peter",
                   empcode: "123456",
@@ -396,8 +372,10 @@ const Admin = ({ navigation }) => {
                   village: "Dholakpur",
                   pin: "600127",
                   aadhar: "123456789012",
+                  phone: "+91 9955582384"
                 },
               });
+              console.log(result);
             }}
             text={transcription[lang.language]["registerNow"]}
           />

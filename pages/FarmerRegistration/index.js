@@ -28,7 +28,36 @@ import {
 import Validation from "../../components/CustomTextField/Validation";
 import * as Animatable from "react-native-animatable";
 import Feather from "react-native-vector-icons/Feather";
+import { gql, useMutation } from "@apollo/client";
 
+const ADD_FARMER = gql`
+mutation AddFarmer(
+    $name: String!,
+    $aadhar: String!,
+    $phone: String!,
+    $kitno: String!,
+    $address: String!,
+    $state: String!,
+    $district: String!,
+    $village: String!,
+    $pin: String!
+  ){
+
+    addFarmer(
+      name: $name
+      aadhar: $aadhar
+      phone: $phone
+      address: $address
+      village: $village
+      district: $district
+      kitno: $kitno
+      pin: $pin
+      state: $state
+      ){
+        id
+      }
+    }`
+    
 const Farmer = ({ navigation }) => {
   const lang = useContext(Language);
   const [page, setPage] = useState(0);
@@ -52,6 +81,9 @@ const Farmer = ({ navigation }) => {
     check_textInputKit: false,
     count: true,
   });
+
+  const [addFarmer, { farmerData, loading, error, reset }] = useMutation(ADD_FARMER);
+
   const textInputName = (val) => {
     setData({ ...data, Name: val });
   };
@@ -504,23 +536,37 @@ const Farmer = ({ navigation }) => {
 
           <View style={styles.submit}>
             <RouteButton
-              onPress={() => {
-                {
-                  data.isValidAadhar && data.isValidMobile && data.isValidPin &&data.isValidKit
-                    ? navigation.navigate("Login") &&
-                      setData({
-                        ...data,
-                        count: true,
-                      })
-                    : setData({
-                        ...data,
-                        count: false,
-                      });
+              onPress={async() => {
+                  if(data.isValidAadhar && data.isValidMobile && data.isValidPin &&data.isValidKit){
+                    var result = await addFarmer({
+                      variables: {
+                        name: data.Name,
+                        aadhar: data.Aadhar,
+                        phone: data.Mobile,
+                        pin: data.Pin,
+                        address: data.Address,
+                        state: data.State,
+                        district: data.District,
+                        village: data.Village,
+                        kitno: data.Kit
+                      },
+                    });
+                    console.log(data);
+                    navigation.navigate("Login")
+                  }
+                    // ? navigation.navigate("Login") &&
+                    //   setData({
+                    //     ...data,
+                    //     count: true,
+                    //   })
+                    // : setData({
+                    //     ...data,
+                    //     count: false,
+                    //   });
                   console.log(page);
                   if (page == 0 && data.isValidAadhar && data.isValidMobile &&data.isValidKit) {
                     setPage(1);
                   }
-                }
               }}
               text={
                 page === 0

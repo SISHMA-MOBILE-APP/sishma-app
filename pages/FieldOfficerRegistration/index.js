@@ -488,7 +488,7 @@ const Officer = ({ navigation }) => {
 
                 var result = await addFieldOfficer({
                   variables: {
-                    departmanent: "SENSE",
+                    departmanent: "SCOPE",
                     address: "221B bleekers street",
                     state: "solid",
                     district: "karachi",
@@ -497,7 +497,7 @@ const Officer = ({ navigation }) => {
                     name: "Bruce Wayne",
                     empcode: "69",
                     designation: "",
-                    aadhar: "123456789019",
+                    aadhar: "123456789039",
                     email: "batman@vit.com",
                     phone: "+91 6969696969",
                   },
