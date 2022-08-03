@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, FlatList, Button, Modal, StatusBar, Image, Dimensions } from 'react-native'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 
 import {
   widthPercentageToDP as wp,
@@ -11,43 +11,61 @@ import FieldOfficerSuggestion from '../FieldOfficerSuggestion';
 import { LinearGradient } from "expo-linear-gradient";
 import { PieChart, BarChart } from 'react-native-chart-kit'
 import { User } from '../../providers/userProvider';
+import { gql, useQuery } from '@apollo/client';
 
-
+const GET_ALL_RESULTS = gql`
+query{
+	getAllSoilDetails{
+    farmername,
+  	kit,
+    nitrogen,
+    potassium,
+    phosphorus,
+    iron,
+    manganese,
+   	copper
+    boron,
+    pH,
+    moisture,
+  }
+}
+`
 
 const FieldOfficerDashboard = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible1, setModalVisible1] = useState(false);
+  const [dataIndex, setDataIndex] = useState(0);
+  const [soilData, setSoilData] = useState([])
+  const getSoilDetailsFetch = useQuery(GET_ALL_RESULTS);
+
+  useEffect(()=>{
+    console.log("here")
+    getSoilDetailsFetch.refetch()
+    .then(result=>{
+      if(result.data.getAllSoilDetails){
+        const data = [];
+        result.data.getAllSoilDetails.forEach(val=>data.push({
+          name: val.farmername,
+          kit: val.kit,
+          j:"View",
+          k: "View",
+          nitrogen: val.nitrogen,
+          potassium: val.postassium,
+          phosphorus: val.phosphorus,
+          iron: val.iron,
+          manganese: val.manganese,
+          copper: val.copper,
+          boron: val.boron,
+          pH: val.pH,
+          moisture: val.moisture,
+        }))
+        console.log(data);
+        setSoilData(data);
+      }
+    })
+  }, []);
 
   const userContext = useContext(User);
-
-  const data = [
-    { id: 1, name: 'Sukesh Kumar', kitNo: 555555, j: 'View', k: 'View' },
-    { id: 2, name: 'Hareesh Ketu', kitNo: 552555, j: 'View', k: 'View' },
-    { id: 3, name: 'Raman Nivasan', kitNo: 553555, j: 'View', k: 'View' },
-    { id: 4, name: 'Sukesh Kumar Sahoo', kitNo: 585555, j: 'View', k: 'View' },
-    { id: 5, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
-    { id: 6, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
-    { id: 7, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
-    { id: 8, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
-    { id: 9, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
-    { id: 10, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
-    { id: 11, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
-    { id: 12, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
-    { id: 13, name: 'Sukesh Kumar', kitNo: 555755, j: 'View', k: 'View' },
-  ]
-  const npmdata = [
-    { name: 'Nitrogen', population: 76.5, color: '#128a49', legendFontColor: '#6d6d6d', legendFontSize: 11 },
-    { name: 'Phosphorus', population: 12.5, color: '#3BACB6', legendFontColor: '#6d6d6d', legendFontSize: 11 },
-    { name: 'Potassium', population: 12.7, color: '#D8E9A8', legendFontColor: '#6d6d6d', legendFontSize: 11 },
-  ]
-  const nutrients = {
-    labels: ["Fe", "Mg", "Ca", "I",],
-    datasets: [
-      {
-        data: [20, 45, 28, 80,]
-      }
-    ]
-  };
   const chartConfig = {
     backgroundGradientFrom: 'white',
     backgroundGradientTo: 'white',
@@ -61,7 +79,7 @@ const FieldOfficerDashboard = () => {
       <View style={styles.item}>
 
         <View style={{ width: wp("11%"), alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{ fontSize: hp('2%'), fontWeight: 'bold' }}>{index}</Text>
+          <Text style={{ fontSize: hp('2%'), fontWeight: 'bold' }}>{index+1}</Text>
         </View>
 
         <View style={{ width: wp("30%"), alignItems: 'center', justifyContent: 'center' }}>
@@ -70,8 +88,32 @@ const FieldOfficerDashboard = () => {
         <View style={{ width: wp('18'), alignItems: 'center', justifyContent: 'center' }}>
           <Text style={{ fontSize: hp('2%') }}>{item.kitNo}</Text>
         </View>
-        <TouchableOpacity onPress={() => item.id > 0 ? setModalVisible(true) : console.log('Nope')} style={styles.details}>
-          <Text style={{ fontSize: hp('2%'), color: 'black', fontWeight: "bold", textAlign: "center" }} >{item.j}</Text>
+        <TouchableOpacity onPress={() =>{
+          console.log(item.nitrogen, item.phosphorus, item.potassium)
+          setDataIndex({
+            npmData:[ { name: 'Nitrogen', population: item.nitrogen === undefined? 0: Number(item.nitrogen), color: '#128a49', legendFontColor: '#6d6d6d', legendFontSize: 11 },
+              { name: 'Phosphorus', population: item.phosphorus === undefined? 0: Number(item.phosphorus), color: '#3BACB6', legendFontColor: '#6d6d6d', legendFontSize: 11 },
+              { name: 'Potassium', population: item.potassium === undefined? 0: Number(item.potassium), color: '#D8E9A8', legendFontColor: '#6d6d6d', legendFontSize: 11 }
+            ],
+            nutrients: {
+              labels: ["Fe", "Mn", "Cu", "B",],
+              datasets: [
+                {
+                  data: [
+                    item.iron === undefined ? 0: Number(item.iron), 
+                    item.manganese === undefined ? 0: Number(item.manganese), 
+                    item.copper === undefined ? 0: Number(item.copper), 
+                    item.boron === undefined ? 0: Number(item.boron),
+                  ]
+                }
+              ]
+            },
+            pH: item.pH === undefined ? 0: item.pH,
+            moisture: item.moisture === undefined ? 0: item.moisture
+          })
+          setModalVisible(true)
+        }} style={styles.details}>
+          <Text style={{ fontSize: hp('2%'), color: 'black', fontWeight: "bold", textAlign: "center" }} >View</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => item.id > 0 ? setModalVisible1(true) : console.log('Nope')} style={styles.respond}>
           <Text style={{ fontSize: hp('2%'), color: 'white', fontWeight: "bold" }}>Respond</Text>
@@ -188,9 +230,9 @@ const FieldOfficerDashboard = () => {
           </View>
         </View>
         <FlatList
-          data={data}
+          data={soilData}
           renderItem={item}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={(item, index) => index}
         />
       </View>
 
@@ -221,7 +263,7 @@ const FieldOfficerDashboard = () => {
             </Text>
           </View>
           <PieChart
-            data={npmdata}
+            data={dataIndex.npmData}
             width={(Dimensions.get("screen").width * 3.4) / 4}
             height={180}
             paddingLeft={10}
@@ -234,14 +276,14 @@ const FieldOfficerDashboard = () => {
 
           <BarChart
             style={{ backgroundColor: "white", paddingLeft: 15 }}
-            data={nutrients}
+            data={dataIndex.nutrients}
             width={(Dimensions.get("screen").width * 3) / 4}
             height={180}
             chartConfig={chartConfig}
             // verticalLabelRotation={30}
           />
-          <Text style={styles.modalval}>PH: 10.6</Text>
-          <Text style={styles.modalval}>Soil Moisture: 35%</Text>
+          <Text style={styles.modalval}>PH: {dataIndex.pH}</Text>
+          <Text style={styles.modalval}>Soil Moisture: {dataIndex.moisture}%</Text>
           <TouchableOpacity
             style={[
               styles.modalval,

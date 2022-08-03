@@ -1,4 +1,5 @@
 import { StyleSheet, StatusBar, SafeAreaView } from "react-native";
+import { registerRootComponent } from "expo";
 import Login from "./components/LoginOrRegister/Login";
 import Option from "./components/LoginOrRegister/Option";
 
@@ -38,9 +39,9 @@ export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <ApolloProvider client={client}>
       <UserProvider>
         <LanguageProvider>
+    <ApolloProvider client={client}>
           <NavigationContainer>
             <Stack.Navigator
               screenOptions={{
@@ -78,9 +79,9 @@ export default function App() {
               {/* <Stack.Screen name="Contact" component={Contact} /> */}
             </Stack.Navigator>
           </NavigationContainer>
+    </ApolloProvider>
         </LanguageProvider>
       </UserProvider>
-    </ApolloProvider>
   );
 }
 

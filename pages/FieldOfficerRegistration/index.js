@@ -76,11 +76,9 @@ const ADD_FIELD_OFFICER = gql`
 
 const Officer = ({ navigation }) => {
 
-  const [addFieldOfficer, { fieldOfficerData, loading, error }] = useMutation(ADD_FIELD_OFFICER);
+  const [addFieldOfficer, { fieldOfficerData, loading, error, reset }] = useMutation(ADD_FIELD_OFFICER);
 
-  if (loading) return <Loading />;
-  if (error) return <Text> {`Submission error! ${error.message}`} </Text>;
-
+  
   const [page, setPage] = React.useState(0);
   const [signInOptions, setSignOptions] = React.useState(false);
   const lang = useContext(Language);
@@ -103,7 +101,7 @@ const Officer = ({ navigation }) => {
       check_textInputPin: false,
       count: true,
     });
-  const textInputName = (val) => {
+    const textInputName = (val) => {
     setData({ ...data, Name: val });
   };
   const textInputAddress = (val) => {
@@ -206,6 +204,8 @@ const Officer = ({ navigation }) => {
       });
     }
   };
+  if (loading) return <Loading />;
+  if (error) return <Text> {`Submission error! ${error.message}`} </Text>;
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1, minHeight: "100%" }}>
       <LinearGradient
@@ -479,13 +479,14 @@ const Officer = ({ navigation }) => {
               />
             ) : <RouteButton
               style={{ width: "106%" }}
-              onPress={() => {data.isValidAadhar&&data.isValidMobile?navigation.navigate('FieldOfficerSuggestion')&&setData({
-                ...data,
-                count: true,
-              }): setData({ ...data, count: false,});
+              onPress={async() => {
+              //   data.isValidAadhar&&data.isValidMobile?navigation.navigate('FieldOfficerSuggestion')&&setData({
+              //   ...data,
+              //   count: true,
+              // }): setData({ ...data, count: false,});
                 // navigation.navigate('Login')
 
-                addFieldOfficer({
+                var result = await addFieldOfficer({
                   variables: {
                     departmanent: "SENSE",
                     address: "221B bleekers street",
@@ -496,11 +497,12 @@ const Officer = ({ navigation }) => {
                     name: "Bruce Wayne",
                     empcode: "69",
                     designation: "",
-                    aadhar: "123456789012",
+                    aadhar: "123456789019",
                     email: "batman@vit.com",
                     phone: "+91 6969696969",
                   },
                 });
+                console.log(result)
 
               }}
               text={transcription[lang.language]["registerNow"]}
